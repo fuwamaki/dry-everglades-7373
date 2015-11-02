@@ -18,7 +18,7 @@
 <script src = "/socket.io/socket.io.js"></script>
 <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js">
 <script>
-     var socket = io.connect('http://dry-garden-3629.herokuapp.com/');
+     var socket = io.connect('https://dry-everglades-7373.herokuapp.com');
      document.querySelector('#sendData').addEventListener('click', function () {
          console.log('送信');   
          socket.emit('sendData',$('#textArea')[0].value);
