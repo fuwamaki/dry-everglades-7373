@@ -24,6 +24,9 @@ var server = http.createServer(app);
 //app.configure(function () {
 //    app.use(express.static('nodejs_chat'));
 //});
+server.configure(function(){
+      server.use(express.static('nodejs_chat'));
+});
 
 //ポート番号の付与
 app.listen(port, function () {
@@ -34,14 +37,14 @@ app.listen(port, function () {
 var io = socketIO.listen(server);
 
 //設定   
-//io.configure(function () {
+io.configure(function () {
    //HerokuではWebSocketがまだサポートされていない？ので、以下の設定が必要 
-//    io.set("transports", ["xhr-polling"]); 
-//    io.set("polling duration", 10); 
+    io.set("transports", ["xhr-polling"]); 
+    io.set("polling duration", 10); 
 
-    // socket.ioのログ出力を抑制する
-//    io.set('log level', 1);
-//});
+     socket.ioのログ出力を抑制する
+    io.set('log level', 1);
+});
 
 io.sockets.on('connection', function (socket) {
         console.log('接続：'+ socket.id);
