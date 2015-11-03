@@ -40,8 +40,8 @@ var io = socketIO.listen(server);
 //    io.set("polling duration", 10); 
 
     // socket.ioのログ出力を抑制する
-    io.set('log level', 1);
-});
+//    io.set('log level', 1);
+//});
 
 io.sockets.on('connection', function (socket) {
         console.log('接続：'+ socket.id);
