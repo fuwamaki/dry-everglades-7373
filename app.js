@@ -34,10 +34,10 @@ app.listen(port, function () {
 var io = socketIO.listen(server);
 
 //設定   
-io.configure(function () {
+//io.configure(function () {
    //HerokuではWebSocketがまだサポートされていない？ので、以下の設定が必要 
-    io.set("transports", ["xhr-polling"]); 
-    io.set("polling duration", 10); 
+//    io.set("transports", ["xhr-polling"]); 
+//    io.set("polling duration", 10); 
 
     // socket.ioのログ出力を抑制する
     io.set('log level', 1);
