@@ -44,7 +44,7 @@ io.set(function(){
     io.set("transports", ["xhr-polling"]); 
     io.set("polling duration", 10); 
 
-     socket.ioのログ出力を抑制する
+     //socket.ioのログ出力を抑制する
     io.set('log level', 1);
 });
 
