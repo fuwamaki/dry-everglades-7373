@@ -6,8 +6,10 @@ var express = require('express');
 var socketIO = require('socket.io');
 //portの設定 3000かherokuで準備されているprocess.env.PORTを使用
 var port = process.env.PORT || 3000;
+
 //サーバを起動
-var app = express.createServer();
+//var app = express.createServer();
+var app = express();
 
 //アクセスした時に表示する内容を設定
 app.get('/', function (req, res) {
