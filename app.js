@@ -12,7 +12,7 @@ var app = express.createServer();
 //アクセスした時に表示する内容を設定
 app.get('/', function (req, res) {
      //index.htmlファイルを読み込む
-     res.sendfile('nodejs_chat/index.html');
+     res.sendfile('./index.html');
  //    res.send('Hello, World');
 });
 
