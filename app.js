@@ -19,9 +19,9 @@ app.get('/', function (req, res) {
 });
 
 //ルートディレクトリの設定
-app.configure(function () {
-    app.use(express.static('nodejs_chat'));
-});
+//app.configure(function () {
+//    app.use(express.static('nodejs_chat'));
+//});
 
 //ポート番号の付与
 app.listen(port, function () {
