@@ -17,7 +17,7 @@ app.get('/', function (req, res) {
      //index.htmlファイルを読み込む
      res.sendfile('./index.html');
  //    res.send('Hello, World');
-       server.use(express.static('nodejs_chat'));
+//       server.use(express.static('nodejs_chat'));
 });
 
 
