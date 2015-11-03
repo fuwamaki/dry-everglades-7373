@@ -12,13 +12,13 @@ var app = express.createServer();
 //アクセスした時に表示する内容を設定
 app.get('/', function (req, res) {
      //index.htmlファイルを読み込む
-     res.sendfile(__dirname + '/index.html');
+     res.sendfile('nodejs_chat/index.html');
  //    res.send('Hello, World');
 });
 
 //ルートディレクトリの設定
 app.configure(function () {
-    app.use(express.static(__dirname));
+    app.use(express.static('nodejs_chat'));
 });
 
 //ポート番号の付与
