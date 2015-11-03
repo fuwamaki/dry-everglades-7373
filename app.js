@@ -1,58 +1,29 @@
-//httpを読み込む
-var http = require('http');
-//フレームワークexpressを読み込む
-var express = require('express');
-//通信のやり取りを行うsocket.ioの読み込み
-var socketIO = require('socket.io');
-//portの設定 3000かherokuで準備されているprocess.env.PORTを使用
-var port = process.env.PORT || 3000;
-//サーバを起動
-var app = express.createServer();
-
-//アクセスした時に表示する内容を設定
-app.get('/', function (req, res) {
-     //index.htmlファイルを読み込む
-     res.sendfile(__dirname + '/index.html');
- //    res.send('Hello, World');
-});
-
-//ルートディレクトリの設定
-app.configure(function () {
-    app.use(express.static(__dirname));
-});
-
-//ポート番号の付与
-app.listen(port, function () {
-    console.log('Listening on ' + port);
-});
-
-var io = socketIO.listen(app);
-
-//設定   
-io.configure(function () {
-   //HerokuではWebSocketがまだサポートされていない？ので、以下の設定が必要 
-    io.set("transports", ["xhr-polling"]); 
-    io.set("polling duration", 10); 
-
-    // socket.ioのログ出力を抑制する
-    io.set('log level', 1);
-});
-
-io.sockets.on('connection', function (socket) {
-        console.log('接続：'+ socket.id);
-        socket.on('sendData', function(message){
-            console.log('データの受信');
-            console.log(message);
-             // 全ユーザーにメッセージを送る
-            io.sockets.emit('returnData', message);
-        });
-
-         socket.on("disconnect", function () {
-             //切断した人のsocket.idを表示する
-             console.log('切断：' + socket.id);
-             // 全ユーザーにメッセージを送る
-             io.sockets.emit("message", {"value":"user disconnected"});
-         });
-        
-
+var http = require("http");
+var socketio = require("socket.io");
+var fs = require("fs");
+ 
+var server = http.createServer(function(req, res) {
+     res.writeHead(200, {"Content-Type":"text/html"});
+     var output = fs.readFileSync("./index.html", "utf-8");
+     res.end(output);
+}).listen(process.env.VMC_APP_PORT || 3000);
+ 
+var io = socketio.listen(server);
+ 
+io.sockets.on("connection", function (socket) {
+ 
+  // メッセージ送信（送信者にも送られる）
+  socket.on("C_to_S_message", function (data) {
+    io.sockets.emit("S_to_C_message", {value:data.value});
+  });
+ 
+  // ブロードキャスト（送信者以外の全員に送信）
+  socket.on("C_to_S_broadcast", function (data) {
+    socket.broadcast.emit("S_to_C_message", {value:data.value});
+  });
+ 
+  // 切断したときに送信
+  socket.on("disconnect", function () {
+//    io.sockets.emit("S_to_C_message", {value:"user disconnected"});
+  });
 });
