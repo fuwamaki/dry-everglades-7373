@@ -18,6 +18,8 @@ app.get('/', function (req, res) {
  //    res.send('Hello, World');
 });
 
+var server = http.createServer(app);
+
 //ルートディレクトリの設定
 //app.configure(function () {
 //    app.use(express.static('nodejs_chat'));
@@ -28,7 +30,8 @@ app.listen(port, function () {
     console.log('Listening on ' + port);
 });
 
-var io = socketIO.listen(app);
+//var io = socketIO.listen(app);
+var io = socketIO.listen(server);
 
 //設定   
 io.configure(function () {
