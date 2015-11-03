@@ -15,7 +15,7 @@ var server = http.createServer(app);
 //アクセスした時に表示する内容を設定
 app.get('/', function (req, res) {
      //index.htmlファイルを読み込む
-     res.sendfile('./index.html');
+     res.sendFile('./index.html');
  //    res.send('Hello, World');
 //       server.use(express.static('nodejs_chat'));
 });
