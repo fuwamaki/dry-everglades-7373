@@ -45,7 +45,7 @@ io.configure(function () {
     io.set("polling duration", 10); 
 
      //socket.ioのログ出力を抑制する
-    io.set('log level', 1);
+//    io.set('log level', 1);
 });
 
 io.sockets.on('connection', function (socket) {
