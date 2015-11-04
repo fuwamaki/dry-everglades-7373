@@ -26,3 +26,10 @@ wss.on("connection", function(ws) {
     clearInterval(id)
   })
 })
+
+//ブロードキャストを行う
+function broadcast(message) {
+    connections.forEach(function (con, i) {
+        con.send(message);
+    });
+};
