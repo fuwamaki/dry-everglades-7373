@@ -18,24 +18,24 @@
     </style>
 
     <script>
-      var host = location.origin.replace(/^http/, 'ws')
-      var ws = new WebSocket(host);
-      ws.onmessage = function (event) {
-        var li = document.createElement('li');
-        li.innerHTML = JSON.parse(event.data);
-        document.querySelector('#pings').appendChild(li);
-      };
       function send() {
             ws.send(document.getElementById('msg').value);
       }
+      var host = location.origin.replace(/^http/, 'ws')
+      var ws = new WebSocket(host);
+      ws.onmessage = function (event) {
+//        var li = document.createElement('li');
+//        li.innerHTML = JSON.parse(event.data);
+//        document.querySelector('#pings').appendChild(li);
+        document.getElementById("messages").innerHTML += "<div>" + JSON.parse(event.data) + "</div>";
+        console.log(JSON.parse(event.data));
+      };
+	  
     </script>
   </head>
   <body>
-  <div>
     <input type="text" id="msg"/>
     <input type="button" value="send" onclick="send()"/>
-</div>    
-    <h1>Pings</h1>
-    <ul id='pings'></ul>
+    <div id="messages"/>
   </body>
 </html>

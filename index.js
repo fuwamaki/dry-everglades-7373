@@ -14,6 +14,9 @@ console.log("http server listening on %d", port)
 var wss = new WebSocketServer({server: server})
 console.log("websocket server created")
 
+//Websocket接続を保存しておく
+var connections = [];
+
 wss.on("connection", function(ws) {
   var id = setInterval(function() {
     ws.send(JSON.stringify(new Date()), function() {  })
@@ -26,6 +29,9 @@ wss.on("connection", function(ws) {
     clearInterval(id)
   })
   
+      //配列にWebSocket接続を保存
+    connections.push(ws);
+
       //メッセージ送信時
     ws.on('message', function (message) {
         console.log('message:', message);
