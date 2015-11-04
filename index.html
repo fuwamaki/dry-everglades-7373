@@ -24,13 +24,9 @@
       var host = location.origin.replace(/^http/, 'ws')
       var ws = new WebSocket(host);
       ws.onmessage = function (event) {
-//        var li = document.createElement('li');
-//        li.innerHTML = JSON.parse(event.data);
-//        document.querySelector('#pings').appendChild(li);
         document.getElementById("messages").innerHTML += "<div>" + JSON.parse(event.data) + "</div>";
         console.log(JSON.parse(event.data));
       };
-	  
     </script>
   </head>
   <body>
