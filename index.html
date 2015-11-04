@@ -25,14 +25,15 @@
         li.innerHTML = JSON.parse(event.data);
         document.querySelector('#pings').appendChild(li);
       };
+      function send() {
+            ws.send(document.getElementById('msg').value);
+      }
     </script>
   </head>
   <body>
   <div>
-    <input type="text" id="textArea"></input>
-    <button id="sendData">送信</button>
-    <p id="returnData"></p>
-    
+    <input type="text" id="msg"/>
+    <input type="button" value="send" onclick="send()"/>
 </div>    
     <h1>Pings</h1>
     <ul id='pings'></ul>
