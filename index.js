@@ -25,6 +25,12 @@ wss.on("connection", function(ws) {
     console.log("websocket connection close")
     clearInterval(id)
   })
+  
+      //メッセージ送信時
+    ws.on('message', function (message) {
+        console.log('message:', message);
+        broadcast(JSON.stringify(message));
+    });
 })
 
 //ブロードキャストを行う
