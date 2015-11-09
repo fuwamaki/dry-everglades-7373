@@ -17,17 +17,24 @@
       }
     </style>
 
+<!-- スクリプト部分 -->
     <script>
+	//
       function send() {
             ws.send(document.getElementById('msg').value);
       }
       var host = location.origin.replace(/^http/, 'ws')
       var ws = new WebSocket(host);
+	  
+	  //サーバからデータ受信時のイベント
       ws.onmessage = function (event) {
         document.getElementById("messages").innerHTML += "<div>" + JSON.parse(event.data) + "</div>";
         console.log(JSON.parse(event.data));
       };
     </script>
+<!-- スクリプト部分終わり -->
+
+
   </head>
   <body>
     <input type="text" id="msg"/>
