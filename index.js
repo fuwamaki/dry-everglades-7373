@@ -1,25 +1,25 @@
-//それぞれ変数の定義
-var WebSocketServer = require("ws").Server;
-var http = require("http");
-var express = require("express");
-var app = express();
-var port = process.env.PORT || 5000;
+//それぞれ変数の定義(websocket必須)
+var WebSocketServer = require("ws").Server;		//WebSocket
+var http = require("http");						//http
+var express = require("express");				//express
+var app = express();							//appという名のexpress
+var port = process.env.PORT || 5000;			//ポート
+//付け加え変数定義
+var connections = [];							//Websocket接続の保存用配列
 
+
+//expressモジュールからhttpサーバを作成し、wsモジュールのseverの引数にし、websocket用サーバオブジェクトを作成
 app.use(express.static(__dirname + "/"));
-
 var server = http.createServer(app);
+//ポートにwebsocketサーバを立てる
 server.listen(port);
+var wss = new WebSocketServer({server: server});
 
-//consoleに表示
-//※ポート番号は毎回変わる
-console.log("http server listening on %d", port)
+//console表示　※ポート番号は毎回変わる
+console.log("http server listening on %d", port);
+console.log("websocket server created");
 
-//ポートにWebSocketサーバを立てる
-var wss = new WebSocketServer({server: server})
-console.log("websocket server created")
 
-//Websocket接続を保存しておく
-var connections = [];
 
 //クライアントと接続すると動作するイベント
 wss.on("connection", function(ws) {
