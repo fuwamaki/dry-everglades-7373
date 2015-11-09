@@ -31,7 +31,8 @@
 	var ws = new WebSocket(host);							//websocket
 	//付け加え変数定義
 	var ping_msg = document.getElementById("ping_message");		//ping用
-	var chat_ipt = document.getElementById("chat_input");		//chat用文字入力部分
+	var chat_ipt;
+// = document.getElementById("chat_input");		//chat用文字入力部分
 	var chat_btn = document.getElementById("chat_button");		//chat用ボタン
 	var chat_fld = document.getElementById("chat_field");		//chat用出力部分
 	
@@ -44,8 +45,9 @@
 	
 	function send() {
 		//サーバに送信
-//		ws.send(chat_ipt.value);
-		ws.send(document.getElementById("chat_input").value);
+		chat_ipt = document.getElementById("chat_input");
+		ws.send(chat_ipt.value);
+//		ws.send(document.getElementById("chat_input").value);
 		console.log("送信したった");
 //		chat_fld += chat_ipt.value;
 	}
