@@ -16,40 +16,41 @@ server.listen(port);
 var wss = new WebSocketServer({server: server});
 
 //console表示　※ポート番号は毎回変わる
-console.log("http server listening on %d", port);
-console.log("websocket server created");
+console.log("コンソール：http server listening on %d", port);
+console.log("コンソール：websocket server created");
 
 
 
 //クライアントと接続すると動作するイベント
 wss.on("connection", function(ws) {
 
-  var id = setInterval(function() {
-  //接続時のメッセージ
-  ws.send(JSON.stringify(new Date()), function() {  })
-  }, 1000)
+	//接続時のメッセージ
+	var id = setInterval(function() {
+		ws.send(JSON.stringify(new Date()), function() {
+		}) 
+	}, 1000);
+	console.log("コンソール：websocket connection open");
 
-  console.log("websocket connection open")
+	//websocketクローズ処理
+	ws.on("close", function() {
+		console.log("コンソール：websocket connection close");
+		clearInterval(id);
+	});
+	
+	//配列にWebSocket接続を保存
+	connections.push(ws);
 
-  //websocketがクローズした際のメッセージ
-  ws.on("close", function() {
-    console.log("websocket connection close")
-    clearInterval(id)
-  })
-  
-      //配列にWebSocket接続を保存
-  connections.push(ws);
-
-      //メッセージ送信時
-  ws.on('message', function (message) {
-    console.log('message:', message);
-    broadcast(JSON.stringify(message));
+	//メッセージ送信時
+	ws.on('message', function (message) {
+		//console.log('message:', message);
+		broadcast(JSON.stringify(message));
     });
+	
 })
 
 //ブロードキャストを行う
 function broadcast(message) {
-    connections.forEach(function (con, i) {
-        con.send(message);
-    });
+	connections.forEach(function (con, i) {
+		con.send(message);
+	});
 };
