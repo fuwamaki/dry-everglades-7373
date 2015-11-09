@@ -1,5 +1,5 @@
 //それぞれ変数の定義(websocket必須)
-var WebSocketServer = require("ws").Server;		//WebSocket
+var WebSocketServer = require("ws").Server;		//websocket
 var http = require("http");						//http
 var express = require("express");				//express
 var app = express();							//appという名のexpress
