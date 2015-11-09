@@ -1,44 +1,51 @@
 <html>
-  <head>
-    <style>
-      body {
-        font-family: "Helvetica Neue", helvetica, arial;
-        padding: 15px;
-      }
+	<head>
+	
+<!-- CSS部分 -->
+	<style>
+		body {
+			font-family: "Helvetica Neue", helvetica, arial;
+			padding: 15px;
+		}
 
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
 
-      ul li {
-        line-height: 1.4;
-      }
-    </style>
+		ul li {
+			line-height: 1.4;
+		}
+	</style>
+<!-- CSS部分 -->
+
 
 <!-- スクリプト部分 -->
-    <script>
+	<script>
 	//
-      function send() {
-            ws.send(document.getElementById('msg').value);
-      }
-      var host = location.origin.replace(/^http/, 'ws')
-      var ws = new WebSocket(host);
+	function send() {
+		ws.send(document.getElementById('msg').value);
+	}
+
+	var host = location.origin.replace(/^http/, 'ws')
+	var ws = new WebSocket(host);
 	  
-	  //サーバからデータ受信時のイベント
-      ws.onmessage = function (event) {
-        document.getElementById("messages").innerHTML += "<div>" + JSON.parse(event.data) + "</div>";
-        console.log(JSON.parse(event.data));
-      };
+	//サーバからデータ受信時のイベント
+	ws.onmessage = function (event) {
+		document.getElementById("messages").innerHTML += "<div>" + JSON.parse(event.data) + "</div>";
+		console.log(JSON.parse(event.data));
+	};
+	
     </script>
 <!-- スクリプト部分終わり -->
 
-
-  </head>
-  <body>
-    <input type="text" id="msg"/>
-    <input type="button" value="send" onclick="send()"/>
-    <div id="messages"/>
+</head>
+<body>
+	<input type="text" id="msg"/>
+	<input type="button" value="send" onclick="send()"/>
+	<!--	<div id="messages"/> -->
+	
+	<textarea name="pingbox" rows="8" cols="40" id="messages"></textarea>
   </body>
 </html>

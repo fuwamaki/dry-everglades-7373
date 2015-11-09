@@ -25,11 +25,11 @@ console.log("コンソール：websocket server created");
 wss.on("connection", function(ws) {
 
 	//接続時のメッセージ
-/*	var id = setInterval(function() {
+	var id = setInterval(function() {
 		ws.send(JSON.stringify(new Date()), function() {
 		}) 
-	}, 1000);
-*/	console.log("コンソール：websocket connection open");
+	}, 1000);	//1000msごとに送信
+	console.log("コンソール：websocket connection open");
 
 	//websocketクローズ処理
 	ws.on("close", function() {
@@ -49,8 +49,8 @@ wss.on("connection", function(ws) {
 })
 
 //ブロードキャストを行う
-function broadcast(message) {
+function broadcast(b_message) {
 	connections.forEach(function (con, i) {
-		con.send(message);
+		con.send(b_message);
 	});
 };
