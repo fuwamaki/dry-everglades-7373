@@ -25,11 +25,11 @@ console.log("コンソール：websocket server created");
 wss.on("connection", function(ws) {
 
 	//接続時のメッセージ
-	var id = setInterval(function() {
+/*	var id = setInterval(function() {
 		ws.send(JSON.stringify(new Date()), function() {
 		}) 
 	}, 1000);
-	console.log("コンソール：websocket connection open");
+*/	console.log("コンソール：websocket connection open");
 
 	//websocketクローズ処理
 	ws.on("close", function() {
