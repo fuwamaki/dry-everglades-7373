@@ -34,12 +34,10 @@
 	var chat_ipt = document.getElementById("chat_input");		//chat用文字入力部分
 	var chat_btn = document.getElementById("chat_button");		//chat用ボタン
 	var chat_fld = document.getElementById("chat_field");		//chat用出力部分
-	  
+	
 	//サーバからデータ受信時のイベント
 	ws.onmessage = function (event) {
-		//ping_msg.innerHTML += JSON.parse(event.data);
 		document.getElementById("ping_message").innerHTML += JSON.parse(event.data);
-		ping_msg.innerHTML += "<div>" + JSON.parse(event.data) + "</div>";
 		console.log(JSON.parse(event.data));
 	};
 	
@@ -47,6 +45,7 @@
 	function send() {
 		//サーバに送信
 		ws.send(chat_ipt.value);
+		console.log("送信したった");
 //		chat_fld += chat_ipt.value;
 	}
 
