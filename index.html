@@ -39,7 +39,8 @@
 	  
 	//サーバからデータ受信時のイベント
 	ws.onmessage = function (event) {
-		ping_msg.innerHTML += "<div>" + JSON.parse(event.data) + "</div>";
+		ping_msg.innerHTML += JSON.parse(event.data);
+		/*ping_msg.innerHTML += "<div>" + JSON.parse(event.data) + "</div>";*/
 		//console.log(JSON.parse(event.data));
 	};
 	
@@ -57,14 +58,12 @@
 	<!-- chat部分 -->
 	<input type="text" id="chat_input"/>
 	<input type="button" id="chat_button" value="send" onclick="send()"/>
-	<textarea name="chatbox" rows="8" cols="40">
-		<div id="chat_field"/>
+	<textarea name="chatbox" rows="8" cols="40" id="chat_field">
 	</textarea>
 	<br>
 	
 	<!-- pingボックス:通信を切らないために -->
-	<textarea name="pingbox" rows="8" cols="40">
-		<div id="ping_message"/>
+	<textarea name="pingbox" rows="8" cols="40" id="ping_message">
 	</textarea>
 	
   </body>
