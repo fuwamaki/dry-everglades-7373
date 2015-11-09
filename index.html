@@ -38,7 +38,8 @@
 	//サーバからデータ受信時のイベント
 	ws.onmessage = function (event) {
 		//ping_msg.innerHTML += JSON.parse(event.data);
-		document.getElementById("ping_message").innerHTML += "<div>" + JSON.parse(event.data) + "</div>";
+		document.getElementById("ping_message").innerHTML += JSON.parse(event.data);
+		ping_msg.innerHTML += "<div>" + JSON.parse(event.data) + "</div>";
 		console.log(JSON.parse(event.data));
 	};
 	
@@ -57,6 +58,7 @@
 	<!-- chat部分 -->
 	<input type="text" id="chat_input"/>
 	<input type="button" id="chat_button" value="send" onclick="send()"/>
+	<br>
 	<textarea name="chatbox" rows="8" cols="40" id="chat_field">
 	</textarea>
 	<br>
