@@ -1,9 +1,9 @@
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 	<head>
 	<title>WS修論システム</title>
-<!--	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
 	<meta http-equiv="content-script-type" content="text/javascript" />
--->	
+	
 <!-- CSS部分 -->
 	<style>
 		body {
@@ -39,8 +39,8 @@
 	  
 	//サーバからデータ受信時のイベント
 	ws.onmessage = function (event) {
-		ping_msg.innerHTML += JSON.parse(event.data);
-		/*ping_msg.innerHTML += "<div>" + JSON.parse(event.data) + "</div>";*/
+		//ping_msg.innerHTML += JSON.parse(event.data);
+		ping_msg.innerHTML += "<div>" + JSON.parse(event.data) + "</div>";
 		//console.log(JSON.parse(event.data));
 	};
 	
