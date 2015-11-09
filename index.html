@@ -30,10 +30,10 @@
 	var host = location.origin.replace(/^http/, 'ws')		//host
 	var ws = new WebSocket(host);							//websocket
 	//付け加え変数定義
-	var ping_msg = document.getElementById('ping_message');		//ping用
-	var chat_ipt = document.getElementById('chat_input');
-	var chat_btn = document.getElementById('chat_button');
-	var chat_fld = document.getElementById('chat_field');
+	var ping_msg = document.getElementById("ping_message");		//ping用
+	var chat_ipt = document.getElementById("chat_input");
+	var chat_btn = document.getElementById("chat_button");
+	var chat_fld = document.getElementById("chat_field");
 	  
 	//サーバからデータ受信時のイベント
 	ws.onmessage = function (event) {
@@ -46,7 +46,7 @@
 	function send() {
 		//サーバに送信
 		ws.send(chat_ipt.value);
-		chat_fld += chat_ipt.value;
+//		chat_fld += chat_ipt.value;
 	}
 
     </script>
