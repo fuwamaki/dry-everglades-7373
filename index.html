@@ -23,29 +23,46 @@
 
 <!-- スクリプト部分 -->
 	<script>
-	//
-	function send() {
-		ws.send(document.getElementById('msg').value);
-	}
-
-	var host = location.origin.replace(/^http/, 'ws')
-	var ws = new WebSocket(host);
+	//変数定義(websocket必須)
+	var host = location.origin.replace(/^http/, 'ws')		//host
+	var ws = new WebSocket(host);							//websocket
+	//付け加え変数定義
+	var ping_msg;
+	ping_msg = document.getElementById('ping_message');		//ping用
+	var chat_ipt, chat_btn, chat_fld;
+	chat_ipt = document.getElementById('chat_input');
+	chat_btn = document.getElementById('chat_button');
+	chat_fld = document.getElementById('chat_field');
 	  
 	//サーバからデータ受信時のイベント
 	ws.onmessage = function (event) {
-		document.getElementById("messages").innerHTML += "<div>" + JSON.parse(event.data) + "</div>";
-		console.log(JSON.parse(event.data));
+		ping_msg.innerHTML += "<div>" + JSON.parse(event.data) + "</div>";
+		//console.log(JSON.parse(event.data));
 	};
 	
+	
+	function send() {
+		//サーバに送信
+		ws.send(document.getElementById('msg').value);
+	}
+
     </script>
 <!-- スクリプト部分終わり -->
 
 </head>
 <body>
-	<input type="text" id="msg"/>
-	<input type="button" value="send" onclick="send()"/>
-	<!--	<div id="messages"/> -->
+	<!-- chat部分 -->
+	<input type="text" id="chat_input"/>
+	<input type="button" id="chat_button" value="send" onclick="send()"/>
+	<textarea name="chatbox" rows="8" cols="40">
+		<div id="chat_field"/>
+	</textarea>
+	<br>
 	
-	<textarea name="pingbox" rows="8" cols="40" id="messages"></textarea>
+	<!-- pingボックス:通信を切らないために -->
+	<textarea name="pingbox" rows="8" cols="40">
+		<div id="ping_message"/>
+	</textarea>
+	
   </body>
 </html>
