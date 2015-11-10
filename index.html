@@ -68,17 +68,22 @@
 	</div>
 
 	<!-- chat部分 -->
-	<input type="text" id="chat_input"/>
-	<input type="button" id="chat_button" value="send" onclick="send()"/>
-	<br>
-	<textarea name="chatbox" rows="8" cols="40" id="chat_field">
-	</textarea>
-	<br>
+	<div class="chat_part">
+		---サンプル、チャット部分---<br>
+		<input type="text" id="chat_input"/>
+		<input type="button" id="chat_button" value="send" onclick="send()"/>
+		<br>
+		<textarea name="chatbox" rows="8" cols="40" id="chat_field">
+		</textarea>
+		<br><br>
+	</div>
 	
 	<!-- 自分のステータス -->
-	<div class="my_status">
+	<div class="my_status_part">
+		---ステータス---<br>
 		<!-- 自分のステータス登録 -->
 		<div class="my_status_regist">
+			登録:<br>
 			<button type="my_regist_device" name="button_regist_device" value="regist_device" onclick="onDeviceRadioButton();">デバイス登録</button>
 			<button type="change_device" name="button_change_device" value="change_device">デバイス変更</button><br/>
 			<!-- デバイス選択ラジオボタン -->
@@ -91,24 +96,34 @@
 				<input type="radio" name="device" id="tablet3" value="tablet3"/><label for="tablet3">Tablet3</label>
 			</form>
 		</div>
+		
 		<!-- 自分のステータス確認 -->
 		<div class="my_status_check">
+			状態:<br>
+			デバイス：<nobr id="output_device">未登録</nobr><br>
+			接続：<nobr id="output_connection">未登録</nobr><br>
 		</div>
 	</div>
 	
-	<!-- デバイス情報 -->
-	
-	
-	<div class="device_part">
-		<p>デバイス情報：<nobr id="output_device">未登録</nobr></p>
-		<p>接続状態：<nobr id="output_connection">未登録</nobr></p>
-		
+	<!-- デバイス通信状況 -->
+	<div class="communication_part">
+		<br>---デバイス通信状況---<br>
+		パソコン1：<font color="red" id="com_pc1">未接続</font><br>
+		パソコン2：<font color="red" id="com_pc2">未接続</font><br>
+		パソコン3：<font color="red" id="com_pc3">未接続</font><br>
+		タブレット1：<font color="red" id="com_tablet1">未接続</font><br>
+		タブレット2：<font color="red" id="com_tablet2">未接続</font><br>
+		タブレット3：<font color="red" id="com_tablet3">未接続</font><br>
+		<br>
 	</div>
-
 	
+
 	<!-- pingボックス:通信を切らないために -->
-	<textarea name="pingbox" rows="8" cols="40" id="ping_message">
-	</textarea>
+	<div class="pingbox_part">
+		---PINGBOX ＜ 通信を切らないために ＞---<br>
+		<textarea name="pingbox" rows="8" cols="40" id="ping_message">
+		</textarea>
+	</div>
 	
   </body>
 </html>
