@@ -26,40 +26,41 @@ var chat_ipt;
 var chat_btn = document.getElementById("chat_button");		//chat用ボタン
 var chat_fld = document.getElementById("chat_field");		//chat用出力部分
 
-//サーバからデータ受信時のイベント
+//サーバからデータ受信時のmessageイベント
 ws.onmessage = function (event) {
+	log_fld = document.getElementById("log_field");
+	
 	document.getElementById("ping_message").innerHTML += JSON.parse(event.data) + "<br/>";
 	console.log(JSON.parse(event.data));
 	
-	//文字の送信のテスト
-	if(JSON.parse(event.data) == "test"){
-		console.log("テストでうまくいったった");
-	}
+	//デバイス登録イベント
 	if(JSON.parse(event.data) == "PC.1"){
 		document.getElementById("com_pc1").innerHTML = "PC.1";
-		console.log("PC1登録完了");
+		log_fld.innerHTML += "PC1 登録完了" + "<br>";
 	} else if(JSON.parse(event.data) == "PC.2"){
 		document.getElementById("com_pc2").innerHTML = "PC.2";
-		console.log("PC2登録完了");
+		log_fld.innerHTML += "PC2 登録完了" + "<br>";
 	} else if(JSON.parse(event.data) == "PC.3"){
 		document.getElementById("com_pc3").innerHTML = "PC.3";
-		console.log("PC3登録完了");
+		log_fld.innerHTML += "PC3 登録完了" + "<br>";
 	} else if(JSON.parse(event.data) == "TABLET.1"){
 		document.getElementById("com_tablet1").innerHTML = "TABLET.1";
-		console.log("TALBET1登録完了");
+		log_fld.innerHTML += "TABLET1 登録完了" + "<br>";
 	} else if(JSON.parse(event.data) == "TABLET.2"){
 		document.getElementById("com_tablet2").innerHTML = "TABLET.2";
-		console.log("TALBET2登録完了");
+		log_fld.innerHTML += "TABLET2 登録完了" + "<br>";
 	} else if(JSON.parse(event.data) == "TABLET.3"){
 		document.getElementById("com_tablet3").innerHTML = "TABLET.3";
-		console.log("TALBET3登録完了");
+		log_fld.innerHTML += "TABLET3 登録完了" + "<br>";
 	}
 };
 	
+var log_ipt, log_fld;
+
 //送信function
 function send() {
 	//サーバに送信
-	chat_ipt = document.getElementById("chat_input");
+	log_ipt = document.getElementById("log_input");
 	ws.send(chat_ipt.value);
 //		ws.send(document.getElementById("chat_input").value);
 	console.log("送信したった");
@@ -114,18 +115,18 @@ function onDeviceRadioButton(){
 
 </head>
 <body>
-	<!-- タイトル s-->
+	<!-- タイトル -->
 	<div class="title_part">
 		<h1>WebSocket修論システム</h1>
 	</div>
 
-	<!-- chat部分 -->
-	<div class="chat_part">
-		---サンプル、チャット部分---<br>
-		<input type="text" id="chat_input"/>
-		<input type="button" id="chat_button" value="send" onclick="send()"/>
+	<!-- log部分 -->
+	<div class="log_part">
+		---ログ部分---<br>
+		<input type="text" id="log_input"/>
+		<input type="button" id="log_button" value="send" onclick="send()"/>
 		<br>
-		<textarea name="chatbox" rows="8" cols="40" id="chat_field">
+		<textarea name="logbox" rows="8" cols="40" id="log_field">
 		</textarea>
 		<br><br>
 	</div>
