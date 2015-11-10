@@ -23,6 +23,7 @@ console.log("コンソール：websocket server created");
 
 //クライアントと接続すると動作するイベント
 wss.on("connection", function(ws) {
+	console.log("IDナンバー:" + ws.id);
 
 	//接続時のメッセージ
 	var id = setInterval(function() {
@@ -30,6 +31,7 @@ wss.on("connection", function(ws) {
 		ws.send(JSON.stringify(new Date()), function() {
 		}) 
 	}, 1000);	//1000ms(1秒)ごとに送信
+	
 	console.log("コンソール：websocket connection open");
 
 	//websocketクローズ処理

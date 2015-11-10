@@ -27,8 +27,8 @@
 <!-- スクリプト部分 -->
 	<script>
 	//変数定義(websocket必須)
-	var host = location.origin.replace(/^http/, 'ws')		//host
-	var ws = new WebSocket(host);							//websocket
+	var host = location.origin.replace(/^http/, 'ws')			//host
+	var ws = new WebSocket(host);								//websocket
 	//付け加え変数定義
 	var ping_msg = document.getElementById("ping_message");		//ping用
 	var chat_ipt;
@@ -38,9 +38,10 @@
 	
 	//サーバからデータ受信時のイベント
 	ws.onmessage = function (event) {
-		document.getElementById("ping_message").innerHTML += JSON.parse(event.data) + "<br>";
+		document.getElementById("ping_message").innerHTML += JSON.parse(event.data) + "<br/>";
 		console.log(JSON.parse(event.data));
 		
+		//文字の送信のテスト
 		if(JSON.parse(event.data) == "test"){
 			console.log("テストでうまくいったった");
 		}
