@@ -36,7 +36,23 @@ ws.onmessage = function (event) {
 		console.log("テストでうまくいったった");
 	}
 	if(JSON.parse(event.data) == "PC.1"){
-		console.log("PC1の登録完了");
+		document.getElementById("com_pc1").innerHTML = "PC.1";
+		console.log("PC1登録完了");
+	} else if(JSON.parse(event.data) == "PC.2"){
+		document.getElementById("com_pc2").innerHTML = "PC.2";
+		console.log("PC2登録完了");
+	} else if(JSON.parse(event.data) == "PC.3"){
+		document.getElementById("com_pc3").innerHTML = "PC.3";
+		console.log("PC3登録完了");
+	} else if(JSON.parse(event.data) == "TABLET.1"){
+		document.getElementById("com_tablet1").innerHTML = "TABLET.1";
+		console.log("TALBET1登録完了");
+	} else if(JSON.parse(event.data) == "TABLET.2"){
+		document.getElementById("com_tablet2").innerHTML = "TABLET.2";
+		console.log("TALBET2登録完了");
+	} else if(JSON.parse(event.data) == "TABLET.3"){
+		document.getElementById("com_tablet3").innerHTML = "TABLET.3";
+		console.log("TALBET3登録完了");
 	}
 };
 	
