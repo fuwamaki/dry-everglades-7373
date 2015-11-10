@@ -62,6 +62,11 @@
 
 </head>
 <body>
+	<!-- タイトル s-->
+	<div class="title_part">
+		<h1>WebSocket修論システム</h1>
+	</div>
+
 	<!-- chat部分 -->
 	<input type="text" id="chat_input"/>
 	<input type="button" id="chat_button" value="send" onclick="send()"/>
@@ -69,6 +74,24 @@
 	<textarea name="chatbox" rows="8" cols="40" id="chat_field">
 	</textarea>
 	<br>
+	
+	<!-- デバイス情報 -->
+	<div class="device_part">
+		<p>デバイス情報：<nobr id="output_device">未登録</nobr></p>
+		<p>接続状態：<nobr id="output_connection">未登録</nobr></p>
+		<button type="regist_device" name="button_regist_device" value="regist_device" onclick="onDeviceRadioButton();">デバイス登録</button>
+		<button type="change_device" name="button_change_device" value="change_device">デバイス変更</button><br/>
+		<!-- デバイス選択ラジオボタン -->
+		<form>
+			<input type="radio" name="device" id="pc1" value="pc1"/><label for="pc1">PC1</label>
+			<input type="radio" name="device" id="pc2" value="pc2"/><label for="pc2">PC2</label>
+			<input type="radio" name="device" id="pc3" value="pc3"/><label for="pc3">PC3</label><br/>
+			<input type="radio" name="device" id="tablet1" value="tablet1"/><label for="tablet1">Tablet1</label>
+			<input type="radio" name="device" id="tablet2" value="tablet2"/><label for="tablet2">Tablet2</label>
+			<input type="radio" name="device" id="tablet3" value="tablet3"/><label for="tablet3">Tablet3</label>
+		</form>
+	</div>
+
 	
 	<!-- pingボックス:通信を切らないために -->
 	<textarea name="pingbox" rows="8" cols="40" id="ping_message">
