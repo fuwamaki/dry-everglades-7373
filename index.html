@@ -38,7 +38,7 @@
 	
 	//サーバからデータ受信時のイベント
 	ws.onmessage = function (event) {
-		document.getElementById("ping_message").innerHTML += JSON.parse(event.data);
+		document.getElementById("ping_message").innerHTML += JSON.parse(event.data) + "<br>";
 		console.log(JSON.parse(event.data));
 	};
 	
