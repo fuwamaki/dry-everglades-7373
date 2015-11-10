@@ -35,7 +35,7 @@ ws.onmessage = function (event) {
 	if(JSON.parse(event.data) == "test"){
 		console.log("テストでうまくいったった");
 	}
-	if(SON.parse(event.data) == "PC.1"){
+	if(JSON.parse(event.data) == "PC.1"){
 		console.log("PC1の登録完了");
 	}
 };
