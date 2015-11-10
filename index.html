@@ -41,7 +41,7 @@
 		document.getElementById("ping_message").innerHTML += JSON.parse(event.data) + "<br>";
 		console.log(JSON.parse(event.data));
 		
-		if(JSON.parse(event.data) == test){
+		if(JSON.parse(event.data) == "test"){
 			console.log("テストでうまくいったった");
 		}
 	};
