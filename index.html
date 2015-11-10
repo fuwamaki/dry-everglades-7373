@@ -75,21 +75,34 @@
 	</textarea>
 	<br>
 	
+	<!-- 自分のステータス -->
+	<div class="my_status">
+		<!-- 自分のステータス登録 -->
+		<div class="my_status_regist">
+			<button type="my_regist_device" name="button_regist_device" value="regist_device" onclick="onDeviceRadioButton();">デバイス登録</button>
+			<button type="change_device" name="button_change_device" value="change_device">デバイス変更</button><br/>
+			<!-- デバイス選択ラジオボタン -->
+			<form>
+				<input type="radio" name="device" id="pc1" value="pc1"/><label for="pc1">PC1</label>
+				<input type="radio" name="device" id="pc2" value="pc2"/><label for="pc2">PC2</label>
+				<input type="radio" name="device" id="pc3" value="pc3"/><label for="pc3">PC3</label><br/>
+				<input type="radio" name="device" id="tablet1" value="tablet1"/><label for="tablet1">Tablet1</label>
+				<input type="radio" name="device" id="tablet2" value="tablet2"/><label for="tablet2">Tablet2</label>
+				<input type="radio" name="device" id="tablet3" value="tablet3"/><label for="tablet3">Tablet3</label>
+			</form>
+		</div>
+		<!-- 自分のステータス確認 -->
+		<div class="my_status_check">
+		</div>
+	</div>
+	
 	<!-- デバイス情報 -->
+	
+	
 	<div class="device_part">
 		<p>デバイス情報：<nobr id="output_device">未登録</nobr></p>
 		<p>接続状態：<nobr id="output_connection">未登録</nobr></p>
-		<button type="regist_device" name="button_regist_device" value="regist_device" onclick="onDeviceRadioButton();">デバイス登録</button>
-		<button type="change_device" name="button_change_device" value="change_device">デバイス変更</button><br/>
-		<!-- デバイス選択ラジオボタン -->
-		<form>
-			<input type="radio" name="device" id="pc1" value="pc1"/><label for="pc1">PC1</label>
-			<input type="radio" name="device" id="pc2" value="pc2"/><label for="pc2">PC2</label>
-			<input type="radio" name="device" id="pc3" value="pc3"/><label for="pc3">PC3</label><br/>
-			<input type="radio" name="device" id="tablet1" value="tablet1"/><label for="tablet1">Tablet1</label>
-			<input type="radio" name="device" id="tablet2" value="tablet2"/><label for="tablet2">Tablet2</label>
-			<input type="radio" name="device" id="tablet3" value="tablet3"/><label for="tablet3">Tablet3</label>
-		</form>
+		
 	</div>
 
 	
