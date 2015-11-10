@@ -5,60 +5,96 @@
 	<meta http-equiv="content-script-type" content="text/javascript" />
 	
 <!-- CSS部分 -->
-	<style>
-		body {
-			font-family: "Helvetica Neue", helvetica, arial;
-			padding: 15px;
-		}
-
-		ul {
-			list-style: none;
-			margin: 0;
-			padding: 0;
-		}
-
-		ul li {
-			line-height: 1.4;
-		}
-	</style>
+<style>
+body {
+	font-family: "Helvetica Neue", helvetica, arial;
+	padding: 15px;
+}
+</style>
 <!-- CSS部分 -->
 
 
 <!-- スクリプト部分 -->
-	<script>
-	//変数定義(websocket必須)
-	var host = location.origin.replace(/^http/, 'ws')			//host
-	var ws = new WebSocket(host);								//websocket
-	//付け加え変数定義
-	var ping_msg = document.getElementById("ping_message");		//ping用
-	var chat_ipt;
+<script>
+//変数定義(websocket必須)
+var host = location.origin.replace(/^http/, 'ws')			//host
+var ws = new WebSocket(host);								//websocket
+//付け加え変数定義
+var ping_msg = document.getElementById("ping_message");		//ping用
+var chat_ipt;
 // = document.getElementById("chat_input");		//chat用文字入力部分
-	var chat_btn = document.getElementById("chat_button");		//chat用ボタン
-	var chat_fld = document.getElementById("chat_field");		//chat用出力部分
-	
-	//サーバからデータ受信時のイベント
-	ws.onmessage = function (event) {
-		document.getElementById("ping_message").innerHTML += JSON.parse(event.data) + "<br/>";
-		console.log(JSON.parse(event.data));
-		
-		//文字の送信のテスト
-		if(JSON.parse(event.data) == "test"){
-			console.log("テストでうまくいったった");
-		}
-	};
-	
-	//送信function
-	function send() {
-		//サーバに送信
-		chat_ipt = document.getElementById("chat_input");
-		ws.send(chat_ipt.value);
-//		ws.send(document.getElementById("chat_input").value);
-		console.log("送信したった");
-//		chat_fld += chat_ipt.value;
-	}
+var chat_btn = document.getElementById("chat_button");		//chat用ボタン
+var chat_fld = document.getElementById("chat_field");		//chat用出力部分
 
-    </script>
+//サーバからデータ受信時のイベント
+ws.onmessage = function (event) {
+	document.getElementById("ping_message").innerHTML += JSON.parse(event.data) + "<br/>";
+	console.log(JSON.parse(event.data));
+	
+	//文字の送信のテスト
+	if(JSON.parse(event.data) == "test"){
+		console.log("テストでうまくいったった");
+	}
+	if(SON.parse(event.data) == "PC.1"){
+		console.log("PC1の登録完了");
+	}
+};
+	
+//送信function
+function send() {
+	//サーバに送信
+	chat_ipt = document.getElementById("chat_input");
+	ws.send(chat_ipt.value);
+//		ws.send(document.getElementById("chat_input").value);
+	console.log("送信したった");
+//		chat_fld += chat_ipt.value;
+}
+
+
+var num_dvc;
+
+	//デバイス登録ボタンイベント
+function onDeviceRadioButton(){
+	//定義
+	var pc1 = document.getElementById("pc1").checked;
+	var pc2 = document.getElementById("pc2").checked;
+	var pc3 = document.getElementById("pc3").checked;
+	var tablet1 = document.getElementById("tablet1").checked;
+	var tablet2 = document.getElementById("tablet2").checked;
+	var tablet3 = document.getElementById("tablet3").checked;
+
+	
+	//値の代入
+	if(pc1==true){
+		num_dvc = "PC.1";
+		document.getElementById("com_pc1").innerHTML = num_dvc;			//デバイス通信状況に
+	} else if(pc2==true){
+		num_dvc = "PC.2";
+		document.getElementById("com_pc2").innerHTML = num_dvc;			//デバイス通信状況に
+	} else if(pc3==true){
+		num_dvc = "PC.3";
+		document.getElementById("com_pc3").innerHTML = num_dvc;			//デバイス通信状況に
+	} else if(tablet1==true){
+		num_dvc = "TABLET.1";
+		document.getElementById("com_tablet1").innerHTML = num_dvc;		//デバイス通信状況に
+	} else if(tablet2==true){
+		num_dvc = "TABLET.2";
+		document.getElementById("com_tablet2").innerHTML = num_dvc;		//デバイス通信状況に
+	} else if(tablet3==true){
+		num_dvc = "TABLET.3";
+		document.getElementById("com_tablet3").innerHTML = num_dvc;		//デバイス通信状況に
+	}
+	
+	document.getElementById("my_device_status").innerHTML = num_dvc;	//デバイス状態に
+	
+	//他のデバイスにも自身の状態を送信
+	ws.send(num_dvc);
+}
+</script>
 <!-- スクリプト部分終わり -->
+
+
+
 
 </head>
 <body>
@@ -85,7 +121,7 @@
 		<div class="my_status_regist">
 			登録:<br>
 			<button type="my_regist_device" name="button_regist_device" value="regist_device" onclick="onDeviceRadioButton();">デバイス登録</button>
-			<button type="change_device" name="button_change_device" value="change_device">デバイス変更</button><br/>
+			<button type="change_device" name="button_change_device" value="change_device" onclick="onDeviceChangeRadioButton()">デバイス変更</button><br/>
 			<!-- デバイス選択ラジオボタン -->
 			<form>
 				<input type="radio" name="device" id="pc1" value="pc1"/><label for="pc1">PC1</label>
@@ -100,8 +136,8 @@
 		<!-- 自分のステータス確認 -->
 		<div class="my_status_check">
 			状態:<br>
-			デバイス：<nobr id="output_device">未登録</nobr><br>
-			接続：<nobr id="output_connection">未登録</nobr><br>
+			デバイス：<nobr id="my_device_status">未登録</nobr><br>
+			接続：<nobr id="my_connection">未登録</nobr><br>
 		</div>
 	</div>
 	
