@@ -26,9 +26,10 @@ wss.on("connection", function(ws) {
 
 	//接続時のメッセージ
 	var id = setInterval(function() {
+		//時間データのsend JSON.stringify(xxx)が、クライアントのJSON.parse(event.data)に相当
 		ws.send(JSON.stringify(new Date()), function() {
 		}) 
-	}, 1000);	//1000msごとに送信
+	}, 1000);	//1000ms(1秒)ごとに送信
 	console.log("コンソール：websocket connection open");
 
 	//websocketクローズ処理

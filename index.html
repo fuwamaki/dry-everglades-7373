@@ -40,9 +40,13 @@
 	ws.onmessage = function (event) {
 		document.getElementById("ping_message").innerHTML += JSON.parse(event.data) + "<br>";
 		console.log(JSON.parse(event.data));
+		
+		if(JSON.parse(event.data) == test){
+			console.log("テストでうまくいったった");
+		}
 	};
 	
-	
+	//送信function
 	function send() {
 		//サーバに送信
 		chat_ipt = document.getElementById("chat_input");
