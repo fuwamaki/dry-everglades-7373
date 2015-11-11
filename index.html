@@ -29,20 +29,25 @@ div.logbox{
 var host = location.origin.replace(/^http/, 'ws')			//host
 var ws = new WebSocket(host);								//websocket
 //付け加え変数定義
-var ping_msg, log_ipt, log_fld;								//pingボックス、log入力、logボックス
+var message, ping_msg, log_ipt, log_fld;					//メッセージ、pingボックス、log入力、logボックス
 var userid = 'ユーザ' + Math.floor(Math.random() * 500);	//ユーザIDをランダムで生成
 
 //オープン処理
 ws.onopen = function(){
-//	ws.send("open");
-	ws.send(JSON.stringify({
-		user: userid,
-		text: 'open'
-	}));
+	ws.send("open");
+//	ws.send(JSON.stringify({
+//		user: userid,
+//		text: 'open'
+//	}));
 }
 
 //サーバからデータ受信時のmessageイベント
 ws.onmessage = function (event) {
+
+	//メッセージの代入
+//	message = JSON.parse(event.data);
+
+	//変数に値代入
 	ping_msg = document.getElementById("ping_message");
 	log_ipt = document.getElementById("log_input");
 	log_fld = document.getElementById("log_field");
