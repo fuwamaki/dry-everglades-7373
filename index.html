@@ -28,7 +28,7 @@ div.logbox{
 var host = location.origin.replace(/^http/, 'ws')			//host
 var ws = new WebSocket(host);								//websocket
 //付け加え変数定義
-var ping_msg = document.getElementById("ping_message");		//ping用
+var ping_msg;		//ping用
 var log_ipt, log_fld;
 
 
@@ -36,9 +36,11 @@ var log_ipt, log_fld;
 
 //サーバからデータ受信時のmessageイベント
 ws.onmessage = function (event) {
+	ping_msg = document.getElementById("ping_message");
+	log_ipt = document.getElementById("log_box").innerHTML;
 	log_fld = document.getElementById("log_field");
 	
-	document.getElementById("ping_message").innerHTML += JSON.parse(event.data) + "<br>";
+	ping_msg += JSON.parse(event.data) + "<br>";
 	console.log(JSON.parse(event.data));
 	
 	//デバイス登録イベント
@@ -184,7 +186,7 @@ function onDeviceRadioButton(){
 	<!-- pingボックス:通信を切らないために -->
 	<div class="pingbox_part">
 		---PINGBOX ＜ 通信を切らないために ＞---<br>
-		<div class="pingbox" style="height:100px; width:500px; overflow-y:scroll;">
+		<div class="ping_message" style="height:100px; width:500px; overflow-y:scroll;">
 			<!-- 表示したいテーブル<br>a<br>a<br>a<br>a<br>a<br>aaaa<br>aaaaa<br> -->
 		</div>
 	</div>
