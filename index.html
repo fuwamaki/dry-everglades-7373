@@ -37,7 +37,7 @@ var log_ipt, log_fld;
 //サーバからデータ受信時のmessageイベント
 ws.onmessage = function (event) {
 	ping_msg = document.getElementById("ping_message");
-	log_ipt = document.getElementById("log_box").innerHTML;
+	log_ipt = document.getElementById("log_input").innerHTML;
 	log_fld = document.getElementById("log_field");
 	
 	ping_msg += JSON.parse(event.data) + "<br>";
@@ -186,7 +186,7 @@ function onDeviceRadioButton(){
 	<!-- pingボックス:通信を切らないために -->
 	<div class="pingbox_part">
 		---PINGBOX ＜ 通信を切らないために ＞---<br>
-		<div class="ping_message" style="height:100px; width:500px; overflow-y:scroll;">
+		<div class="pingbox" id="ping_message" style="height:100px; width:500px; overflow-y:scroll;">
 			<!-- 表示したいテーブル<br>a<br>a<br>a<br>a<br>a<br>aaaa<br>aaaaa<br> -->
 		</div>
 	</div>
