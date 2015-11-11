@@ -23,7 +23,7 @@ console.log("コンソール：websocket server created");
 
 //クライアントと接続すると動作するイベント
 wss.on("connection", function(ws) {
-//	失敗console.log("IDナンバー:" + ws.id);
+//	失敗した console.log("IDナンバー:" + ws.id);
 
 	//接続時のメッセージ
 	var id = setInterval(function() {

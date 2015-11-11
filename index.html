@@ -10,6 +10,14 @@ body {
 	font-family: "Helvetica Neue", helvetica, arial;
 	padding: 15px;
 }
+div.pingbox{
+	border-style: solid;
+	border-color: gray;
+}
+div.logbox{
+	border-style: solid;
+	border-color: gray;
+}
 </style>
 <!-- CSS部分 -->
 
@@ -21,16 +29,16 @@ var host = location.origin.replace(/^http/, 'ws')			//host
 var ws = new WebSocket(host);								//websocket
 //付け加え変数定義
 var ping_msg = document.getElementById("ping_message");		//ping用
-var chat_ipt;
-// = document.getElementById("chat_input");		//chat用文字入力部分
-var chat_btn = document.getElementById("chat_button");		//chat用ボタン
-var chat_fld = document.getElementById("chat_field");		//chat用出力部分
+var log_ipt, log_fld;
+
+
+
 
 //サーバからデータ受信時のmessageイベント
 ws.onmessage = function (event) {
 	log_fld = document.getElementById("log_field");
 	
-	document.getElementById("ping_message").innerHTML += JSON.parse(event.data) + "<br/>";
+	document.getElementById("ping_message").innerHTML += JSON.parse(event.data) + "<br>";
 	console.log(JSON.parse(event.data));
 	
 	//デバイス登録イベント
@@ -55,13 +63,15 @@ ws.onmessage = function (event) {
 	}
 };
 	
-var log_ipt, log_fld;
 
-//送信function
+//ログ入力の送信ボタンイベント
 function send() {
 	//サーバに送信
+	log_fld = document.getElementById("log_field");
 	log_ipt = document.getElementById("log_input");
-	ws.send(chat_ipt.value);
+//	ws.send(log_ipt.value);
+	var testtext = log_ipt.value + "<br>";
+	log_fld.innerHTML += testtext;
 //		ws.send(document.getElementById("chat_input").value);
 	console.log("送信したった");
 //		chat_fld += chat_ipt.value;
@@ -126,8 +136,8 @@ function onDeviceRadioButton(){
 		<input type="text" id="log_input"/>
 		<input type="button" id="log_button" value="send" onclick="send()"/>
 		<br>
-		<textarea name="logbox" rows="8" cols="40" id="log_field">
-		</textarea>
+		<div class="logbox" id="log_field" style="height:100px; width:500px; overflow-y:scroll;">
+		</div>
 		<br><br>
 	</div>
 	
@@ -174,8 +184,9 @@ function onDeviceRadioButton(){
 	<!-- pingボックス:通信を切らないために -->
 	<div class="pingbox_part">
 		---PINGBOX ＜ 通信を切らないために ＞---<br>
-		<textarea name="pingbox" rows="8" cols="40" id="ping_message">
-		</textarea>
+		<div class="pingbox" style="height:100px; width:500px; overflow-y:scroll;">
+			<!-- 表示したいテーブル<br>a<br>a<br>a<br>a<br>a<br>aaaa<br>aaaaa<br> -->
+		</div>
 	</div>
 	
   </body>
