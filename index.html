@@ -37,10 +37,10 @@ var log_ipt, log_fld;
 //サーバからデータ受信時のmessageイベント
 ws.onmessage = function (event) {
 	ping_msg = document.getElementById("ping_message");
-	log_ipt = document.getElementById("log_input").innerHTML;
+	log_ipt = document.getElementById("log_input");
 	log_fld = document.getElementById("log_field");
 	
-	ping_msg += JSON.parse(event.data) + "<br>";
+	ping_msg.innerHTML += JSON.parse(event.data) + "<br>";
 	console.log(JSON.parse(event.data));
 	
 	//デバイス登録イベント
