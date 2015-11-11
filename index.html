@@ -32,7 +32,9 @@ var ping_msg;		//ping用
 var log_ipt, log_fld;
 
 
-
+ws.onopen = function(){
+	ws.send("open");
+}
 
 //サーバからデータ受信時のmessageイベント
 ws.onmessage = function (event) {
@@ -40,6 +42,12 @@ ws.onmessage = function (event) {
 	log_ipt = document.getElementById("log_input");
 	log_fld = document.getElementById("log_field");
 	
+	//openメッセージ
+	if(JSON.parse(event.data) == "open"){
+		log_fld.innerHTML += "device opened<br>";
+	}
+	
+	//pingメッセージ
 	ping_msg.innerHTML += JSON.parse(event.data) + "<br>";
 	console.log(JSON.parse(event.data));
 	
