@@ -41,7 +41,7 @@ div.pingbox{
 var host = location.origin.replace(/^http/, 'ws');			//host
 var ws = new WebSocket(host);								//websocket
 //付け加え変数定義
-var message, ping_msg, log_ipt, log_fld;					//メッセージ、pingボックス、log入力、logボックス
+var message, ping_fld, chat_ipt, chat_fld;					//メッセージ、pingボックス、log入力、logボックス
 var userid = 'ユーザ' + Math.floor(Math.random() * 500);	//ユーザIDをランダムで生成
 
 //**********オープン処理**********
@@ -73,29 +73,29 @@ ws.onmessage = function (event) {
 	
 	//openメッセージ
 	if(JSON.parse(event.data) == "open"){
-		log_fld.innerHTML += "device opened<br>";
+		chat_fld.innerHTML += "device opened<br>";
 	//closeメッセージ
 	} else if(JSON.parse(event.data) == "close"){
-		log_fld.innerHTML += "device closed<br>";
+		chat_fld.innerHTML += "device closed<br>";
 	//デバイス登録イベント
 	} else if(JSON.parse(event.data) == "PC.1"){
 		document.getElementById("com_pc1").innerHTML = "PC.1";
-		log_fld.innerHTML += "PC1 登録完了" + "<br>";
+		chat_fld.innerHTML += "PC1 登録完了" + "<br>";
 	} else if(JSON.parse(event.data) == "PC.2"){
 		document.getElementById("com_pc2").innerHTML = "PC.2";
-		log_fld.innerHTML += "PC2 登録完了" + "<br>";
+		chat_fld.innerHTML += "PC2 登録完了" + "<br>";
 	} else if(JSON.parse(event.data) == "PC.3"){
 		document.getElementById("com_pc3").innerHTML = "PC.3";
-		log_fld.innerHTML += "PC3 登録完了" + "<br>";
+		chat_fld.innerHTML += "PC3 登録完了" + "<br>";
 	} else if(JSON.parse(event.data) == "TABLET.1"){
 		document.getElementById("com_tablet1").innerHTML = "TABLET.1";
-		log_fld.innerHTML += "TABLET1 登録完了" + "<br>";
+		chat_fld.innerHTML += "TABLET1 登録完了" + "<br>";
 	} else if(JSON.parse(event.data) == "TABLET.2"){
 		document.getElementById("com_tablet2").innerHTML = "TABLET.2";
-		log_fld.innerHTML += "TABLET2 登録完了" + "<br>";
+		chat_fld.innerHTML += "TABLET2 登録完了" + "<br>";
 	} else if(JSON.parse(event.data) == "TABLET.3"){
 		document.getElementById("com_tablet3").innerHTML = "TABLET.3";
-		log_fld.innerHTML += "TABLET3 登録完了" + "<br>";
+		chat_fld.innerHTML += "TABLET3 登録完了" + "<br>";
 	} else {
 	//pingメッセージ
 	ping_fld.innerHTML += JSON.parse(event.data) + "<br>";
@@ -115,7 +115,7 @@ function send() {
 //	通信ありで送信したい場合
 	ws.send(chattext);
 //	通信なしで送信したい場合
-//	log_fld.innerHTML += logtext;
+//	chat_fld.innerHTML += chattext;
 	console.log("inputからメッセージを送信" + chattext);
 }
 
