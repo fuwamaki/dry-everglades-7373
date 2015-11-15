@@ -105,7 +105,7 @@ ws.onmessage = function (event) {
 		chat_fld.innerHTML += "TABLET3 登録完了" + "<br>";
 	} else {
 	//pingメッセージ
-	ping_fld.innerHTML += JSON.parse(event.data) + "<br>";
+	ping_fld.innerHTML += JSON.parse(event.data).text + "<br>";
 //	console.log(JSON.parse(event.data));
 	}
 };
@@ -120,12 +120,12 @@ function send() {
 	chat_fld = document.getElementById("chat_field");
 	
 //	通信ありで送信したい場合
-//	ws.send(chattext);
-	ws.send(JSON.stringify({
-		user: userid,
-		type: 'chat',
-		text: chattext,
-	}));
+	ws.send(chattext);
+//	ws.send(JSON.stringify({
+//		user: userid,
+//		type: 'chat',
+//		text: chattext,
+//	}));
 //	通信なしで送信したい場合
 //	chat_fld.innerHTML += chattext;
 	console.log("inputからメッセージを送信" + chattext);
