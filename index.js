@@ -48,9 +48,6 @@ wss.on("connection", function(ws) {
 	//メッセージ送信時
 	ws.on('message', function (message) {
 		console.log('メッセージmessage:', message);
-		console.log("messageのuser：" + message.user);
-		console.log("messageのtype：" + message.type);
-		console.log("messageのtext：" + message.text);
 		broadcast(JSON.stringify(message));
     });
 	
@@ -58,12 +55,11 @@ wss.on("connection", function(ws) {
 
 //ブロードキャストを行う
 function broadcast(b_message) {
-	var messages = JSON.stringify({
-		user: b_message.user,
-		type: b_message.type,
-		text: b_message.text
-	});
+	var userid = 1;
 	connections.forEach(function (con, i) {
-		con.send(JSON.stringify(b_message));
+		con.send(JSON.stringify({
+			type: 'chat',
+			text: b_message
+		}));
 	});
 };
