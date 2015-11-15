@@ -10,11 +10,23 @@ body {
 	font-family: "Helvetica Neue", helvetica, arial;
 	padding: 15px;
 }
-div.pingbox{
+div.box_part{
+	width: 400px;
+	float: right;
+}
+div.device_part{
+	width: 300px;
+	float: left;
+}
+div.chatbox{
 	border-style: solid;
 	border-color: gray;
 }
 div.logbox{
+	border-style: solid;
+	border-color: gray;
+}
+div.pingbox{
 	border-style: solid;
 	border-color: gray;
 }
@@ -38,6 +50,7 @@ ws.onopen = function(){
 //	ws.send(JSON.stringify({
 //		user: userid,
 //		text: 'open'
+//		type: 
 //	}));
 }
 
@@ -54,9 +67,9 @@ ws.onmessage = function (event) {
 //	message = JSON.parse(event.data);
 
 	//変数に値代入
-	ping_msg = document.getElementById("ping_message");
-	log_ipt = document.getElementById("log_input");
-	log_fld = document.getElementById("log_field");
+	ping_fld = document.getElementById("ping_field");
+	chat_ipt = document.getElementById("chat_input");
+	chat_fld = document.getElementById("chat_field");
 	
 	//openメッセージ
 	if(JSON.parse(event.data) == "open"){
@@ -85,7 +98,7 @@ ws.onmessage = function (event) {
 		log_fld.innerHTML += "TABLET3 登録完了" + "<br>";
 	} else {
 	//pingメッセージ
-	ping_msg.innerHTML += JSON.parse(event.data) + "<br>";
+	ping_fld.innerHTML += JSON.parse(event.data) + "<br>";
 	console.log(JSON.parse(event.data));
 	}
 };
@@ -95,15 +108,15 @@ ws.onmessage = function (event) {
 //**********ログ入力の送信ボタンイベント**********
 function send() {
 	//サーバに送信
-	log_ipt = document.getElementById("log_input");
-	var logtext = log_ipt.value + "<br>";
-	log_fld = document.getElementById("log_field");
+	chat_ipt = document.getElementById("chat_input");
+	var chattext = chat_ipt.value + "<br>";
+	chat_fld = document.getElementById("chat_field");
 	
 //	通信ありで送信したい場合
-	ws.send(logtext);
+	ws.send(chattext);
 //	通信なしで送信したい場合
 //	log_fld.innerHTML += logtext;
-	console.log("inputからメッセージを送信" + logtext);
+	console.log("inputからメッセージを送信" + chattext);
 }
 
 
@@ -154,30 +167,58 @@ function onDeviceRadioButton(){
 
 </head>
 <body>
-	<!-- タイトル -->
+	<!-- **********タイトル********** -->
 	<div class="title_part">
 		<h1>WebSocket修論システム</h1>
 	</div>
-
-	<!-- log部分 -->
-	<div class="log_part">
-		---ログ部分---<br>
-		<input type="text" id="log_input"/>
-		<input type="button" id="log_button" value="send" onclick="send()"/>
-		<br>
-		<div class="logbox" id="log_field" style="height:100px; width:500px; overflow-y:scroll;">
-		</div>
-		<br><br>
-	</div>
+	<!-- **********タイトルend********** -->	
 	
-	<!-- 自分のステータス -->
-	<div class="my_status_part">
-		---ステータス---<br>
-		<!-- 自分のステータス登録 -->
-		<div class="my_status_regist">
-			登録:<br>
-			<button type="my_regist_device" name="button_regist_device" value="regist_device" onclick="onDeviceRadioButton();">デバイス登録</button>
-			<button type="change_device" name="button_change_device" value="change_device" onclick="onDeviceChangeRadioButton()">デバイス変更</button><br/>
+	<!-- **********ボックス********** -->
+	<div class="box_part">
+		<!-- デバッグ用チャット部分 -->
+		<div class="chat_part">
+			--デバッグ用チャット部分--<br>
+			<input type="text" id="chat_input"/>
+			<input type="button" id="chat_button" value="send" onclick="send()"/>
+			<br>
+			<div class="chatbox" id="chat_field" style="height:100px; width:350px; overflow-y:scroll;">
+			</div>
+			<br><br>
+		</div>
+
+		<!-- 接続ログ部分 -->
+		<div class="log_part">
+			---ログ部分---<br>
+			<div class="logbox" id="log_field" style="height:100px; width:350px; overflow-y:scroll;">
+			</div>
+			<br><br>
+		</div>
+	
+		<!-- ping部分:通信を切らないために -->
+		<div class="ping_part">
+			---PINGBOX ＜ 通信を切らないために ＞---<br>
+			<div class="pingbox" id="ping_field" style="height:100px; width:350px; overflow-y:scroll;">
+			</div>
+		</div>
+		<br>
+	</div>
+	<!-- **********ボックスend********** -->
+	
+	<!-- **********デバイス・通信********** -->
+	<div class="device_part">
+		
+		<!-- 自身の接続ステータス部分 -->
+		<div class="my_connect_status_part">
+			接続状態：　<nobr id="my_connect_status">未接続</nobr>
+			<br>
+		</div>
+		
+		<!-- デバイス登録部分 -->
+		<div class="device_regist_part">
+			デバイス登録：<br>
+			<!-- 登録ボタン、変更ボタン -->
+			<button name="button_regist_device" value="regist_device" onclick="onDeviceRadioButton();">デバイス登録</button>
+			<button name="button_change_device" value="change_device" onclick="onDeviceChangeRadioButton()">デバイス変更</button><br/>
 			<!-- デバイス選択ラジオボタン -->
 			<form>
 				<input type="radio" name="device" id="pc1" value="pc1"/><label for="pc1">PC1</label>
@@ -187,36 +228,44 @@ function onDeviceRadioButton(){
 				<input type="radio" name="device" id="tablet2" value="tablet2"/><label for="tablet2">Tablet2</label>
 				<input type="radio" name="device" id="tablet3" value="tablet3"/><label for="tablet3">Tablet3</label>
 			</form>
+			<br>
 		</div>
 		
-		<!-- 自分のステータス確認 -->
-		<div class="my_status_check">
-			状態:<br>
-			デバイス：<nobr id="my_device_status">未登録</nobr><br>
-			接続：<nobr id="my_connection">未登録</nobr><br>
+		<!-- 自身のデバイスステータス部分 -->
+		<div class="my_device_status_part">
+			This PC ステータス：　<nobr id="my_device_status">未登録</nobr>
+			<br>
 		</div>
-	</div>
-	
-	<!-- デバイス通信状況 -->
-	<div class="communication_part">
-		<br>---デバイス通信状況---<br>
-		パソコン1：<font color="red" id="com_pc1">未接続</font><br>
-		パソコン2：<font color="red" id="com_pc2">未接続</font><br>
-		パソコン3：<font color="red" id="com_pc3">未接続</font><br>
-		タブレット1：<font color="red" id="com_tablet1">未接続</font><br>
-		タブレット2：<font color="red" id="com_tablet2">未接続</font><br>
-		タブレット3：<font color="red" id="com_tablet3">未接続</font><br>
+		
+		<!-- 全体デバイスステータス部分 -->
+		<div class="connect_part">
+			---デバイス通信状況---<br>
+			パソコン1：<font color="red" id="con_pc1">未接続</font><br>
+			パソコン2：<font color="red" id="con_pc2">未接続</font><br>
+			パソコン3：<font color="red" id="con_pc3">未接続</font><br>
+			タブレット1：<font color="red" id="con_tablet1">未接続</font><br>
+			タブレット2：<font color="red" id="con_tablet2">未接続</font><br>
+			タブレット3：<font color="red" id="con_tablet3">未接続</font><br>
+		</div>
+		
+		<!-- Kinect接続部分 -->
+
 		<br>
 	</div>
+	<!-- **********デバイス・通信end********** -->
 	
-
-	<!-- pingボックス:通信を切らないために -->
-	<div class="pingbox_part">
-		---PINGBOX ＜ 通信を切らないために ＞---<br>
-		<div class="pingbox" id="ping_message" style="height:100px; width:500px; overflow-y:scroll;">
-			<!-- 表示したいテーブル<br>a<br>a<br>a<br>a<br>a<br>aaaa<br>aaaaa<br> -->
-		</div>
-	</div>
+	<!-- **********台本・稽古********** -->
+	
+	<!-- 台本登録部分 -->
+	
+	
+	<!-- 稽古操作部分 -->
+	
+	
+	<!-- 稽古進行状況部分 -->
+	
+	
+	<!-- **********台本・稽古end********** -->
 	
   </body>
 </html>
