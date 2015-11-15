@@ -48,9 +48,9 @@ var userid = 'ユーザ' + Math.floor(Math.random() * 500);	//ユーザIDをラ�
 ws.onopen = function(){
 //	ws.send("open");
 	ws.send(JSON.stringify({
-		user:userid,
-		type:'connect'
-//		text:'open'
+		user: userid,
+		type: 'connect',
+		text: 'open'
 	}));
 }
 
@@ -120,7 +120,12 @@ function send() {
 	chat_fld = document.getElementById("chat_field");
 	
 //	通信ありで送信したい場合
-	ws.send(chattext);
+//	ws.send(chattext);
+	ws.send(JSON.stringify({
+		user: userid,
+		type: 'chat',
+		text: chattext,
+	}));
 //	通信なしで送信したい場合
 //	chat_fld.innerHTML += chattext;
 	console.log("inputからメッセージを送信" + chattext);
@@ -164,7 +169,12 @@ function onDeviceRadioButton(){
 	document.getElementById("my_device_status").innerHTML = num_dvc;	//デバイス状態に
 	
 	//他のデバイスにも自身の状態を送信
-	ws.send(num_dvc);
+//	ws.send(num_dvc);
+	ws.send(JSON.stringify({
+		user: userid,
+		type: 'connect',
+		text: num_dvc,
+	}));
 }
 </script>
 <!-- スクリプト部分終わり -->
