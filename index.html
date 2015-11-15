@@ -64,9 +64,13 @@ ws.onopen = function(){
 ws.onmessage = function (event) {
 
 	//メッセージの代入
-	message = JSON.parse(event.data);
+	try{
+		message = JSON.parse(event.data);
+	} catch (e){
+	}
 	
 	console.log(message);
+	console.log(message.user);
 	if(message.type === 'connect'){
 		console.log(message.user + " のタイプはconnect");
 	}
