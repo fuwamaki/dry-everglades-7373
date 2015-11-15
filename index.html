@@ -85,7 +85,7 @@ ws.onmessage = function (event) {
 };
 
 //**********クローズイベント**********
-ws.onclose = function (event) {
+ws.onclose = function(){
 	ws.send('close');
 }
 	
