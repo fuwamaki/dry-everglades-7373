@@ -64,6 +64,6 @@ function broadcast(b_message) {
 		text: b_message.text
 	});
 	connections.forEach(function (con, i) {
-		con.send(messages);
+		con.send(JSON.stringify(b_message));
 	});
 };
