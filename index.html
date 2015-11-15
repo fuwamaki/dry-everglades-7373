@@ -68,7 +68,7 @@ ws.onmessage = function (event) {
 
 	
 	console.log(messages);
-	console.log(messages.getItem("user"));
+	console.log(messages.type);
 	if(messages.type === 'connect'){
 		console.log(messages.user + " のタイプはconnect");
 	}
