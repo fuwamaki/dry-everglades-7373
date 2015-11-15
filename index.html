@@ -68,7 +68,7 @@ ws.onmessage = function (event) {
 
 	
 	console.log(messages);
-	console.log(messages.type);
+	console.log(messages.type.toUTCString());
 	if(messages.type === 'connect'){
 		console.log(messages.user + " のタイプはconnect");
 	}
