@@ -55,7 +55,12 @@ wss.on("connection", function(ws) {
 
 //ブロードキャストを行う
 function broadcast(b_message) {
+	var messages = JSON.stringify({
+		user: b_message.user,
+		type: b_message.type,
+		text: b_message.text
+	});
 	connections.forEach(function (con, i) {
-		con.send(b_message);
+		con.send(messages);
 	});
 };
