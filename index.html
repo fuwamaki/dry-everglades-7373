@@ -49,8 +49,8 @@ ws.onopen = function(){
 //	ws.send("open");
 	ws.send(JSON.stringify({
 		user:userid,
-		type:"connect",
-		text:"open"
+		type:'connect',
+		text:'open'
 	}));
 }
 
@@ -68,7 +68,7 @@ ws.onmessage = function (event) {
 
 	
 	console.log(messages);
-	console.log(messages.user);
+	console.log(JSON.parse(event.data).user);
 	if(messages.type === 'connect'){
 		console.log(messages.user + " のタイプはconnect");
 	}
