@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Style-Type" content="text/css" />
 	<meta http-equiv="content-script-type" content="text/javascript" />
 	
-<!-- CSS部分 -->
+<!-- --------------------CSS部分-------------------- -->
 <style>
 body {
 	font-family: "Helvetica Neue", helvetica, arial;
@@ -19,20 +19,20 @@ div.logbox{
 	border-color: gray;
 }
 </style>
-<!-- CSS部分 -->
+<!-- --------------------CSS部分-------------------- -->
 
 
-<!-- スクリプト部分 -->
+<!-- --------------------スクリプト部分-------------------- -->
 <script>
 
 //変数定義(websocket必須)
-var host = location.origin.replace(/^http/, 'ws')			//host
+var host = location.origin.replace(/^http/, 'ws');			//host
 var ws = new WebSocket(host);								//websocket
 //付け加え変数定義
 var message, ping_msg, log_ipt, log_fld;					//メッセージ、pingボックス、log入力、logボックス
 var userid = 'ユーザ' + Math.floor(Math.random() * 500);	//ユーザIDをランダムで生成
 
-//オープン処理
+//**********オープン処理**********
 ws.onopen = function(){
 	ws.send("open");
 //	ws.send(JSON.stringify({
@@ -41,7 +41,7 @@ ws.onopen = function(){
 //	}));
 }
 
-//サーバからデータ受信時のmessageイベント
+//**********サーバからデータ受信時のmessageイベント**********
 ws.onmessage = function (event) {
 
 	//メッセージの代入
@@ -55,7 +55,9 @@ ws.onmessage = function (event) {
 	//openメッセージ
 	if(JSON.parse(event.data) == "open"){
 		log_fld.innerHTML += "device opened<br>";
-		
+	//closeメッセージ
+	} else if(JSON.parse(event.data) == "close"){
+		log_fld.innerHTML += "device closed<br>";
 	//デバイス登録イベント
 	} else if(JSON.parse(event.data) == "PC.1"){
 		document.getElementById("com_pc1").innerHTML = "PC.1";
@@ -81,9 +83,14 @@ ws.onmessage = function (event) {
 	console.log(JSON.parse(event.data));
 	}
 };
+
+//**********クローズイベント**********
+ws.onclose function(event){
+	ws.send('close');
+}
 	
 
-//ログ入力の送信ボタンイベント
+//**********ログ入力の送信ボタンイベント**********
 function send() {
 	//サーバに送信
 	log_ipt = document.getElementById("log_input");
@@ -98,9 +105,9 @@ function send() {
 }
 
 
-var num_dvc;
+var num_dvc;	//自デバイスの値
 
-	//デバイス登録ボタンイベント
+	//**********デバイス登録ボタンイベント**********
 function onDeviceRadioButton(){
 	//定義
 	var pc1 = document.getElementById("pc1").checked;
