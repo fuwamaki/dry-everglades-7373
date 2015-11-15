@@ -79,22 +79,22 @@ ws.onmessage = function (event) {
 		chat_fld.innerHTML += "device closed<br>";
 	//デバイス登録イベント
 	} else if(JSON.parse(event.data) == "PC.1"){
-		document.getElementById("com_pc1").innerHTML = "PC.1";
+		document.getElementById("con_pc1").innerHTML = "PC.1";
 		chat_fld.innerHTML += "PC1 登録完了" + "<br>";
 	} else if(JSON.parse(event.data) == "PC.2"){
-		document.getElementById("com_pc2").innerHTML = "PC.2";
+		document.getElementById("con_pc2").innerHTML = "PC.2";
 		chat_fld.innerHTML += "PC2 登録完了" + "<br>";
 	} else if(JSON.parse(event.data) == "PC.3"){
-		document.getElementById("com_pc3").innerHTML = "PC.3";
+		document.getElementById("con_pc3").innerHTML = "PC.3";
 		chat_fld.innerHTML += "PC3 登録完了" + "<br>";
 	} else if(JSON.parse(event.data) == "TABLET.1"){
-		document.getElementById("com_tablet1").innerHTML = "TABLET.1";
+		document.getElementById("con_tablet1").innerHTML = "TABLET.1";
 		chat_fld.innerHTML += "TABLET1 登録完了" + "<br>";
 	} else if(JSON.parse(event.data) == "TABLET.2"){
-		document.getElementById("com_tablet2").innerHTML = "TABLET.2";
+		document.getElementById("con_tablet2").innerHTML = "TABLET.2";
 		chat_fld.innerHTML += "TABLET2 登録完了" + "<br>";
 	} else if(JSON.parse(event.data) == "TABLET.3"){
-		document.getElementById("com_tablet3").innerHTML = "TABLET.3";
+		document.getElementById("con_tablet3").innerHTML = "TABLET.3";
 		chat_fld.innerHTML += "TABLET3 登録完了" + "<br>";
 	} else {
 	//pingメッセージ
@@ -136,22 +136,22 @@ function onDeviceRadioButton(){
 	//値の代入
 	if(pc1==true){
 		num_dvc = "PC.1";
-		document.getElementById("com_pc1").innerHTML = num_dvc;			//デバイス通信状況に
+		document.getElementById("con_pc1").innerHTML = num_dvc;			//デバイス通信状況に
 	} else if(pc2==true){
 		num_dvc = "PC.2";
-		document.getElementById("com_pc2").innerHTML = num_dvc;			//デバイス通信状況に
+		document.getElementById("con_pc2").innerHTML = num_dvc;			//デバイス通信状況に
 	} else if(pc3==true){
 		num_dvc = "PC.3";
-		document.getElementById("com_pc3").innerHTML = num_dvc;			//デバイス通信状況に
+		document.getElementById("con_pc3").innerHTML = num_dvc;			//デバイス通信状況に
 	} else if(tablet1==true){
 		num_dvc = "TABLET.1";
-		document.getElementById("com_tablet1").innerHTML = num_dvc;		//デバイス通信状況に
+		document.getElementById("con_tablet1").innerHTML = num_dvc;		//デバイス通信状況に
 	} else if(tablet2==true){
 		num_dvc = "TABLET.2";
-		document.getElementById("com_tablet2").innerHTML = num_dvc;		//デバイス通信状況に
+		document.getElementById("con_tablet2").innerHTML = num_dvc;		//デバイス通信状況に
 	} else if(tablet3==true){
 		num_dvc = "TABLET.3";
-		document.getElementById("com_tablet3").innerHTML = num_dvc;		//デバイス通信状況に
+		document.getElementById("con_tablet3").innerHTML = num_dvc;		//デバイス通信状況に
 	}
 	
 	document.getElementById("my_device_status").innerHTML = num_dvc;	//デバイス状態に
