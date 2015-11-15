@@ -66,8 +66,8 @@ ws.onmessage = function (event) {
 	//メッセージの代入
 	message = JSON.parse(event.data);
 	
-	if(message.type == 'connect'){
-		console.log("タイプはconnect");
+	if(message.type == "connect"){
+		console.log(message.user + " のタイプはconnect");
 	}
 
 	//変数に値代入
