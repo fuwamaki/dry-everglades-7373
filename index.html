@@ -64,10 +64,10 @@ ws.onopen = function(){
 ws.onmessage = function (event) {
 
 	//メッセージの代入
-	try{
-		message = JSON.parse(event.data);
-	} catch (e){
-	}
+	message = JSON.parse(event.data);
+	localStorage.setItem("data", JSON.stringify(message));
+	message = JSON.parse(localStorage.getItem("data"));
+
 	
 	console.log(message);
 	console.log(message.user);
