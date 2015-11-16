@@ -19,11 +19,13 @@ var wss = new WebSocketServer({server: server});
 console.log("コンソール：http server listening on %d", port);
 console.log("コンソール：websocket server created");
 
-
+var userid = 1;
 
 //クライアントと接続すると動作するイベント
 wss.on("connection", function(ws) {
 //	失敗した console.log("IDナンバー:" + ws.id);
+	
+	userid++;
 
 	//接続時のメッセージ
 	var id = setInterval(function() {
@@ -47,18 +49,19 @@ wss.on("connection", function(ws) {
 
 	//メッセージ送信時
 	ws.on('message', function (message) {
-		console.log('メッセージmessage:', message);
+//		console.log('メッセージmessage:', message);
 		broadcast(JSON.stringify(message));
     });
 	
 })
 
+
 //ブロードキャストを行う
 function broadcast(b_message) {
-	var userid = 1;
 	connections.forEach(function (con, i) {
 		con.send(JSON.stringify({
-			type: 'chat',
+			user: userid,
+			type: 'log',
 			text: b_message
 		}));
 	});
