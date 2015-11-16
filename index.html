@@ -127,7 +127,7 @@ ws.onmessage = function (event) {
 		}
 	//typeがchat
 	} else if(messages.type == "chat"){
-		chat_fld.innerHTML += "ユーザ" + userid + ": " + messages.text + "<br>";
+		chat_fld.innerHTML += "ユーザ" + messages.user + ": " + messages.text + "<br>";
 	}
 
 		
