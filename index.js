@@ -62,10 +62,11 @@ function broadcast(b_message) {
 	var mes = b_message;
 	console.log('mesの値:', mes);
 	connections.forEach(function (con, i) {
-		con.send(JSON.stringify({
-			user: userid,
-			type: 'log',
-			text: mes
-		}));
+//		con.send(JSON.stringify({
+//			user: userid,
+//			type: 'log',
+//			text: mes
+//		}));
+		con.send(JSON.stringify(mes));
 	});
 };

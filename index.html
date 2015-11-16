@@ -45,12 +45,12 @@ var userid;													//ユーザIDをランダムで生成
 
 //**********オープン処理**********
 ws.onopen = function(){
-	ws.send('open');
-//	ws.send(JSON.stringify({
-//		user: userid,
-//		type: 'connect',
-//		text: 'open'
-//	}));
+//	ws.send('open');
+	ws.send(JSON.stringify({
+		user: userid,
+		type: 'log',
+		text: 'open'
+	}));
 }
 
 //**********クローズイベント**********
