@@ -372,6 +372,7 @@ ws.onmessage = function (event) {
 		ping_fld.innerHTML += "ユーザ" + userid + ": " + JSON.parse(event.data).text + "<br>";
 //		console.log(JSON.parse(event.data));
 	
+	
 	//typeがconnect
 	} else if(messages.type == "connect"){
 		//websocket処理部分
