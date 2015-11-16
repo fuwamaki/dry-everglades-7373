@@ -48,6 +48,8 @@ var host = location.origin.replace(/^http/, 'ws');			//host
 var ws = new WebSocket(host);								//websocket
 //付け加え変数定義
 var userid = Math.floor(Math.random() * 500);				//ユーザIDをランダムで生成
+var pc1_id, pc2_id, pc3_id, tablet1_id, tablet2_id, tablet3_id;
+var open_switch = 0;
 
 //**********オープン処理**********
 ws.onopen = function(){
@@ -89,10 +91,11 @@ ws.onmessage = function (event) {
 	} else if(messages.type == "connect"){
 		//websocket処理部分
 		if(messages.text == "open"){
-			log_fld.innerHTML += "device opened<br>";
-			userid = messages.user;
+			if(open_switch == 0) userid = messages.user;
+			log_fld.innerHTML += "ユーザ" + messages.user + " device opened<br>";
 		} else if(messages.text == "close"){
 			log_fld.innerHTML += "device closed<br>";
+			
 		//デバイス登録部分
 		} else if(messages.text == "PC.1"){
 			document.getElementById("con_pc1").innerHTML = "PC.1";
