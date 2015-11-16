@@ -67,6 +67,6 @@ function broadcast(b_message) {
 //			type: 'log',
 //			text: mes
 //		}));
-		con.send(JSON.stringify(mes));
+		con.send(mes);
 	});
 };
