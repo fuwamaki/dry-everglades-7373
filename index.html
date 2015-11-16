@@ -91,7 +91,10 @@ ws.onmessage = function (event) {
 	} else if(messages.type == "connect"){
 		//websocket処理部分
 		if(messages.text == "open"){
-			if(open_switch == 0) userid = messages.user;
+			if(open_switch == 0){
+				userid = messages.user;
+				open_switch = 1;
+			}
 			log_fld.innerHTML += "ユーザ" + messages.user + " device opened<br>";
 		} else if(messages.text == "close"){
 			log_fld.innerHTML += "device closed<br>";
@@ -177,7 +180,7 @@ function send() {
 	}));
 //	通信なしで送信したい場合
 //	chat_fld.innerHTML += chattext;
-	console.log("inputからメッセージを送信" + chattext);
+//	console.log("inputからメッセージを送信" + chattext);
 }
 
 
