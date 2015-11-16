@@ -41,14 +41,14 @@ div.pingbox{
 var host = location.origin.replace(/^http/, 'ws');			//host
 var ws = new WebSocket(host);								//websocket
 //付け加え変数定義
-var userid = 0;													//ユーザIDをランダムで生成
+var userid = Math.floor(Math.random() * 500;				//ユーザIDをランダムで生成
 
 //**********オープン処理**********
 ws.onopen = function(){
 //	ws.send('open');
 	ws.send(JSON.stringify({
 		user: userid,
-		type: 'log',
+		type: 'connect',
 		text: 'open'
 	}));
 }
@@ -70,18 +70,18 @@ ws.onmessage = function (event) {
 
 	//メッセージの代入
 	var messages = JSON.parse(event.data);
-	console.log(messages);
-	console.log(messages.user + messages.type + messages.text);
+//	console.log(messages);
+//	console.log(messages.user + messages.type + messages.text);
+	
 	
 	//typeがping
 	if(messages.type == "ping"){
-		ping_fld.innerHTML += userid + ": " + JSON.parse(event.data).text + "<br>";
+		ping_fld.innerHTML += "ユーザ" + userid + ": " + JSON.parse(event.data).text + "<br>";
 //		console.log(JSON.parse(event.data));
 	
-	//typeがlog
-	} else if(messages.type == "log"){
-		
-		//connect部分
+	//typeがconnect
+	} else if(messages.type == "connect"){
+		//websocket処理部分
 		if(messages.text == "open"){
 			log_fld.innerHTML += "device opened<br>";
 			userid = messages.user;
@@ -90,7 +90,8 @@ ws.onmessage = function (event) {
 		//デバイス登録部分
 		} else if(messages.text == "PC.1"){
 			document.getElementById("con_pc1").innerHTML = "PC.1";
-			log_fld.innerHTML += "PC1 登録完了" + "<br>";
+			log_fld.innerHTML += "ユーザ" + userid + "PC1 登録完了" + "<br>";
+			userid = "PC1";
 		} else if(messages.text == "PC.2"){
 			document.getElementById("con_pc2").innerHTML = "PC.2";
 			log_fld.innerHTML += "PC2 登録完了" + "<br>";
@@ -106,15 +107,12 @@ ws.onmessage = function (event) {
 		} else if(messages.text == "TABLET.3"){
 			document.getElementById("con_tablet3").innerHTML = "TABLET.3";
 			log_fld.innerHTML += "TABLET3 登録完了" + "<br>";
-			
-		//chat部分
-		} else {
-			chat_fld.innerHTML += userid + ": " + messages.text + "<br>";
 		}
-		
+	//typeがchat
+	} else if(messages.type == "chat"){
+		chat_fld.innerHTML += "ユーザ" + userid + ": " + messages.text + "<br>";
 	}
-		
-		
+
 		
 /*
 	//openメッセージ

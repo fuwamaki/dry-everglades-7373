@@ -49,8 +49,8 @@ wss.on("connection", function(ws) {
 
 	//メッセージ送信時
 	ws.on('message', function (message) {
-		console.log('メッセージmessage:', message);
-//		broadcast(JSON.stringify(message));
+//		console.log('メッセージmessage:', message);
+//		悪の根源：broadcast(JSON.stringify(message));
 		broadcast(message);
     });
 	
@@ -59,14 +59,9 @@ wss.on("connection", function(ws) {
 
 //ブロードキャストを行う
 function broadcast(b_message) {
-	var mes = b_message;
-	console.log('mesの値:', mes);
+//	var mes = b_message;
+//	console.log('mesの値:', mes);
 	connections.forEach(function (con, i) {
-//		con.send(JSON.stringify({
-//			user: userid,
-//			type: 'log',
-//			text: mes
-//		}));
-		con.send(mes);
+		con.send(b_message);
 	});
 };
