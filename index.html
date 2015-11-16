@@ -157,12 +157,12 @@ function send() {
 	chat_fld = document.getElementById("chat_field");
 	
 //	通信ありで送信したい場合
-	ws.send(chattext);
-//	ws.send(JSON.stringify({
-//		user: userid,
-//		type: 'chat',
-//		text: chattext,
-//	}));
+//	ws.send(chattext);
+	ws.send(JSON.stringify({
+		user: userid,
+		type: 'log',
+		text: chattext,
+	}));
 //	通信なしで送信したい場合
 //	chat_fld.innerHTML += chattext;
 	console.log("inputからメッセージを送信" + chattext);
