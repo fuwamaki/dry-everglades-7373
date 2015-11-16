@@ -358,6 +358,9 @@ ws.onmessage = function (event) {
 	var chat_fld = document.getElementById("chat_field");
 	var log_fld = document.getElementById("log_field");
 	var ping_fld = document.getElementById("ping_field");
+	
+	var my_con_sts = document.getElementById("my_connect_status");
+	var my_dvc_sts = document.getElementById("my_device_status");
 
 	//メッセージの代入
 	var messages = JSON.parse(event.data);
@@ -377,40 +380,42 @@ ws.onmessage = function (event) {
 			if(open_switch == 0){
 				userid = messages.user;
 				open_switch = 1;
+				my_con_sts.innerHTML = "OPEN";
+				my_dvc_sts.innerHTML = "ユーザ " + userid;
 			}
-			log_fld.innerHTML += "ユーザ" + messages.user + " device opened<br>";
+			log_fld.innerHTML += "ユーザ " + messages.user + " device opened<br>";
 		} else if(messages.text == "close"){
 			log_fld.innerHTML += "device closed<br>";
 			
 		//デバイス登録部分
 		} else if(messages.text == "PC.1"){
 			document.getElementById("con_pc1").innerHTML = "PC.1";
-			log_fld.innerHTML += "ユーザ" + messages.user + ": PC1 登録完了" + "<br>";
+			log_fld.innerHTML += "ユーザ " + messages.user + ": PC1 登録完了" + "<br>";
 			if(messages.user == userid) userid = "PC1";
 		} else if(messages.text == "PC.2"){
 			document.getElementById("con_pc2").innerHTML = "PC.2";
-			log_fld.innerHTML += "ユーザ" + messages.user + ": PC2 登録完了" + "<br>";
+			log_fld.innerHTML += "ユーザ " + messages.user + ": PC2 登録完了" + "<br>";
 			if(messages.user == userid) userid = "PC2";
 		} else if(messages.text == "PC.3"){
 			document.getElementById("con_pc3").innerHTML = "PC.3";
-			log_fld.innerHTML += "ユーザ" + messages.user + ": PC3 登録完了" + "<br>";
+			log_fld.innerHTML += "ユーザ " + messages.user + ": PC3 登録完了" + "<br>";
 			if(messages.user == userid) userid = "PC3";
 		} else if(messages.text == "TABLET.1"){
 			document.getElementById("con_tablet1").innerHTML = "TABLET.1";
-			log_fld.innerHTML += "ユーザ" + messages.user + ": TABLET1 登録完了" + "<br>";
+			log_fld.innerHTML += "ユーザ " + messages.user + ": TABLET1 登録完了" + "<br>";
 			if(messages.user == userid) userid = "Tablet1";
 		} else if(messages.text == "TABLET.2"){
 			document.getElementById("con_tablet2").innerHTML = "TABLET.2";
-			log_fld.innerHTML += "ユーザ" + messages.user + ": TABLET2 登録完了" + "<br>";
+			log_fld.innerHTML += "ユーザ " + messages.user + ": TABLET2 登録完了" + "<br>";
 			if(messages.user == userid) userid = "Tablet2";
 		} else if(messages.text == "TABLET.3"){
 			document.getElementById("con_tablet3").innerHTML = "TABLET.3";
-			log_fld.innerHTML += "ユーザ" + messages.user + ": TABLET3 登録完了" + "<br>";
+			log_fld.innerHTML += "ユーザ " + messages.user + ": TABLET3 登録完了" + "<br>";
 			if(messages.user == userid) userid = "Tablet3";
 		}
 	//typeがchat
 	} else if(messages.type == "chat"){
-		chat_fld.innerHTML += "ユーザ" + messages.user + ": " + messages.text + "<br>";
+		chat_fld.innerHTML += "ユーザ " + messages.user + ": " + messages.text + "<br>";
 	}
 
 		
