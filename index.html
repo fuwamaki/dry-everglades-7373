@@ -90,7 +90,7 @@ ws.onmessage = function (event) {
 		//デバイス登録部分
 		} else if(messages.text == "PC.1"){
 			document.getElementById("con_pc1").innerHTML = "PC.1";
-			log_fld.innerHTML += "ユーザ" + userid + "PC1 登録完了" + "<br>";
+			log_fld.innerHTML += "ユーザ" + userid + ": PC1 登録完了" + "<br>";
 			userid = "PC1";
 		} else if(messages.text == "PC.2"){
 			document.getElementById("con_pc2").innerHTML = "PC.2";
@@ -158,7 +158,7 @@ function send() {
 //	ws.send(chattext);
 	ws.send(JSON.stringify({
 		user: userid,
-		type: 'log',
+		type: 'chat',
 		text: chattext,
 	}));
 //	通信なしで送信したい場合
