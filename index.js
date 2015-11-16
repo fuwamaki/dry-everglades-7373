@@ -50,7 +50,8 @@ wss.on("connection", function(ws) {
 	//メッセージ送信時
 	ws.on('message', function (message) {
 		console.log('メッセージmessage:', message);
-		broadcast(JSON.stringify(message));
+//		broadcast(JSON.stringify(message));
+		broadcast(message);
     });
 	
 })
