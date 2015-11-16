@@ -9,6 +9,7 @@
 body {
 	font-family: "Helvetica Neue", helvetica, arial;
 	padding: 15px;
+	background-color: #ffb6c1;
 }
 div.box_part{
 	width: 400px;
@@ -94,19 +95,24 @@ ws.onmessage = function (event) {
 			userid = "PC1";
 		} else if(messages.text == "PC.2"){
 			document.getElementById("con_pc2").innerHTML = "PC.2";
-			log_fld.innerHTML += "PC2 登録完了" + "<br>";
+			log_fld.innerHTML += "ユーザ" + userid + ": PC2 登録完了" + "<br>";
+			userid = "PC2";
 		} else if(messages.text == "PC.3"){
 			document.getElementById("con_pc3").innerHTML = "PC.3";
-			log_fld.innerHTML += "PC3 登録完了" + "<br>";
+			log_fld.innerHTML += "ユーザ" + userid + ": PC3 登録完了" + "<br>";
+			userid = "PC3";
 		} else if(messages.text == "TABLET.1"){
 			document.getElementById("con_tablet1").innerHTML = "TABLET.1";
-			log_fld.innerHTML += "TABLET1 登録完了" + "<br>";
+			log_fld.innerHTML += "ユーザ" + userid + ": TABLET1 登録完了" + "<br>";
+			userid = "Tablet1";
 		} else if(messages.text == "TABLET.2"){
 			document.getElementById("con_tablet2").innerHTML = "TABLET.2";
-			log_fld.innerHTML += "TABLET2 登録完了" + "<br>";
+			log_fld.innerHTML += "ユーザ" + userid + ": TABLET2 登録完了" + "<br>";
+			userid = "Tablet2";
 		} else if(messages.text == "TABLET.3"){
 			document.getElementById("con_tablet3").innerHTML = "TABLET.3";
-			log_fld.innerHTML += "TABLET3 登録完了" + "<br>";
+			log_fld.innerHTML += "ユーザ" + userid + ": TABLET3 登録完了" + "<br>";
+			userid = "Tablet3";
 		}
 	//typeがchat
 	} else if(messages.type == "chat"){
