@@ -41,7 +41,7 @@ div.pingbox{
 var host = location.origin.replace(/^http/, 'ws');			//host
 var ws = new WebSocket(host);								//websocket
 //付け加え変数定義
-var userid = Math.floor(Math.random() * 500;				//ユーザIDをランダムで生成
+var userid = Math.floor(Math.random() * 500);				//ユーザIDをランダムで生成
 
 //**********オープン処理**********
 ws.onopen = function(){
