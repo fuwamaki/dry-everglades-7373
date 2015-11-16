@@ -6,35 +6,236 @@
 	
 <!-- --------------------CSS部分-------------------- -->
 <style>
+/*タイトル部分*/
 div.title_part{
 	background-color: white;
+	border-color: black;
+	height: 50px;
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
 }
+h1{
+	text-align: center;
+}
+/*body全体*/
 body {
+	width: 1200px;
 	font-family: "Helvetica Neue", helvetica, arial;
 	padding: 15px;
 	background-color: #ffb6c1;
+	margin-left: auto;
+	margin-right: auto;
 }
-div.box_part{
-	width: 400px;
-	float: right;
+/*デバイス部分*/
+div.device_part{
+	margin-top: 20px;
+	width: 300px;
+	float: left;
+}
+div.my_connect_status_part{
+	width: 300px;
+	height: 40px;
+	background-color: #f4a460;
+	border-style: solid;
+	border-color: gray;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+}
+nobr#my_connect_status{
+	color: red;
+}
+div.device_regist_part{
+	border-style: solid;
+	border-color: gray;
+	width: 295px;
+	height: 130px;
+	margin-top: 20px;
+	padding-top: 10px;
+	margin-bottom: 20px;
 	background-color: white;
 }
-div.device_part{
+div.regist_button{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+div.form1{
+	display: block;
+	float: left;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+div.form2{
+	display: block;
+	float: left;
+	margin-right: 20px;
+}
+div.form3{
+	display: block;
+	float: left;
+}
+div.my_device_status_part{
 	width: 300px;
+	height: 40px;
+	background-color: #f4a460;
+	border-style: solid;
+	border-color: gray;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+}
+nobr#my_device_status{
+	color: red;
+}
+div.connect_part{
+	border-style: solid;
+	border-color: gray;
+	width: 295px;
+	height: 100px;
+	margin-top: 20px;
+	text-align: center;
+	background-color: white;
+}
+div.con1{
+	display: block;
+	float: left;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+div.con2{
+	display: block;
+	float: left;
+}
+div.kinect_part{
+	border-style: solid;
+	border-color: gray;
+	width: 295px;
+	height: 150px;
+	margin-top: 20px;
+	text-align: center;
+	background-color: white;
+}
+/*---稽古部分---*/
+div.training_part{
+	margin-top: 20px;
+	margin-left: 25px;
+	width: 500px;
 	float: left;
 	background-color: white;
 }
-div.chatbox{
+div.instruction_part{
+	width: 495px;
+	height: 40px;
 	border-style: solid;
 	border-color: gray;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+	background-color: black;
+	color: white;
+}
+nobr#instruction_part_title{
+	color: red;
+}
+div.choice_script_part{
+	width: 495px;
+	height: 100px;
+	margin-top: 5px;
+	border-style: solid;
+	border-color: gray;
+}
+div.choice_script_part_title{
+	width: auto;
+	background-color: #696969;
+	color: white;
+}
+div.operation_part{
+	width: 495px;
+	height: 230px;
+	margin-top: 5px;
+	border-style: solid;
+	border-color: gray;
+}
+div.operation_part_title{
+	width: auto;
+	background-color: #696969;
+	color: white;
+}
+div.training_log_part{
+	width: 495px;
+	height: 150px;
+	margin-top: 5px;
+	border-style: solid;
+	border-color: gray;
+}
+div.training_log_part_title{
+	width: auto;
+	background-color: #696969;
+	color: white;
+}
+/*---ボックス部分---*/
+div.box_part{
+	width: 350px;
+	float: right;
+	margin-top: 20px;
+}
+/*チャット部分*/
+div.chat_part_title{
+	width: 350px;
+	background-color: #696969;
+	color: white;
+	text-align: center;
+}
+input#chat_input{
+	width: 295px;
+}
+input#chat_button{
+	width: 50px;
+}
+div.chatbox{
+	width: 345px;
+	height: 150px;
+	border-style: solid;
+	border-color: gray;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 5px;
+	background-color: white;
+}
+/*ログ部分*/
+div.log_part_title{
+	width: 350px;
+	background-color: #696969;
+	color: white;
+	text-align: center;
 }
 div.logbox{
+	width: 345px;
+	height: 150px;
 	border-style: solid;
 	border-color: gray;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 5px;
+	background-color: white;
+}
+/*ping部分*/
+div.ping_part_title{
+	width: 350px;
+	background-color: #696969;
+	color: white;
+	text-align: center;
 }
 div.pingbox{
+	width: 345px;
+	height: 150px;
 	border-style: solid;
 	border-color: gray;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: white;
 }
 </style>
 <!-- --------------------CSS部分-------------------- -->
@@ -242,61 +443,41 @@ function onDeviceRadioButton(){
 	</div>
 	<!-- **********タイトルend********** -->	
 	
-	<!-- **********ボックス********** -->
-	<div class="box_part">
-		<!-- デバッグ用チャット部分 -->
-		<div class="chat_part">
-			--デバッグ用チャット部分--<br>
-			<input type="text" id="chat_input"/>
-			<input type="button" id="chat_button" value="send" onclick="send()"/>
-			<br>
-			<div class="chatbox" id="chat_field" style="height:100px; width:350px; overflow-y:scroll;">
-			</div>
-			<br><br>
-		</div>
 
-		<!-- 接続ログ部分 -->
-		<div class="log_part">
-			---ログ部分---<br>
-			<div class="logbox" id="log_field" style="height:100px; width:350px; overflow-y:scroll;">
-			</div>
-			<br><br>
-		</div>
-	
-		<!-- ping部分:通信を切らないために -->
-		<div class="ping_part">
-			---PINGBOX ＜ 通信を切らないために ＞---<br>
-			<div class="pingbox" id="ping_field" style="height:100px; width:350px; overflow-y:scroll;">
-			</div>
-		</div>
-		<br>
-	</div>
-	<!-- **********ボックスend********** -->
 	
 	<!-- **********デバイス・通信********** -->
 	<div class="device_part">
 		
 		<!-- 自身の接続ステータス部分 -->
 		<div class="my_connect_status_part">
-			接続状態：　<nobr id="my_connect_status">未接続</nobr>
-			<br>
+			接続状態：　<nobr id="my_connect_status">未接続</nobr><br>
 		</div>
 		
 		<!-- デバイス登録部分 -->
 		<div class="device_regist_part">
-			デバイス登録：<br>
+			デバイス登録<br>
 			<!-- 登録ボタン、変更ボタン -->
-			<button name="button_regist_device" value="regist_device" onclick="onDeviceRadioButton();">デバイス登録</button>
-			<button name="button_change_device" value="change_device" onclick="onDeviceChangeRadioButton()">デバイス変更</button><br/>
+			<div class="regist_button">
+				<button name="button_regist_device" value="regist_device" onclick="onDeviceRadioButton();">デバイス登録</button>
+				<button name="button_change_device" value="change_device" onclick="onDeviceChangeRadioButton()">デバイス変更</button><br/>
+			</div>
 			<!-- デバイス選択ラジオボタン -->
-			<form>
-				<input type="radio" name="device" id="pc1" value="pc1"/><label for="pc1">PC1</label>
-				<input type="radio" name="device" id="pc2" value="pc2"/><label for="pc2">PC2</label>
-				<input type="radio" name="device" id="pc3" value="pc3"/><label for="pc3">PC3</label><br/>
-				<input type="radio" name="device" id="tablet1" value="tablet1"/><label for="tablet1">Tablet1</label>
-				<input type="radio" name="device" id="tablet2" value="tablet2"/><label for="tablet2">Tablet2</label>
-				<input type="radio" name="device" id="tablet3" value="tablet3"/><label for="tablet3">Tablet3</label>
-			</form>
+			<div class="regist_form">
+				<form>
+					<div class="form1">
+						<input type="radio" name="device" id="pc1" value="pc1"/><label for="pc1">PC1</label><br>
+						<input type="radio" name="device" id="tablet1" value="tablet1"/><label for="tablet1">Tablet1</label>
+					</div>
+					<div class="form2">
+						<input type="radio" name="device" id="pc2" value="pc2"/><label for="pc2">PC2</label><br>
+						<input type="radio" name="device" id="tablet2" value="tablet2"/><label for="tablet2">Tablet2</label>
+					</div>
+					<div class="form3">
+						<input type="radio" name="device" id="pc3" value="pc3"/><label for="pc3">PC3</label><br>
+						<input type="radio" name="device" id="tablet3" value="tablet3"/><label for="tablet3">Tablet3</label>
+					</div>
+				</form>
+			</div>
 			<br>
 		</div>
 		
@@ -308,33 +489,91 @@ function onDeviceRadioButton(){
 		
 		<!-- 全体デバイスステータス部分 -->
 		<div class="connect_part">
-			---デバイス通信状況---<br>
-			パソコン1：<font color="red" id="con_pc1">未接続</font><br>
-			パソコン2：<font color="red" id="con_pc2">未接続</font><br>
-			パソコン3：<font color="red" id="con_pc3">未接続</font><br>
-			タブレット1：<font color="red" id="con_tablet1">未接続</font><br>
-			タブレット2：<font color="red" id="con_tablet2">未接続</font><br>
-			タブレット3：<font color="red" id="con_tablet3">未接続</font><br>
+			<nobr id="connect_part_title">---デバイス通信状況---</nobr><br>
+			<div class="con1">
+				PC1：<font color="red" id="con_pc1">未接続</font><br>
+				PC2：<font color="red" id="con_pc2">未接続</font><br>
+				PC3：<font color="red" id="con_pc3">未接続</font>
+			</div>
+			<div class="con2">
+				Tablet1：<font color="red" id="con_tablet1">未接続</font><br>
+				Tablet2：<font color="red" id="con_tablet2">未接続</font><br>
+				Tablet3：<font color="red" id="con_tablet3">未接続</font>
+			</div>
 		</div>
 		
 		<!-- Kinect接続部分 -->
-
+		<div class="kinect_part">
+			<nobr id="kinect_part_title">---KINECT通信状況---</nobr><br>
+		</div>
 		<br>
 	</div>
 	<!-- **********デバイス・通信end********** -->
 	
 	<!-- **********台本・稽古********** -->
-	
-	<!-- 台本登録部分 -->
-	
-	
-	<!-- 稽古操作部分 -->
-	
-	
-	<!-- 稽古進行状況部分 -->
-	
+	<div class="training_part">
+		<!-- 指示部分 -->
+		<div class="instruction_part">
+			指示： <nobr id="instruction_part_title">デバイス登録をしてください</nobr><br>
+		</div>
+		
+		<!-- 台本選択部分 -->
+		<div class="choice_script_part">
+			<div class="choice_script_part_title">
+				台本選択<br>
+			</div>
+		</div>
+		
+		<!-- 稽古操作部分 -->
+		<div class="operation_part">
+			<div class="operation_part_title">
+				稽古操作<br>
+			</div>
+		</div>
+		
+		<!-- 稽古進行状況部分 -->
+		<div class="training_log_part">
+			<div class="training_log_part_title">
+				台本進行状況<br>
+			</div>
+		</div>
+	</div>
 	
 	<!-- **********台本・稽古end********** -->
 	
+	<!-- **********ボックス********** -->
+	<div class="box_part">
+		<!-- デバッグ用チャット部分 -->
+		<div class="chat_part">
+			<div class="chat_part_title">
+				--デバッグ用チャット--<br>
+			</div>
+			<input type="text" id="chat_input"/>
+			<input type="button" id="chat_button" value="send" onclick="send()"/>
+			<br>
+			<div class="chatbox" id="chat_field" style="overflow-y:scroll;">
+			</div>
+		</div>
+
+		<!-- 接続ログ部分 -->
+		<div class="log_part">
+			<div class="log_part_title">
+				--ログ--<br>
+			</div>
+			<div class="logbox" id="log_field" style="overflow-y:scroll;">
+			</div>
+		</div>
+	
+		<!-- ping部分:通信を切らないために -->
+		<div class="ping_part">
+			<div class="ping_part_title">
+				---PINGBOX ＜ 通信を切らないために ＞---<br>
+			</div>
+			<div class="pingbox" id="ping_field" style="overflow-y:scroll;">
+			</div>
+		</div>
+		<br>
+	</div>
+	<!-- **********ボックスend********** -->	
   </body>
 </html>
