@@ -75,7 +75,7 @@ ws.onmessage = function (event) {
 	
 	//typeがping
 	if(messages.type == "ping"){
-		ping_fld.innerHTML += messages.user + ": " + JSON.parse(event.data).text + "<br>";
+		ping_fld.innerHTML += userid + ": " + JSON.parse(event.data).text + "<br>";
 //		console.log(JSON.parse(event.data));
 	
 	//typeがlog
