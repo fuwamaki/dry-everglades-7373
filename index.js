@@ -55,7 +55,9 @@ wss.on("connection", function(ws) {
 //		悪の根源：broadcast(JSON.stringify(message));
 		console.log('タイプ', JSON.parse(message).type);
 		broadcast(message);
-//		if(JSON.parse(message).type == "connect") connect(user, text);
+		if(JSON.parse(message).type == 'connect'){
+			connect(user, text);
+		}
     });
 	
 })
