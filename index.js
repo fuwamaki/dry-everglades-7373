@@ -67,6 +67,9 @@ wss.on("connection", function(ws) {
 function broadcast(b_message) {
 //	var mes = b_message;
 //	console.log('mesの値:', mes);
+		console.log('ユーザ', b_message.user);
+		console.log('タイプ', b_message.type);
+		console.log('テキスト', b_message.text);
 	connections.forEach(function (con, i) {
 		con.send(b_message);
 	});
