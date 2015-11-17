@@ -53,9 +53,9 @@ wss.on("connection", function(ws) {
 	ws.on('message', function (message) {
 //		console.log('メッセージmessage:', message);
 //		悪の根源：broadcast(JSON.stringify(message));
-//		console.log('ユーザ', JSON.parse(message).user);
+		console.log('タイプ', JSON.parse(message).type);
 		broadcast(message);
-		if(JSON.parse(message).type == "connect") connect(user, text);
+//		if(JSON.parse(message).type == "connect") connect(user, text);
     });
 	
 })
