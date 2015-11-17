@@ -90,36 +90,6 @@ ws.onmessage = function (event) {
 		chat_fld.innerHTML += "ユーザ " + messages.user + ": " + messages.text + "<br>";
 	}
 
-		
-/*
-	//openメッセージ
-	if(JSON.parse(event.data) == "open"){
-		chat_fld.innerHTML += "device opened<br>";
-	//closeメッセージ
-	} else if(JSON.parse(event.data) == "close"){
-		chat_fld.innerHTML += "device closed<br>";
-	//デバイス登録イベント
-	} else if(JSON.parse(event.data) == "PC.1"){
-		document.getElementById("con_pc1").innerHTML = "PC.1";
-		chat_fld.innerHTML += "PC1 登録完了" + "<br>";
-	} else if(JSON.parse(event.data) == "PC.2"){
-		document.getElementById("con_pc2").innerHTML = "PC.2";
-		chat_fld.innerHTML += "PC2 登録完了" + "<br>";
-	} else if(JSON.parse(event.data) == "PC.3"){
-		document.getElementById("con_pc3").innerHTML = "PC.3";
-		chat_fld.innerHTML += "PC3 登録完了" + "<br>";
-	} else if(JSON.parse(event.data) == "TABLET.1"){
-		document.getElementById("con_tablet1").innerHTML = "TABLET.1";
-		chat_fld.innerHTML += "TABLET1 登録完了" + "<br>";
-	} else if(JSON.parse(event.data) == "TABLET.2"){
-		document.getElementById("con_tablet2").innerHTML = "TABLET.2";
-		chat_fld.innerHTML += "TABLET2 登録完了" + "<br>";
-	} else if(JSON.parse(event.data) == "TABLET.3"){
-		document.getElementById("con_tablet3").innerHTML = "TABLET.3";
-		chat_fld.innerHTML += "TABLET3 登録完了" + "<br>";
-	} else {
-	}
-	*/
 };
 
 	
