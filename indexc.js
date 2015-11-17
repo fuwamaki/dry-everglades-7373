@@ -1,5 +1,3 @@
-<script>
-
 //変数定義(websocket必須)
 var host = location.origin.replace(/^http/, 'ws');			//host
 var ws = new WebSocket(host);								//websocket
@@ -190,4 +188,3 @@ function onDeviceRadioButton(){
 		text: num_dvc,
 	}));
 }
-</script>
