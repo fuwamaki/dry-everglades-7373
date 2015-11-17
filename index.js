@@ -7,7 +7,8 @@ var port = process.env.PORT || 5000;			//ポート
 //付け加え変数定義
 var connections = [];							//Websocket接続の保存用配列
 
-
+//付け加え
+var pc1, pc2, pc3, tablet1, tablet2, tablet3;	//接続状態の記録
 
 //expressモジュールからhttpサーバを作成し、wsモジュールのseverの引数にし、websocket用サーバオブジェクトを作成
 app.use(express.static(__dirname + "/"));
@@ -52,9 +53,9 @@ wss.on("connection", function(ws) {
 	ws.on('message', function (message) {
 //		console.log('メッセージmessage:', message);
 //		悪の根源：broadcast(JSON.stringify(message));
-//		var messages = JSON.parse(message);
-		console.log('ユーザ', JSON.parse(message).user);
+//		console.log('ユーザ', JSON.parse(message).user);
 		broadcast(message);
+		if(JSON.parse(message).type == "connect") connect(user, text);
     });
 	
 })
@@ -66,4 +67,8 @@ function broadcast(b_message) {
 	connections.forEach(function (con, i) {
 		con.send(b_message);
 	});
+};
+
+function connect(s_user, s_text){
+	console.log('コネクトに');
 };
