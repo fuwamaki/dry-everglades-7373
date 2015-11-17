@@ -75,4 +75,5 @@ function connect(s_user, s_text){
 	console.log('コネクトに');
 	if(s_text == "open"){
 		console.log('おーぷん');
+	}
 };
