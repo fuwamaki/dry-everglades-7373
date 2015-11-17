@@ -58,7 +58,6 @@ wss.on("connection", function(ws) {
 	
 })
 
-
 //ブロードキャストを行う
 function broadcast(b_message) {
 //	var mes = b_message;
