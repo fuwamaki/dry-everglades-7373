@@ -52,7 +52,7 @@ wss.on("connection", function(ws) {
 
 	//メッセージ送信時
 	ws.on('message', function (message) {
-//		console.log('メッセージmessage:', message);
+		console.log('メッセージmessage:', message);
 //		悪の根源：broadcast(JSON.stringify(message));
 		console.log('ユーザ', message.user);
 		console.log('タイプ', message.type);
