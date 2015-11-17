@@ -56,8 +56,7 @@ wss.on("connection", function(ws) {
 		console.log('タイプ', JSON.parse(message).type);
 		broadcast(message);
 		if(JSON.parse(message).type == "connect"){
-//			connect(user, text);
-			console.log('コネクトに');
+			connect(JSON.parse(message).user, JSON.parse(message).text);
 		}
     });
 	
@@ -74,4 +73,6 @@ function broadcast(b_message) {
 
 function connect(s_user, s_text){
 	console.log('コネクトに');
+	if(s_text == "open"){
+		console.log('おーぷん');
 };
