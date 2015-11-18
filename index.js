@@ -93,12 +93,27 @@ function connect(s_user, s_text){
 		console.log('おーぷん');
 
 		if(pc1 == 1){
-			console.log('おーぷん:PC1とうろくされてる');
-			connect_message = JSON.stringify({
-				user: 'PC.1',
-				type: 'connect',
-				text: 'open_device'
-			});
+			connect_message = JSON.stringify({user: 'PC.1', type: 'connect', text: 'open_device' });
+			broadcast(connect_message);
+		}
+		if(pc2 == 1){
+			connect_message = JSON.stringify({user: 'PC.2', type: 'connect', text: 'open_device' });
+			broadcast(connect_message);
+		}
+		if(pc3 == 1){
+			connect_message = JSON.stringify({user: 'PC.3', type: 'connect', text: 'open_device' });
+			broadcast(connect_message);
+		}
+		if(tablet1 == 1){
+			connect_message = JSON.stringify({user: 'TABLET.1', type: 'connect', text: 'open_device' });
+			broadcast(connect_message);
+		}
+		if(tablet2 == 1){
+			connect_message = JSON.stringify({user: 'TABLET.2', type: 'connect', text: 'open_device' });
+			broadcast(connect_message);
+		}
+		if(tablet3 == 1){
+			connect_message = JSON.stringify({user: 'TABLET.3', type: 'connect', text: 'open_device' });
 			broadcast(connect_message);
 		}
 
