@@ -4,11 +4,11 @@ var ws = new WebSocket(host);									//websocket
 //付け加え変数定義
 var userid = Math.floor(Math.random() * 500);					//ユーザIDをランダムで生成
 var pc1_id, pc2_id, pc3_id, tablet1_id, tablet2_id, tablet3_id;	//
-var open_switch = 0;
+var open_switch = 0;											//オープンしてるかどうかのフラグ
+var num_dvc;													//自デバイスの値
 
 //**********オープン処理**********
 ws.onopen = function(){
-//	ws.send('open');
 	ws.send(JSON.stringify({
 		user: userid,
 		type: 'connect',
@@ -18,7 +18,11 @@ ws.onopen = function(){
 
 //**********クローズイベント**********
 //ws.onclose = function(){
-//	ws.send("close");
+//	ws.send(JSON.stringify({
+//		user: userid,
+//		type: 'connect',
+//		text: 'close'
+//	}));
 //}
 
 
@@ -37,18 +41,16 @@ ws.onmessage = function (event) {
 	//メッセージの代入
 	var messages = JSON.parse(event.data);
 //	console.log(messages);
-//	console.log(messages.user + messages.type + messages.text);
 	
-	//typeがping
+	//#####typeがping#####
 	if(messages.type == "ping"){
-		ping_fld.innerHTML += "ユーザ" + userid + ": " + JSON.parse(event.data).text + "<br>";
-//		console.log(JSON.parse(event.data));
+		ping_fld.innerHTML += "ユーザ" + userid + ": " + messages.text + "<br>";
 	
 	
-	//typeがconnect
+	//#####typeがconnect#####
 	} else if(messages.type == "connect"){
-//	console.log("タイプがコネクトなら" + messages.user + messages.type + messages.text);
-		//websocket処理部分
+
+		//===websocket処理部分===
 		if(messages.text == "open"){
 			if(open_switch == 0){
 				userid = messages.user;
@@ -60,11 +62,10 @@ ws.onmessage = function (event) {
 		} else if(messages.text == "close"){
 			log_fld.innerHTML += "device closed<br>";
 			
-		//open時、デバイス登録状況を更新する
+		//===open時、デバイス登録状況を更新する===
 		} else if(messages.text == "open_device"){
 			
 			if(userid!="PC1"&&userid!="PC2"&&userid!="PC3"&&userid!="Tablet1"&&userid!="Tablet2"&&userid!="Tablet3"){
-			
 			
 				if(messages.user == "PC.1"){
 					log_fld.innerHTML += "　PC.1：登録済み<br>";
@@ -86,7 +87,7 @@ ws.onmessage = function (event) {
 					document.getElementById("con_tablet3").innerHTML = "TABLET.3";
 				}
 			}
-		//デバイス登録部分
+		//===デバイス登録部分===
 		} else if(messages.text == "PC.1"){
 			document.getElementById("con_pc1").innerHTML = "PC.1";
 			log_fld.innerHTML += "ユーザ " + messages.user + ": PC1 登録完了" + "<br>";
@@ -112,7 +113,7 @@ ws.onmessage = function (event) {
 			log_fld.innerHTML += "ユーザ " + messages.user + ": TABLET3 登録完了" + "<br>";
 			if(messages.user == userid) userid = "Tablet3";
 		}
-	//typeがchat
+	//#####typeがchat#####
 	} else if(messages.type == "chat"){
 		chat_fld.innerHTML += "ユーザ " + messages.user + ": " + messages.text + "<br>";
 	}
@@ -121,27 +122,21 @@ ws.onmessage = function (event) {
 
 	
 
-//**********ログ入力の送信ボタンイベント**********
+//**********チャット入力の送信ボタンイベント**********
 function send() {
-	//サーバに送信
 	chat_ipt = document.getElementById("chat_input");
 	var chattext = chat_ipt.value;
 	chat_fld = document.getElementById("chat_field");
 	
-//	通信ありで送信したい場合
-//	ws.send(chattext);
+	//サーバに送信
 	ws.send(JSON.stringify({
 		user: userid,
 		type: 'chat',
 		text: chattext,
 	}));
-//	通信なしで送信したい場合
-//	chat_fld.innerHTML += chattext;
-//	console.log("inputからメッセージを送信" + chattext);
 }
 
 
-var num_dvc;	//自デバイスの値
 
 	//**********デバイス登録ボタンイベント**********
 function onDeviceRadioButton(){
@@ -152,33 +147,31 @@ function onDeviceRadioButton(){
 	var tablet1 = document.getElementById("tablet1").checked;
 	var tablet2 = document.getElementById("tablet2").checked;
 	var tablet3 = document.getElementById("tablet3").checked;
-
 	
 	//値の代入
 	if(pc1==true){
 		num_dvc = "PC.1";
-		document.getElementById("con_pc1").innerHTML = num_dvc;			//デバイス通信状況に
+		document.getElementById("con_pc1").innerHTML = num_dvc;			//デバイス通信状況に代入
 	} else if(pc2==true){
 		num_dvc = "PC.2";
-		document.getElementById("con_pc2").innerHTML = num_dvc;			//デバイス通信状況に
+		document.getElementById("con_pc2").innerHTML = num_dvc;			//デバイス通信状況に代入
 	} else if(pc3==true){
 		num_dvc = "PC.3";
-		document.getElementById("con_pc3").innerHTML = num_dvc;			//デバイス通信状況に
+		document.getElementById("con_pc3").innerHTML = num_dvc;			//デバイス通信状況に代入
 	} else if(tablet1==true){
 		num_dvc = "TABLET.1";
-		document.getElementById("con_tablet1").innerHTML = num_dvc;		//デバイス通信状況に
+		document.getElementById("con_tablet1").innerHTML = num_dvc;		//デバイス通信状況に代入
 	} else if(tablet2==true){
 		num_dvc = "TABLET.2";
-		document.getElementById("con_tablet2").innerHTML = num_dvc;		//デバイス通信状況に
+		document.getElementById("con_tablet2").innerHTML = num_dvc;		//デバイス通信状況に代入
 	} else if(tablet3==true){
 		num_dvc = "TABLET.3";
-		document.getElementById("con_tablet3").innerHTML = num_dvc;		//デバイス通信状況に
+		document.getElementById("con_tablet3").innerHTML = num_dvc;		//デバイス通信状況に代入
 	}
 	
-	document.getElementById("my_device_status").innerHTML = num_dvc;	//デバイス状態に
+	document.getElementById("my_device_status").innerHTML = num_dvc;	//デバイス状態に代入
 	
 	//他のデバイスにも自身の状態を送信
-//	ws.send(num_dvc);
 	ws.send(JSON.stringify({
 		user: userid,
 		type: 'connect',
