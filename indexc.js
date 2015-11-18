@@ -63,7 +63,7 @@ ws.onmessage = function (event) {
 		//open時、デバイス登録状況を更新する
 		} else if(messages.text == "open_device"){
 			
-			if(userid!="PC.1"){
+			if(userid!="PC1"||userid!="PC2"){
 			
 			
 				if(messages.user == "PC.1"){
