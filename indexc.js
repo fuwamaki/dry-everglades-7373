@@ -1,9 +1,9 @@
 //変数定義(websocket必須)
-var host = location.origin.replace(/^http/, 'ws');			//host
-var ws = new WebSocket(host);								//websocket
+var host = location.origin.replace(/^http/, 'ws');				//host
+var ws = new WebSocket(host);									//websocket
 //付け加え変数定義
-var userid = Math.floor(Math.random() * 500);				//ユーザIDをランダムで生成
-var pc1_id, pc2_id, pc3_id, tablet1_id, tablet2_id, tablet3_id;
+var userid = Math.floor(Math.random() * 500);					//ユーザIDをランダムで生成
+var pc1_id, pc2_id, pc3_id, tablet1_id, tablet2_id, tablet3_id;	//
 var open_switch = 0;
 
 //**********オープン処理**********
@@ -62,24 +62,29 @@ ws.onmessage = function (event) {
 			
 		//open時、デバイス登録状況を更新する
 		} else if(messages.text == "open_device"){
-			if(messages.user == "PC.1"){
-				log_fld.innerHTML += "　PC.1：登録済み<br>";
-				document.getElementById("con_pc1").innerHTML = "PC.1";
-			} else if(messages.user == "PC.2"){
-				log_fld.innerHTML += "　PC.2：登録済み<br>";
-				document.getElementById("con_pc2").innerHTML = "PC.2";
-			} else if(messages.user == "PC.3"){
-				log_fld.innerHTML += "　PC.3：登録済み<br>";
-				document.getElementById("con_pc3").innerHTML = "PC.3";
-			} else if(messages.user == "TABLET.1"){
-				log_fld.innerHTML += "　TABLET.1：登録済み<br>";
-				document.getElementById("con_tablet1").innerHTML = "TABLET.1";
-			} else if(messages.user == "TABLET.2"){
-				log_fld.innerHTML += "　TABLET.2：登録済み<br>";
-				document.getElementById("con_tablet2").innerHTML = "TABLET.2";
-			} else if(messages.user == "TABLET.3"){
-				log_fld.innerHTML += "　TABLET.3：登録済み<br>";
-				document.getElementById("con_tablet3").innerHTML = "TABLET.3";
+			
+			if(userid!="PC.1" && userid!="PC.2"){
+			
+			
+				if(messages.user == "PC.1"){
+					log_fld.innerHTML += "　PC.1：登録済み<br>";
+					document.getElementById("con_pc1").innerHTML = "PC.1";
+				} else if(messages.user == "PC.2"){
+					log_fld.innerHTML += "　PC.2：登録済み<br>";
+					document.getElementById("con_pc2").innerHTML = "PC.2";
+				} else if(messages.user == "PC.3"){
+					log_fld.innerHTML += "　PC.3：登録済み<br>";
+					document.getElementById("con_pc3").innerHTML = "PC.3";
+				} else if(messages.user == "TABLET.1"){
+					log_fld.innerHTML += "　TABLET.1：登録済み<br>";
+					document.getElementById("con_tablet1").innerHTML = "TABLET.1";
+				} else if(messages.user == "TABLET.2"){
+					log_fld.innerHTML += "　TABLET.2：登録済み<br>";
+					document.getElementById("con_tablet2").innerHTML = "TABLET.2";
+				} else if(messages.user == "TABLET.3"){
+					log_fld.innerHTML += "　TABLET.3：登録済み<br>";
+					document.getElementById("con_tablet3").innerHTML = "TABLET.3";
+				}
 			}
 		//デバイス登録部分
 		} else if(messages.text == "PC.1"){

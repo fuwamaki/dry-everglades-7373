@@ -88,10 +88,10 @@ function connect(s_user, s_text){
 	
 
 	console.log('コネクトに');
-	//オープン、クローズ
+	//オープン処理
 	if(s_text == "open"){
-		console.log('おーぷん');
-
+//		console.log('おーぷん');
+		//デバイスが登録されているかチェック
 		if(pc1 == 1){
 			connect_message = JSON.stringify({user: 'PC.1', type: 'connect', text: 'open_device' });
 			broadcast(connect_message);
@@ -116,9 +116,7 @@ function connect(s_user, s_text){
 			connect_message = JSON.stringify({user: 'TABLET.3', type: 'connect', text: 'open_device' });
 			broadcast(connect_message);
 		}
-
-
-		
+	//クローズ処理
 	} else if(s_text == "close"){
 	
 	//デバイス登録
