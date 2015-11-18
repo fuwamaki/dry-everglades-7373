@@ -59,6 +59,10 @@ ws.onmessage = function (event) {
 		} else if(messages.text == "close"){
 			log_fld.innerHTML += "device closed<br>";
 			
+		} else if(messages.text == "open_device"){
+			if(messages.user == "PC.1"){
+				log_fld.innerHTML += "PC.1はすでに登録されている";
+			}
 		//デバイス登録部分
 		} else if(messages.text == "PC.1"){
 			document.getElementById("con_pc1").innerHTML = "PC.1";
