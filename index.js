@@ -107,7 +107,8 @@ function connect(s_user, s_text){
 	
 	//デバイス登録
 	} else if(s_text == "PC.1"){
-		pc1 == 1;
+		pc1 = 1;
+		console.log('サーバがPC1をにんしき');
 	} else if(s_text == "PC.2"){
 		pc2 == 1;
 	} else if(s_text == "PC.3"){
