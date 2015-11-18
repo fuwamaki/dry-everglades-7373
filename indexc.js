@@ -63,22 +63,22 @@ ws.onmessage = function (event) {
 		//open時、デバイス登録状況を更新する
 		} else if(messages.text == "open_device"){
 			if(messages.user == "PC.1"){
-				log_fld.innerHTML += "PC.1：登録済み";
+				log_fld.innerHTML += "　PC.1：登録済み<br>";
 				document.getElementById("con_pc1").innerHTML = "PC.1";
 			} else if(messages.user == "PC.2"){
-				log_fld.innerHTML += "PC.2：登録済み";
+				log_fld.innerHTML += "　PC.2：登録済み<br>";
 				document.getElementById("con_pc2").innerHTML = "PC.2";
 			} else if(messages.user == "PC.3"){
-				log_fld.innerHTML += "PC.3：登録済み";
+				log_fld.innerHTML += "　PC.3：登録済み<br>";
 				document.getElementById("con_pc3").innerHTML = "PC.3";
 			} else if(messages.user == "TABLET.1"){
-				log_fld.innerHTML += "TABLET.1：登録済み";
+				log_fld.innerHTML += "　TABLET.1：登録済み<br>";
 				document.getElementById("con_tablet1").innerHTML = "TABLET.1";
 			} else if(messages.user == "TABLET.2"){
-				log_fld.innerHTML += "TABLET.2：登録済み";
+				log_fld.innerHTML += "　TABLET.2：登録済み<br>";
 				document.getElementById("con_tablet2").innerHTML = "TABLET.2";
 			} else if(messages.user == "TABLET.3"){
-				log_fld.innerHTML += "TABLET.3：登録済み";
+				log_fld.innerHTML += "　TABLET.3：登録済み<br>";
 				document.getElementById("con_tablet3").innerHTML = "TABLET.3";
 			}
 		//デバイス登録部分
