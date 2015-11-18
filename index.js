@@ -99,6 +99,7 @@ function connect(s_user, s_text){
 				type: 'connect',
 				text: 'open_device'
 			});
+			broadcast(connect_message);
 		}
 
 
@@ -110,15 +111,15 @@ function connect(s_user, s_text){
 		pc1 = 1;
 		console.log('サーバがPC1をにんしき');
 	} else if(s_text == "PC.2"){
-		pc2 == 1;
+		pc2 = 1;
 	} else if(s_text == "PC.3"){
-		pc3 == 1;
+		pc3 = 1;
 	} else if(s_text == "TABLET.1"){
-		tablet1 == 1;
+		tablet1 = 1;
 	} else if(s_text == "TABLET.2"){
-		tablet2 == 1;
+		tablet2 = 1;
 	} else if(s_text == "TABLET.3"){
-		tablet3 == 1;
+		tablet3 = 1;
 	}
 	
 };

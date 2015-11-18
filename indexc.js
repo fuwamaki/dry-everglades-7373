@@ -36,7 +36,7 @@ ws.onmessage = function (event) {
 
 	//メッセージの代入
 	var messages = JSON.parse(event.data);
-	console.log(messages);
+//	console.log(messages);
 //	console.log(messages.user + messages.type + messages.text);
 	
 	//typeがping
