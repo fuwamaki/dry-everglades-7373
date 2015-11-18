@@ -93,6 +93,7 @@ function connect(s_user, s_text){
 		console.log('おーぷん');
 
 		if(pc1 == 1){
+			console.log('おーぷん:PC1とうろくされてる');
 			connect_message = JSON.stringify({
 				user: 'PC.1',
 				type: 'connect',

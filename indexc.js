@@ -47,6 +47,7 @@ ws.onmessage = function (event) {
 	
 	//typeがconnect
 	} else if(messages.type == "connect"){
+	console.log("タイプがコネクトなら" + messages.user + messages.type + messages.text);
 		//websocket処理部分
 		if(messages.text == "open"){
 			if(open_switch == 0){
