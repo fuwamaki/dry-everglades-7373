@@ -31,6 +31,7 @@ ws.onopen = function(){
 //    ws.close(4500,"切断理由");
 //}
 
+
 //**********サーバからデータ受信時のmessageイベント**********
 ws.onmessage = function (event) {
 
