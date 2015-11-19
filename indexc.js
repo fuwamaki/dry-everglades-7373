@@ -17,19 +17,19 @@ ws.onopen = function(){
 }
 
 //**********クローズイベント**********
-ws.onclose = function(event){
-	console.log("クローズ");
-	ws.send(JSON.stringify({
-		user: userid,
-		type: 'connect',
-		text: 'close'
-	}));
-}
+//ws.onclose = function(event){
+//	console.log("クローズ");
+//	ws.send(JSON.stringify({
+//		user: userid,
+//		type: 'connect',
+//		text: 'close'
+//	}));
+//}
 
-window.onunload = function(event){
+//window.onunload = function(event){
     // 切断
-    ws.close(4500,"切断理由");
-}
+//    ws.close(4500,"切断理由");
+//}
 
 //**********サーバからデータ受信時のmessageイベント**********
 ws.onmessage = function (event) {
