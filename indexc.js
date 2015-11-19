@@ -2,7 +2,7 @@
 var host = location.origin.replace(/^http/, 'ws');				//host
 var ws = new WebSocket(host);									//websocket
 //付け加え変数定義
-var userid = Math.floor(Math.random() * 500);					//ユーザIDをランダムで生成
+var userid = Math.floor(Math.random() * 500);					//自デバイスのユーザIDをランダムで生成
 var pc1_id, pc2_id, pc3_id, tablet1_id, tablet2_id, tablet3_id;	//
 var open_switch = 0;											//オープンしてるかどうかのフラグ
 var num_dvc;													//自デバイスの値
