@@ -32,6 +32,7 @@ ws.onopen = function(){
 //}
 
 
+
 //**********サーバからデータ受信時のmessageイベント**********
 ws.onmessage = function (event) {
 
