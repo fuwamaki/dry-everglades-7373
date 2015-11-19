@@ -34,6 +34,7 @@ window.onunload = function(event){
 //**********サーバからデータ受信時のmessageイベント**********
 ws.onmessage = function (event) {
 
+
 	//変数に値代入
 	var chat_ipt = document.getElementById("chat_input");
 	var chat_fld = document.getElementById("chat_field");
