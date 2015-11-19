@@ -16,7 +16,6 @@ ws.onopen = function(){
 	}));
 }
 
-
 //**********クローズイベント**********
 //ws.onclose = function(event){
 //	console.log("クローズ");
