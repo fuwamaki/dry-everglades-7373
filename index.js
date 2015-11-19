@@ -80,7 +80,6 @@ function broadcast(b_message) {
 function connect(s_user, s_text){
 	var connect_message;
 	
-	
 	//オープン処理
 	if(s_text == "open"){
 		//デバイスが登録されているかチェック
