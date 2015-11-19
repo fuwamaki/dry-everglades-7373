@@ -1,9 +1,9 @@
 {
-  "name": "nodejs_chat",
-  "version": “0.0.2”,
+  "name": "node-ws-test",
+  "version": “0.0.1”,
   "repository": {
     "type": "git",
-    "url": "https://dry-everglades-7373.herokuapp.com”
+    "url": "https://github.com/heroku-examples/node-ws-test.git"
   },
   "dependencies": {
     "express": "^4.13.3",
