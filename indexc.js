@@ -58,6 +58,7 @@ ws.onmessage = function (event) {
 
 		//===websocket処理部分===
 		if(messages.text == "open"){
+			//自分が最初にオープンした時の動作
 			if(open_switch == 0){
 				userid = messages.user;
 				open_switch = 1;
@@ -157,22 +158,16 @@ function onDeviceRadioButton(){
 	//値の代入
 	if(pc1==true){
 		num_dvc = "PC.1";
-//		document.getElementById("con_pc1").innerHTML = num_dvc;			//デバイス通信状況に代入
 	} else if(pc2==true){
 		num_dvc = "PC.2";
-//		document.getElementById("con_pc2").innerHTML = num_dvc;			//デバイス通信状況に代入
 	} else if(pc3==true){
 		num_dvc = "PC.3";
-//		document.getElementById("con_pc3").innerHTML = num_dvc;			//デバイス通信状況に代入
 	} else if(tablet1==true){
 		num_dvc = "TABLET.1";
-//		document.getElementById("con_tablet1").innerHTML = num_dvc;		//デバイス通信状況に代入
 	} else if(tablet2==true){
 		num_dvc = "TABLET.2";
-//		document.getElementById("con_tablet2").innerHTML = num_dvc;		//デバイス通信状況に代入
 	} else if(tablet3==true){
 		num_dvc = "TABLET.3";
-//		document.getElementById("con_tablet3").innerHTML = num_dvc;		//デバイス通信状況に代入
 	}
 	
 	document.getElementById("my_device_status").innerHTML = num_dvc;	//デバイス状態に代入
@@ -183,4 +178,8 @@ function onDeviceRadioButton(){
 		type: 'connect',
 		text: num_dvc,
 	}));
+}
+
+//watchへの通知サンプル部分
+function onWatchButton(){
 }
