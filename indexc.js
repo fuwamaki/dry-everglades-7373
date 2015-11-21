@@ -71,6 +71,7 @@ ws.onmessage = function (event) {
 				my_con_sts.innerHTML = "OPEN";
 				my_dvc_sts.innerHTML = "ユーザ " + userid;
 			}
+			//共通
 			log_fld.innerHTML += "ユーザ " + messages.user + " device opened<br>";
 		} else if(messages.text == "close"){
 			log_fld.innerHTML += "device closed<br>";
@@ -188,4 +189,37 @@ function onDeviceRadioButton(){
 
 //watchへの通知サンプル部分
 function onWatchButton(){
+}
+
+
+//台本の読み込み
+function onReadScriptButton(){
+	getCSVFile();
+}
+
+function getCSVFile() {
+    var xhr = new createXMLHttpRequest();
+    xhr.onload = function() {
+    createArray(xhr.responseText);
+    };
+ 
+    xhr.open("get", "daihon1.csv", true);
+    xhr.send(null);
+}
+ 
+function createXMLHttpRequest() {
+    var XMLhttpObject = null;
+    XMLhttpObject = new XMLHttpRequest();
+    return XMLhttpObject;
+}
+ 
+function createArray(csvData) {
+    var tempArray = csvData.split("\n");
+    var csvArray = new Array();
+    for(var i = 0; i<tempArray.length;i++){
+    csvArray[i] = tempArray[i].split(",");
+    console.log(csvArray[i]);
+	var training_log = document.getElementById("training_field");
+	training_log.innerHTML += csvArray[i] + "<br>";
+    }
 }

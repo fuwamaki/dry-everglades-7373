@@ -133,6 +133,10 @@
 			</div>
 			<!-- 稽古ボックス部分 -->
 			<div class="operationbox">
+				
+				<!-- 台本読み込みボタン -->
+				<button name="read_script" onclick="onReadScriptButton();">台本読み込み</button>
+
 			</div>
 		</div>
 		
@@ -143,7 +147,7 @@
 				<nobr id="training_log_title">---台本進行状況---</nobr><br>
 			</div>
 			<!-- 稽古ログ部分 -->
-			<div class="traininglogbox">
+			<div class="traininglogbox" id="training_field" style="overflow-y:scroll;">
 			</div>
 		</div>
 	</div>
