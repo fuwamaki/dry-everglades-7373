@@ -86,7 +86,8 @@ ws.onmessage = function (event) {
 			if(userid!="PC1"&&userid!="PC2"&&userid!="PC3"&&userid!="Tablet1"&&userid!="Tablet2"&&userid!="Tablet3"){
 			
 				if(messages.user == "PC.1"){
-					log_fld.innerHTML += "　PC.1：登録済み<br>";
+/*					log_fld.innerHTML += "　PC.1：登録済み<br>"; */
+					write_log(messages.user, ":登録済み<br>");
 					document.getElementById("con_pc1").innerHTML = "PC.1";
 				} else if(messages.user == "PC.2"){
 					log_fld.innerHTML += "　PC.2：登録済み<br>";
