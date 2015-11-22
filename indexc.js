@@ -154,7 +154,7 @@ function update_connect_status(){
 //PCステータスの更新
 function update_pc_status(Userid){
 	var my_dvc_sts = document.getElementById("my_device_status");
-	my_dvc_sts.innerHTML = "ユーザ " + Userid;
+	my_dvc_sts.innerHTML = Userid;
 }
 
 //デバイス通信状況の更新-pc1-
@@ -236,15 +236,9 @@ function onDeviceRadioButton(){
 		num_dvc = "TABLET.3";
 	}
 	
-//	document.getElementById("my_device_status").innerHTML = num_dvc;	//デバイス状態に代入
+	//デバイスステータスの更新
 	update_pc_status(num_dvc);
-	
-	//他のデバイスにも自身の状態を送信
-//	ws.send(JSON.stringify({
-//		user: userid,
-//		type: 'connect',
-//		text: num_dvc,
-//	}));
+	//他のデバイスに更新情報を送信
 	send(userid, 'connect', num_dvc);
 }
 
