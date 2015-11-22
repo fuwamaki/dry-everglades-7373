@@ -242,8 +242,89 @@ function onDeviceRadioButton(){
 	send(userid, 'connect', num_dvc);
 }
 
+//デバイス変更ボタン
+function onDeviceChangeRadioButton(){
+	//未実装
+}
 
 //-----台本、稽古部分-----
+
+//+++++台本選択部分+++++
+
+//台本1ボタン
+function onScriptButton1(){
+	getCSVFile();
+}
+
+//台本2ボタン
+function onScriptButton2(){
+}
+
+//台本3ボタン
+function onScriptButton3(){
+}
+
+//台本4ボタン
+function onScriptButton4(){
+}
+
+//台本5ボタン
+function onScriptButton5(){
+}
+
+//台本6ボタン
+function onScriptButton6(){
+}
+
+//台本7ボタン
+function onScriptButton7(){
+}
+
+//台本8ボタン
+function onScriptButton8(){
+}
+
+//台本決定ボタン
+function onScriptDecideButton(){
+}
+
+//+++++稽古操作部分+++++
+
+//Watchデバッグ通知ボタン1
+function onWatchDebugButton1(){
+}
+
+//Watchデバッグ通知ボタン2
+function onWatchDebugButton2(){
+}
+
+//Watchデバッグ通知ボタン3
+function onWatchDebugButton3(){
+}
+
+//音チェックボタン
+function onSoundCheckButton(){
+}
+
+//稽古スタートボタン
+function onStartButton(){
+}
+
+//一時停止ボタン
+function onStopButton(){
+}
+
+//再スタートボタン
+function onRestartButton(){
+}
+
+//-1から再スタートボタン
+function onRestartBack1Button(){
+}
+
+//-2から再スタートボタン
+function onRestartBack2Button(){
+}
 
 //-----ボックス部分-----
 
@@ -253,33 +334,27 @@ function onChatSendButton() {
 	send(userid, 'chat', chat_ipt.value);
 }
 
+//********************台本、稽古 機能イベント********************
 
-
-//watchへの通知サンプル部分
-function onWatchButton(){
-}
-
-
-//台本の読み込み
-function onReadScriptButton(){
-	getCSVFile();
-}
 
 //色変えるボタン
 function onChangeColorButton(){
 	document.getElementById('2').style.backgroundColor = '#0000ff';
 }
 
+//CSVファイルの読み込み
 function getCSVFile() {
     var xhr = new createXMLHttpRequest();
     xhr.onload = function() {
+		//CSVファイルが存在すれば、配列に格納
 		createArray(xhr.responseText);
     };
- 
+	 //読み込む台本CSVファイルの定義
     xhr.open("get", "daihon1.csv", true);
     xhr.send(null);
 }
- 
+
+//CSVの読み込みに必要なxhrの作成
 function createXMLHttpRequest() {
     var XMLhttpObject = null;
     XMLhttpObject = new XMLHttpRequest();
@@ -287,15 +362,16 @@ function createXMLHttpRequest() {
 }
 
 
-
- 
+//台本を配列に格納
 function createArray(csvData) {
-	var CR = String.fromCharCode(13); //改行コード
-    var tempArray = csvData.split(CR);
-    var csvArray = new Array();
+	var CR = String.fromCharCode(13);	//改行コード
+    var tempArray = csvData.split(CR);	//縦配列
+    var csvArray = new Array();			//横配列
+	var resultTable = "";
 	
-	var training_log = document.getElementById("training_field");
-	var resultTable = "<table border=1 class=\"script\"><tr><th class=\"one\">列:順</th><th class=\"two\">番号</th><th class=\"three\">役者</th><th class=\"four\">セリフ</th></tr>";
+	
+	resultTable = "";
+	resultTable = "<table border=1 class=\"script\"><tr><th class=\"one\">列:順</th><th class=\"two\">番号</th><th class=\"three\">役者</th><th class=\"four\">セリフ</th></tr>";
 
 	
     for(var i = 0; i<tempArray.length;i++){ 
@@ -316,7 +392,11 @@ function createArray(csvData) {
     }
 	
 	resultTable += "</table>";
-	training_log.innerHTML = resultTable;
-	
+	displayArray(resultTable);
 }
 
+//台本進行状況に台本の配列を表示
+function displayArray(resulttable){
+	var training_log = document.getElementById("training_field");
+	training_log.innerHTML = resulttable;
+}
