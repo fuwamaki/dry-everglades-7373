@@ -338,10 +338,12 @@ function onChatSendButton() {
 //********************台本、稽古 機能イベント********************
 
 
-//色変えるボタン
+//色変えるボタン　デバッグ用
 function onChangeColorButton(){
 	document.getElementById('2').style.backgroundColor = '#0000ff';
 }
+
+//+++++-----台本の読み込み-----+++++
 
 //CSVファイルの読み込み
 function getCSVFile(daihon) {
@@ -373,20 +375,21 @@ function createArray(csvData) {
 	
 	//格納する前に初期化
 	resultTable = "";
-	resultTable = "<table border=1 class=\"script\"><tr><th class=\"one\">列:順</th><th class=\"two\">番号</th><th class=\"three\">役者</th><th class=\"four\">セリフ</th></tr>";
+	resultTable = "<table border=1 class=\"script\"><tr><th class=\"one\">順番</th><th class=\"two\">役者</th><th class=\"three\">セリフ</th><th class=\"four\">動き</th></tr>";
 
 	//配列を作成
     for(var i = 0; i<tempArray.length;i++){ 
 //		console.log("長さ" + tempArray.length);
 		csvArray = tempArray[i].split(",");		//セミコロンで分割
-		for(var j = 0; j<csvArray.length; j++){
+/*		for(var j = 0; j<csvArray.length; j++){ */
+		for(var j = 0; j<4; j++){
 			if(j==0){
 				resultTable += "<tr id=\""+ i +"\">";	//trにはクラス(0,1,2,3)をつける
-				resultTable +="<td>" + i + ":" +csvArray[j] + "</td>";
+				resultTable +="<td>" + csvArray[j] + "</td>";
 			}else if(j==3){
-				resultTable +="<td>" +csvArray[j] + "</td></tr>";
+				resultTable +="<td>" + csvArray[j] + "</td></tr>";
 			} else {
-				resultTable +="<td>" +csvArray[j] + "</td>";
+				resultTable +="<td>" + csvArray[j] + "</td>";
 			}
 		}
     }
@@ -401,3 +404,6 @@ function displayArray(resulttable){
 	var training_log = document.getElementById("training_field");
 	training_log.innerHTML = resulttable;
 }
+
+//+++++-----台本の読み込み 終了-----+++++
+
