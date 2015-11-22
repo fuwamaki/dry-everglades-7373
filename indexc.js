@@ -68,13 +68,17 @@ ws.onmessage = function (event) {
 			if(open_switch == 0){
 				userid = messages.user;
 				open_switch = 1;
-				my_con_sts.innerHTML = "OPEN";
-				my_dvc_sts.innerHTML = "ユーザ " + userid;
+//				my_con_sts.innerHTML = "OPEN";
+//				my_dvc_sts.innerHTML = "ユーザ " + userid;
+				update_connect_status();
+				update_pc_status(userid);
 			}
 			//共通
-			log_fld.innerHTML += "ユーザ " + messages.user + " device opened<br>";
+/*			log_fld.innerHTML += "ユーザ " + messages.user + " device opened<br>"; */
+			write_log(messages.user, " device opened<br>");
 		} else if(messages.text == "close"){
-			log_fld.innerHTML += "device closed<br>";
+/*			log_fld.innerHTML += "device closed<br>"; */
+			write_log(messages.user, " device closed<br>");
 			
 		//===open時、デバイス登録状況を更新する===
 		} else if(messages.text == "open_device"){
@@ -140,6 +144,19 @@ ws.onmessage = function (event) {
 //送信メソッド
 
 
+//********************接続ボックス内のイベント********************
+
+//接続状態の更新
+function update_connect_status(){
+	var my_con_sts = document.getElementById("my_connect_status");
+	my_con_sts.innerHTML = "OPEN";
+}
+
+//PCステータスの更新
+function update_pc_status(Userid){
+	var my_dvc_sts = document.getElementById("my_device_status");
+	my_dvc_sts.innerHTML = "ユーザ " + Userid;
+}
 
 //********************チャット、ログ、pingイベント********************
 
@@ -148,7 +165,9 @@ function write_chat(){
 }
 
 //ログボックスに書き込み
-function write_log(){
+function write_log(Userid, Text){
+	var log_fld = document.getElementById("log_field");
+	log_fld.innerHTML += "ユーザ " + Userid + Text;
 }
 
 //pingボックスに書き込み
