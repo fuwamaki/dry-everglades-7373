@@ -209,23 +209,9 @@ function write_ping(Userid, Text){
 
 //********************ボタンイベント********************
 
-//チャット入力送信ボタン
-function onChatSendButton() {
-	chat_ipt = document.getElementById("chat_input");
-//	var chattext = chat_ipt.value;
-	send(userid, 'chat', chat_ipt.value);
-	
-	//サーバに送信
-//	ws.send(JSON.stringify({
-//		user: userid,
-//		type: 'chat',
-//		text: chattext,
-//	}));
-}
+//-----デバイス登録部分-----
 
-
-
-	//********************デバイス登録ボタンイベント********************
+//デバイス登録ボタン
 function onDeviceRadioButton(){
 	//定義
 	var pc1 = document.getElementById("pc1").checked;
@@ -250,7 +236,7 @@ function onDeviceRadioButton(){
 		num_dvc = "TABLET.3";
 	}
 	
-	document.getElementById("my_device_status").innerHTML = num_dvc;	//デバイス状態に代入
+//	document.getElementById("my_device_status").innerHTML = num_dvc;	//デバイス状態に代入
 	
 	//他のデバイスにも自身の状態を送信
 	ws.send(JSON.stringify({
@@ -259,6 +245,19 @@ function onDeviceRadioButton(){
 		text: num_dvc,
 	}));
 }
+
+
+//-----台本、稽古部分-----
+
+//-----ボックス部分-----
+
+//チャット入力送信ボタン
+function onChatSendButton() {
+	chat_ipt = document.getElementById("chat_input");
+	send(userid, 'chat', chat_ipt.value);
+}
+
+
 
 //watchへの通知サンプル部分
 function onWatchButton(){
