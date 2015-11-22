@@ -44,16 +44,7 @@ ws.onmessage = function (event) {
 	var messages = JSON.parse(event.data);
 //	console.log(messages);
 
-	//-----変数に値代入-----
-	var chat_ipt = document.getElementById("chat_input");
-	var chat_fld = document.getElementById("chat_field");
-	var log_fld = document.getElementById("log_field");
-	var ping_fld = document.getElementById("ping_field");
-	
-	var my_con_sts = document.getElementById("my_connect_status");
-	var my_dvc_sts = document.getElementById("my_device_status");
 
-	
 	//-----typeがping-----
 	if(messages.type == "ping"){
 /*		ping_fld.innerHTML += "ユーザ" + userid + ": " + messages.text + "<br>"; */
@@ -69,8 +60,6 @@ ws.onmessage = function (event) {
 			if(open_switch == 0){
 				userid = messages.user;
 				open_switch = 1;
-//				my_con_sts.innerHTML = "OPEN";
-//				my_dvc_sts.innerHTML = "ユーザ " + userid;
 				update_connect_status();
 				update_pc_status(userid);
 			}
@@ -105,6 +94,7 @@ ws.onmessage = function (event) {
 					update_tablet3();
 				}
 			}
+			
 		//===デバイス登録部分===
 		} else if(messages.text == "PC.1"){
 			write_log(messages.user, ":PC.1に登録完了<br>");
@@ -131,6 +121,7 @@ ws.onmessage = function (event) {
 			update_tablet3();
 			if(messages.user == userid) userid = "Tablet3";
 		}
+		
 	//-----typeがchat-----
 	} else if(messages.type == "chat"){
 /*		chat_fld.innerHTML += "ユーザ " + messages.user + ": " + messages.text + "<br>"; */
@@ -142,7 +133,14 @@ ws.onmessage = function (event) {
 	
 //********************共通機能イベント********************
 
-//送信メソッド
+//サーバに送信メソッド
+function send(Userid, Type, Text){
+	ws.send(JSON.stringify({
+		user: Userid,
+		type: Type,
+		text: Text,
+	}));
+}
 
 
 //********************接続ボックス内のイベント********************
@@ -209,18 +207,20 @@ function write_ping(Userid, Text){
 	ping_fld.innerHTML += "ユーザ" + Userid + ": " + Text + "<br>";
 }
 
-//********************チャット入力の送信ボタンイベント********************
-function send() {
+//********************ボタンイベント********************
+
+//チャット入力送信ボタン
+function onChatSendButton() {
 	chat_ipt = document.getElementById("chat_input");
-	var chattext = chat_ipt.value;
-	chat_fld = document.getElementById("chat_field");
+//	var chattext = chat_ipt.value;
+	send(userid, 'chat', chat_ipt.value);
 	
 	//サーバに送信
-	ws.send(JSON.stringify({
-		user: userid,
-		type: 'chat',
-		text: chattext,
-	}));
+//	ws.send(JSON.stringify({
+//		user: userid,
+//		type: 'chat',
+//		text: chattext,
+//	}));
 }
 
 

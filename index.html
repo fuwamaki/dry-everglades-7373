@@ -132,6 +132,8 @@
 					<button name="scriptbutton7" onclick="onScriptButton7();">台本7</button><br>
 					<button name="scriptbutton8" onclick="onScriptButton8();">台本8</button><br>
 				</div>
+				
+				<!-- 台本の概要表示部分 -->
 				<div class="script_table">
 					<table border=1 class="script_information">
 						<tr id="script_title">
@@ -243,7 +245,7 @@
 			<!-- チャットインプット部分 -->
 			<div class="chat_part_input">
 				<input type="text" id="chat_input"/>
-				<input type="button" id="chat_button" value="send" onclick="send()"/><br>
+				<input type="button" id="chat_button" value="onChatSendButton()" onclick="send()"/><br>
 			</div>
 			<!-- チャットボックス部分 -->
 			<div class="chatbox" id="chat_field" style="overflow-y:scroll;">
