@@ -107,27 +107,27 @@ ws.onmessage = function (event) {
 			}
 		//===デバイス登録部分===
 		} else if(messages.text == "PC.1"){
-			write_log(messages.user, ":登録完了<br>");
+			write_log(messages.user, ":PC.1に登録完了<br>");
 			update_pc1();
 			if(messages.user == userid) userid = "PC1";
 		} else if(messages.text == "PC.2"){
-			write_log(messages.user, ":登録完了<br>");
+			write_log(messages.user, ":PC.2に登録完了<br>");
 			update_pc2();
 			if(messages.user == userid) userid = "PC2";
 		} else if(messages.text == "PC.3"){
-			write_log(messages.user, ":登録完了<br>");
+			write_log(messages.user, ":PC.3に登録完了<br>");
 			update_pc3();
 			if(messages.user == userid) userid = "PC3";
 		} else if(messages.text == "TABLET.1"){
-			write_log(messages.user, ":登録完了<br>");
+			write_log(messages.user, ":TABLET.1に登録完了<br>");
 			update_tablet1();
 			if(messages.user == userid) userid = "Tablet1";
 		} else if(messages.text == "TABLET.2"){
-			write_log(messages.user, ":登録完了<br>");
+			write_log(messages.user, ":TABLET.2に登録完了<br>");
 			update_tablet2();
 			if(messages.user == userid) userid = "Tablet2";
 		} else if(messages.text == "TABLET.3"){
-			write_log(messages.user, ":登録完了<br>");
+			write_log(messages.user, ":TABLET.3に登録完了<br>");
 			update_tablet3();
 			if(messages.user == userid) userid = "Tablet3";
 		}
