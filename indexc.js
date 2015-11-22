@@ -253,11 +253,12 @@ function onDeviceChangeRadioButton(){
 
 //台本1ボタン
 function onScriptButton1(){
-	getCSVFile();
+	getCSVFile("daihon1.csv");
 }
 
 //台本2ボタン
 function onScriptButton2(){
+	getCSVFile("daihon2.csv");
 }
 
 //台本3ボタン
@@ -343,14 +344,15 @@ function onChangeColorButton(){
 }
 
 //CSVファイルの読み込み
-function getCSVFile() {
+function getCSVFile(daihon) {
     var xhr = new createXMLHttpRequest();
     xhr.onload = function() {
 		//CSVファイルが存在すれば、配列に格納
 		createArray(xhr.responseText);
     };
 	 //読み込む台本CSVファイルの定義
-    xhr.open("get", "daihon1.csv", true);
+//    xhr.open("get", "daihon1.csv", true);
+    xhr.open("get", daihon, true);
     xhr.send(null);
 }
 
@@ -365,23 +367,21 @@ function createXMLHttpRequest() {
 //台本を配列に格納
 function createArray(csvData) {
 	var CR = String.fromCharCode(13);	//改行コード
-    var tempArray = csvData.split(CR);	//縦配列
+    var tempArray = csvData.split(CR);	//縦配列、改行コードで分割
     var csvArray = new Array();			//横配列
-	var resultTable = "";
+	var resultTable = "";				//配列を一旦格納する変数
 	
-	
+	//格納する前に初期化
 	resultTable = "";
 	resultTable = "<table border=1 class=\"script\"><tr><th class=\"one\">列:順</th><th class=\"two\">番号</th><th class=\"three\">役者</th><th class=\"four\">セリフ</th></tr>";
 
-	
+	//配列を作成
     for(var i = 0; i<tempArray.length;i++){ 
 //		console.log("長さ" + tempArray.length);
-//		console.log("tempArray" + i + " " +tempArray[i]);
-
-		csvArray = tempArray[i].split(",");
+		csvArray = tempArray[i].split(",");		//セミコロンで分割
 		for(var j = 0; j<csvArray.length; j++){
 			if(j==0){
-				resultTable += "<tr id=\""+ i +"\">";	//trにクラスをつける
+				resultTable += "<tr id=\""+ i +"\">";	//trにはクラス(0,1,2,3)をつける
 				resultTable +="<td>" + i + ":" +csvArray[j] + "</td>";
 			}else if(j==3){
 				resultTable +="<td>" +csvArray[j] + "</td></tr>";
@@ -390,8 +390,9 @@ function createArray(csvData) {
 			}
 		}
     }
-	
 	resultTable += "</table>";
+	
+	//作成した配列を台本進行状況に格納する
 	displayArray(resultTable);
 }
 
