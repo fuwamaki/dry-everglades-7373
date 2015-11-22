@@ -28,7 +28,7 @@ ws.onclose = function(event){
 
 window.onunload = function(event){
     // 切断
-    ws.close("切断理由");
+    ws.onclose("切断理由");
 //	ws.send(JSON.stringify({
 //		user: userid,
 //		type: 'connect',
