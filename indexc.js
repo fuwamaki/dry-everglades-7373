@@ -194,7 +194,7 @@ function update_tablet3(){
 //チャットボックスに書き込み
 function write_chat(Userid, Text){
 	var chat_fld = document.getElementById("chat_field");
-	chat_fld.innerHTML += "ユーザ " + User + ": " + Text + "<br>";
+	chat_fld.innerHTML += "ユーザ " + Userid + ": " + Text + "<br>";
 }
 
 //ログボックスに書き込み
