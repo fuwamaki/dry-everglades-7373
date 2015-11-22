@@ -119,8 +119,49 @@
 			<!-- 選択ボックス部分 -->
 			<div class="choicebox">
 				
-				<!-- ウォッチ確認用通知ボタン -->
-				<button name="notify-watch" onclick="onWatchButton();">ウォッチへ通知</button>
+				<!-- 台本選択ボタン -->
+				<div class="choice_script1">
+					<button name="scriptbutton1" onclick="onScriptButton1();">台本1</button><br>
+					<button name="scriptbutton2" onclick="onScriptButton2();">台本2</button><br>
+					<button name="scriptbutton3" onclick="onScriptButton3();">台本3</button><br>
+					<button name="scriptbutton4" onclick="onScriptButton4();">台本4</button><br>
+				</div>
+				<div class="choice_script2">
+					<button name="scriptbutton5" onclick="onScriptButton5();">台本5</button><br>
+					<button name="scriptbutton6" onclick="onScriptButton6();">台本6</button><br>
+					<button name="scriptbutton7" onclick="onScriptButton7();">台本7</button><br>
+					<button name="scriptbutton8" onclick="onScriptButton8();">台本8</button><br>
+				</div>
+				<div class="script_table">
+					<table border=1 class="script_information">
+						<tr id="script_title">
+							<th class="info1"><button name="scriptdecide" onclick="onScriptDecideButton();">台本決定</button></th>
+							<th class="info2"><font color="red">台本<nobr id="number_script">0</nobr></font></th>
+							<th class="info3"><nobr id="script_title">ノータイトル</nobr></th>
+						</tr>
+						<tr>
+							<th>デバイス</th>
+							<th>役者名</th>
+							<th>初期状態</th>
+						</tr>
+						<tr>
+							<td>Watch1</td>
+							<td><nobr id="actor1_name">none</nobr></td>
+							<td><nobr id="actor1_first">none</nobr></td>
+						</tr>
+						<tr>
+							<td>Watch2</td>
+							<td><nobr id="actor2_name">none</nobr></td>
+							<td><nobr id="actor2_first">none</nobr></td>
+						</tr>
+						<tr>
+							<td>Watch3</td>
+							<td><nobr id="actor3_name">none</nobr></td>
+							<td><nobr id="actor3_first">none</nobr></td>
+						</tr>
+					</table>
+				</div>
+				
 				
 			</div>
 		</div>
@@ -134,9 +175,15 @@
 			<!-- 稽古ボックス部分 -->
 			<div class="operationbox">
 				
+				<!-- ウォッチ確認用通知ボタン -->
+				<button name="notify-watch" onclick="onWatchButton();">ウォッチへ通知</button>
+				
 				<!-- 台本読み込みボタン -->
 				<button name="read_script" onclick="onReadScriptButton();">台本読み込み</button>
+				<button name="change_color" onclick="onChangeColorButton();">色変える</button>
 
+				<table border=1><tr><td>aaaaa</td><td>bbbbb</td></tr><tr><td>ccccc</td>	<td>ddddd</td></tr></table>
+				
 			</div>
 		</div>
 		

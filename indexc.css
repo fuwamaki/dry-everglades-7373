@@ -182,10 +182,38 @@ nobr#choice_script_title{
 }
 div.choicebox{
 	width: 495px;
-	height: 100px;
+	height: 120px;
 	border-style: solid;
 	border-color: gray;
 	background-color: white;
+}
+div.choice_script1{
+	margin-top: 2px;
+	width: 50px;
+	float: left;
+}
+div.choice_script2{
+	margin-top: 2px;
+	width: 50px;
+	float: left;
+}
+div.script_table{
+	width: 390px;
+	float: left;
+}
+table.script_information{
+	width: 395px;
+	font-size: 80%;
+	border-collapse: collapse;
+}
+#script_title{
+	border: 0px;
+}
+.info1{
+	width: 70px;
+}
+.info2{
+	width: 40px;
 }
 div.operation_part{
 	width: 500px;
@@ -228,6 +256,19 @@ div.traininglogbox{
 	border-style: solid;
 	border-color: gray;
 	background-color: white;
+}
+table.script{
+	background-color: red;
+	width: 495px;
+}
+.one{
+	width: 50px;
+}
+.two{
+	width: 40px;
+}
+.three{
+	width: 40px;
 }
 /*---ボックス部分---*/
 div.box_part{

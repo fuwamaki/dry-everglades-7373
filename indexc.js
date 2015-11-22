@@ -197,6 +197,11 @@ function onReadScriptButton(){
 	getCSVFile();
 }
 
+//色変えるボタン
+function onChangeColorButton(){
+document.getElementById('2').style.backgroundColor = '#0000ff';
+}
+
 function getCSVFile() {
     var xhr = new createXMLHttpRequest();
     xhr.onload = function() {
@@ -212,31 +217,38 @@ function createXMLHttpRequest() {
     XMLhttpObject = new XMLHttpRequest();
     return XMLhttpObject;
 }
+
+
+
  
 function createArray(csvData) {
 	var CR = String.fromCharCode(13); //改行コード
     var tempArray = csvData.split(CR);
     var csvArray = new Array();
+	
+	var training_log = document.getElementById("training_field");
+	var resultTable = "<table border=1 class=\"script\"><tr><th class=\"one\">列:順</th><th class=\"two\">番号</th><th class=\"three\">役者</th><th class=\"four\">セリフ</th></tr>";
+
+	
     for(var i = 0; i<tempArray.length;i++){ 
 //		console.log("長さ" + tempArray.length);
 //		console.log("tempArray" + i + " " +tempArray[i]);
+
 		csvArray = tempArray[i].split(",");
 		for(var j = 0; j<csvArray.length; j++){
-			createTable(i,j,csvArray[j]);
+			if(j==0){
+				resultTable += "<tr id=\""+ i +"\">";	//trにクラスをつける
+				resultTable +="<td>" + i + ":" +csvArray[j] + "</td>";
+			}else if(j==3){
+				resultTable +="<td>" +csvArray[j] + "</td></tr>";
+			} else {
+				resultTable +="<td>" +csvArray[j] + "</td>";
+			}
 		}
-//		console.log("csvArray" + i + " " + csvArray[i]);
-//		createTable(csvArray[i]);
     }
-}
-
-function createTable(tate, yoko, csvArrayData){
-	var training_log = document.getElementById("training_field");
-	if(yoko==0){
-		training_log.innerHTML += "セリフ"+tate+ ":" +csvArrayData;
-	}else if(yoko==3){
-		training_log.innerHTML +="-" +csvArrayData + "<br>";
-	} else {
-		training_log.innerHTML +="-" +csvArrayData;
-	}
+	
+	resultTable += "</table>";
+	training_log.innerHTML = resultTable;
+	
 }
 
