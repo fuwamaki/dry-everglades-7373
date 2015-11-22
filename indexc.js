@@ -7,7 +7,8 @@ var pc1_id, pc2_id, pc3_id, tablet1_id, tablet2_id, tablet3_id;	//
 var open_switch = 0;											//オープンしてるかどうかのフラグ
 var num_dvc;													//自デバイスの値
 
-//**********オープン処理**********
+
+//********************オープン処理********************
 ws.onopen = function(){
 	ws.send(JSON.stringify({
 		user: userid,
@@ -16,7 +17,7 @@ ws.onopen = function(){
 	}));
 }
 
-//**********クローズイベント**********
+//********************クローズイベント********************
 ws.onclose = function(event){
 	console.log("クローズ");
 	ws.send(JSON.stringify({
@@ -37,11 +38,13 @@ window.onunload = function(event){
 	
 }
 
-
-//**********サーバからデータ受信時のmessageイベント**********
+//********************メッセージ受信イベント********************
 ws.onmessage = function (event) {
+	//-----メッセージの代入-----
+	var messages = JSON.parse(event.data);
+//	console.log(messages);
 
-	//変数に値代入
+	//-----変数に値代入-----
 	var chat_ipt = document.getElementById("chat_input");
 	var chat_fld = document.getElementById("chat_field");
 	var log_fld = document.getElementById("log_field");
@@ -50,16 +53,13 @@ ws.onmessage = function (event) {
 	var my_con_sts = document.getElementById("my_connect_status");
 	var my_dvc_sts = document.getElementById("my_device_status");
 
-	//メッセージの代入
-	var messages = JSON.parse(event.data);
-//	console.log(messages);
 	
-	//#####typeがping#####
+	//-----typeがping-----
 	if(messages.type == "ping"){
-		ping_fld.innerHTML += "ユーザ" + userid + ": " + messages.text + "<br>";
+/*		ping_fld.innerHTML += "ユーザ" + userid + ": " + messages.text + "<br>"; */
+		write_ping(userid, messages.text);
 	
-	
-	//#####typeがconnect#####
+	//-----typeがconnect-----
 	} else if(messages.type == "connect"){
 
 		//===websocket処理部分===
@@ -135,8 +135,29 @@ ws.onmessage = function (event) {
 };
 
 	
+//********************共通機能イベント********************
 
-//**********チャット入力の送信ボタンイベント**********
+//送信メソッド
+
+
+
+//********************チャット、ログ、pingイベント********************
+
+//チャットボックスに書き込み
+function write_chat(){
+}
+
+//ログボックスに書き込み
+function write_log(){
+}
+
+//pingボックスに書き込み
+function write_ping(Userid, Text){
+	var ping_fld = document.getElementById("ping_field");
+	ping_fld.innerHTML += "ユーザ" + Userid + ": " + Text + "<br>";
+}
+
+//********************チャット入力の送信ボタンイベント********************
 function send() {
 	chat_ipt = document.getElementById("chat_input");
 	var chattext = chat_ipt.value;
@@ -152,7 +173,7 @@ function send() {
 
 
 
-	//**********デバイス登録ボタンイベント**********
+	//********************デバイス登録ボタンイベント********************
 function onDeviceRadioButton(){
 	//定義
 	var pc1 = document.getElementById("pc1").checked;
