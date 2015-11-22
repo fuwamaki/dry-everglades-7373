@@ -175,6 +175,41 @@
 			<!-- 稽古ボックス部分 -->
 			<div class="operationbox">
 				
+				<!-- Watchデバッグ部分 -->
+				<div class="watch_table">
+					<table border=1 class="watch_debug">
+						<tr class="watch_tr">
+							<th>Watch通知デバッグ</th>
+							<th><button name="watch_debug1" onclick="onWatchDebugButton1();">Watch1へ通知</button></th>
+							<th><button name="watch_debug2" onclick="onWatchDebugButton2();">Watch2へ通知</button></th>
+							<th><button name="watch_debug3" onclick="onWatchDebugButton3();">Watch3へ通知</button></th>
+						</tr>
+						<tr class="watch_tr">
+							<th>button-reply</th>
+							<th><nobr id="watch_reply1">no reply</nobr></th>
+							<th><nobr id="watch_reply2">no reply</nobr></th>
+							<th><nobr id="watch_reply3">no reply</nobr></th>
+						</tr>
+						<tr class="watch_tr">
+							<th>音声確認<button name="soundcheck" onclick="onSoundCheckButton();">音チェック</button></th>
+							<th><nobr id="watch_voice_reply1">音声no reply</nobr></th>
+							<th><nobr id="watch_voice_reply2">音声no reply</nobr></th>
+							<th><nobr id="watch_voice_reply3">音声no reply</nobr></th>
+						</tr>
+					</table>
+				</div>
+				
+				<!--  -->
+				
+				<div class="training_operation">
+					現在：   <nobr id="taining_now">準備中</nobr><br>
+					<button name="training_start" id="training_start" onclick="onStartButton();">稽古スタート</button>
+					<button name="training_stop" id="training_stop" onclick="onStopButton();">一時停止</button>
+					<button name="training_restart" id="training_restart" onclick="onRestartButton();">再スタート</button><br>
+					<button name="training_restart_back1" id="training_restart_back1" onclick="onRestartBack1Button();"><nobr id="restart_back1">-1</nobr>から再スタート</button>
+					<button name="training_restart_back2" id="training_restart_back2" onclick="onRestartBack2Button();"><nobr id="restart_back2">-2</nobr>から再スタート</button>
+				</div>
+				
 				<!-- ウォッチ確認用通知ボタン -->
 				<button name="notify-watch" onclick="onWatchButton();">ウォッチへ通知</button>
 				
@@ -182,7 +217,6 @@
 				<button name="read_script" onclick="onReadScriptButton();">台本読み込み</button>
 				<button name="change_color" onclick="onChangeColorButton();">色変える</button>
 
-				<table border=1><tr><td>aaaaa</td><td>bbbbb</td></tr><tr><td>ccccc</td>	<td>ddddd</td></tr></table>
 				
 			</div>
 		</div>

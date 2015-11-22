@@ -166,7 +166,7 @@ nobr#instruction_title{
 }
 div.choice_script_part{
 	width: 500px;
-	height: 130px;
+	height: 135px;
 	margin-top: 5px;
 }
 div.choice_script_part_title{
@@ -182,18 +182,18 @@ nobr#choice_script_title{
 }
 div.choicebox{
 	width: 495px;
-	height: 120px;
+	height: 105px;
 	border-style: solid;
 	border-color: gray;
 	background-color: white;
 }
 div.choice_script1{
-	margin-top: 2px;
+	margin-top: 1px;
 	width: 50px;
 	float: left;
 }
 div.choice_script2{
-	margin-top: 2px;
+	margin-top: 1px;
 	width: 50px;
 	float: left;
 }
@@ -217,7 +217,7 @@ table.script_information{
 }
 div.operation_part{
 	width: 500px;
-	height: 230px;
+	height: 225px;
 	margin-top: 10px;
 }
 div.operation_part_title{
@@ -231,10 +231,42 @@ div.operation_part_title{
 }
 div.operationbox{
 	width: 495px;
-	height: 200px;
+	height: 195px;
 	border-style: solid;
 	border-color: gray;
 	background-color: white;
+}
+table.watch_debug{
+	width: 495px;
+	font-size: 80%;
+	border: 0px;
+	border-collapse: collapse;
+}
+.watch_tr{
+	height: 30px;
+}
+div.training_operation{
+	width: 495px;
+	text-align: center;
+	font-size: 110%;
+}
+button#training_start{
+	font-size: 100%;
+}
+button#training_stop{
+	margin-left: 30px;
+	font-size: 100%;
+}
+button#training_restart{
+	margin-left: 30px;
+	font-size: 100%;
+}
+button#training_restart_back1{
+	font-size: 100%;
+}
+button#training_restart_back2{
+	margin-left: 30px;
+	font-size: 100%;
 }
 div.training_log_part{
 	width: 500px;

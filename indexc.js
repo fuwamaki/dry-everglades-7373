@@ -199,7 +199,7 @@ function onReadScriptButton(){
 
 //色変えるボタン
 function onChangeColorButton(){
-document.getElementById('2').style.backgroundColor = '#0000ff';
+	document.getElementById('2').style.backgroundColor = '#0000ff';
 }
 
 function getCSVFile() {
