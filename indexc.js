@@ -86,50 +86,49 @@ ws.onmessage = function (event) {
 			if(userid!="PC1"&&userid!="PC2"&&userid!="PC3"&&userid!="Tablet1"&&userid!="Tablet2"&&userid!="Tablet3"){
 			
 				if(messages.user == "PC.1"){
-/*					log_fld.innerHTML += "　PC.1：登録済み<br>"; */
 					write_log(messages.user, ":登録済み<br>");
-					document.getElementById("con_pc1").innerHTML = "PC.1";
+					update_pc1();
 				} else if(messages.user == "PC.2"){
-					log_fld.innerHTML += "　PC.2：登録済み<br>";
-					document.getElementById("con_pc2").innerHTML = "PC.2";
+					write_log(messages.user, ":登録済み<br>");
+					update_pc2();
 				} else if(messages.user == "PC.3"){
-					log_fld.innerHTML += "　PC.3：登録済み<br>";
-					document.getElementById("con_pc3").innerHTML = "PC.3";
+					write_log(messages.user, ":登録済み<br>");
+					update_pc3();
 				} else if(messages.user == "TABLET.1"){
-					log_fld.innerHTML += "　TABLET.1：登録済み<br>";
-					document.getElementById("con_tablet1").innerHTML = "TABLET.1";
+					write_log(messages.user, ":登録済み<br>");
+					update_tablet1();
 				} else if(messages.user == "TABLET.2"){
-					log_fld.innerHTML += "　TABLET.2：登録済み<br>";
-					document.getElementById("con_tablet2").innerHTML = "TABLET.2";
+					write_log(messages.user, ":登録済み<br>");
+					update_tablet2();
 				} else if(messages.user == "TABLET.3"){
-					log_fld.innerHTML += "　TABLET.3：登録済み<br>";
-					document.getElementById("con_tablet3").innerHTML = "TABLET.3";
+					write_log(messages.user, ":登録済み<br>");
+					update_tablet3();
 				}
 			}
 		//===デバイス登録部分===
 		} else if(messages.text == "PC.1"){
-			document.getElementById("con_pc1").innerHTML = "PC.1";
-			log_fld.innerHTML += "ユーザ " + messages.user + ": PC1 登録完了" + "<br>";
+			write_log(messages.user, ":登録完了<br>");
+			update_pc1();
 			if(messages.user == userid) userid = "PC1";
 		} else if(messages.text == "PC.2"){
-			document.getElementById("con_pc2").innerHTML = "PC.2";
-			log_fld.innerHTML += "ユーザ " + messages.user + ": PC2 登録完了" + "<br>";
+			write_log(messages.user, ":登録完了<br>");
+			update_pc2();
 			if(messages.user == userid) userid = "PC2";
 		} else if(messages.text == "PC.3"){
-			document.getElementById("con_pc3").innerHTML = "PC.3";
-			log_fld.innerHTML += "ユーザ " + messages.user + ": PC3 登録完了" + "<br>";
+			write_log(messages.user, ":登録完了<br>");
+			update_pc3();
 			if(messages.user == userid) userid = "PC3";
 		} else if(messages.text == "TABLET.1"){
-			document.getElementById("con_tablet1").innerHTML = "TABLET.1";
-			log_fld.innerHTML += "ユーザ " + messages.user + ": TABLET1 登録完了" + "<br>";
+			write_log(messages.user, ":登録完了<br>");
+			update_tablet1();
 			if(messages.user == userid) userid = "Tablet1";
 		} else if(messages.text == "TABLET.2"){
-			document.getElementById("con_tablet2").innerHTML = "TABLET.2";
-			log_fld.innerHTML += "ユーザ " + messages.user + ": TABLET2 登録完了" + "<br>";
+			write_log(messages.user, ":登録完了<br>");
+			update_tablet2();
 			if(messages.user == userid) userid = "Tablet2";
 		} else if(messages.text == "TABLET.3"){
-			document.getElementById("con_tablet3").innerHTML = "TABLET.3";
-			log_fld.innerHTML += "ユーザ " + messages.user + ": TABLET3 登録完了" + "<br>";
+			write_log(messages.user, ":登録完了<br>");
+			update_tablet3();
 			if(messages.user == userid) userid = "Tablet3";
 		}
 	//#####typeがchat#####
@@ -157,6 +156,36 @@ function update_connect_status(){
 function update_pc_status(Userid){
 	var my_dvc_sts = document.getElementById("my_device_status");
 	my_dvc_sts.innerHTML = "ユーザ " + Userid;
+}
+
+//デバイス通信状況の更新-pc1-
+function update_pc1(){
+	document.getElementById("con_pc1").innerHTML = "PC.1";
+}
+
+//デバイス通信状況の更新-pc2-
+function update_pc2(){
+	document.getElementById("con_pc2").innerHTML = "PC.2";
+}
+
+//デバイス通信状況の更新-pc3-
+function update_pc3(){
+	document.getElementById("con_pc3").innerHTML = "PC.3";
+}
+
+//デバイス通信状況の更新-tablet1-
+function update_tablet1(){
+	document.getElementById("con_tablet1").innerHTML = "TABLET.1";
+}
+
+//デバイス通信状況の更新-tablet2-
+function update_tablet2(){
+	document.getElementById("con_tablet2").innerHTML = "TABLET.2";
+}
+
+//デバイス通信状況の更新-tablet3-
+function update_tablet3(){
+	document.getElementById("con_tablet3").innerHTML = "TABLET.3";
 }
 
 //********************チャット、ログ、pingイベント********************
