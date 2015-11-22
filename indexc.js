@@ -200,7 +200,7 @@ function onReadScriptButton(){
 function getCSVFile() {
     var xhr = new createXMLHttpRequest();
     xhr.onload = function() {
-    createArray(xhr.responseText);
+		createArray(xhr.responseText);
     };
  
     xhr.open("get", "daihon1.csv", true);
@@ -214,12 +214,29 @@ function createXMLHttpRequest() {
 }
  
 function createArray(csvData) {
-    var tempArray = csvData.split("\n");
+	var CR = String.fromCharCode(13); //改行コード
+    var tempArray = csvData.split(CR);
     var csvArray = new Array();
-    for(var i = 0; i<tempArray.length;i++){
-    csvArray[i] = tempArray[i].split(",");
-    console.log(csvArray[i]);
-	var training_log = document.getElementById("training_field");
-	training_log.innerHTML += csvArray[i] + "<br>";
+    for(var i = 0; i<tempArray.length;i++){ 
+//		console.log("長さ" + tempArray.length);
+//		console.log("tempArray" + i + " " +tempArray[i]);
+		csvArray = tempArray[i].split(",");
+		for(var j = 0; j<csvArray.length; j++){
+			createTable(i,j,csvArray[j]);
+		}
+//		console.log("csvArray" + i + " " + csvArray[i]);
+//		createTable(csvArray[i]);
     }
 }
+
+function createTable(tate, yoko, csvArrayData){
+	var training_log = document.getElementById("training_field");
+	if(yoko==0){
+		training_log.innerHTML += "セリフ"+tate+ ":" +csvArrayData;
+	}else if(yoko==3){
+		training_log.innerHTML +="-" +csvArrayData + "<br>";
+	} else {
+		training_log.innerHTML +="-" +csvArrayData;
+	}
+}
+
