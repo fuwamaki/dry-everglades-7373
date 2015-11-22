@@ -63,6 +63,7 @@ ws.onmessage = function (event) {
 	} else if(messages.type == "connect"){
 
 		//===websocket処理部分===
+		//オープン
 		if(messages.text == "open"){
 			//自分が最初にオープンした時の動作
 			if(open_switch == 0){
@@ -74,10 +75,9 @@ ws.onmessage = function (event) {
 				update_pc_status(userid);
 			}
 			//共通
-/*			log_fld.innerHTML += "ユーザ " + messages.user + " device opened<br>"; */
 			write_log(messages.user, " device opened<br>");
+		//クローズ
 		} else if(messages.text == "close"){
-/*			log_fld.innerHTML += "device closed<br>"; */
 			write_log(messages.user, " device closed<br>");
 			
 		//===open時、デバイス登録状況を更新する===
@@ -131,9 +131,10 @@ ws.onmessage = function (event) {
 			update_tablet3();
 			if(messages.user == userid) userid = "Tablet3";
 		}
-	//#####typeがchat#####
+	//-----typeがchat-----
 	} else if(messages.type == "chat"){
-		chat_fld.innerHTML += "ユーザ " + messages.user + ": " + messages.text + "<br>";
+/*		chat_fld.innerHTML += "ユーザ " + messages.user + ": " + messages.text + "<br>"; */
+		write_chat(messages.user, messages.text);
 	}
 
 };
@@ -191,7 +192,9 @@ function update_tablet3(){
 //********************チャット、ログ、pingイベント********************
 
 //チャットボックスに書き込み
-function write_chat(){
+function write_chat(Userid, Text){
+	var chat_fld = document.getElementById("chat_field");
+	chat_fld.innerHTML += "ユーザ " + User + ": " + Text + "<br>";
 }
 
 //ログボックスに書き込み
