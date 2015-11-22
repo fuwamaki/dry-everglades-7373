@@ -237,13 +237,15 @@ function onDeviceRadioButton(){
 	}
 	
 //	document.getElementById("my_device_status").innerHTML = num_dvc;	//デバイス状態に代入
+	update_pc_status(num_dvc);
 	
 	//他のデバイスにも自身の状態を送信
-	ws.send(JSON.stringify({
-		user: userid,
-		type: 'connect',
-		text: num_dvc,
-	}));
+//	ws.send(JSON.stringify({
+//		user: userid,
+//		type: 'connect',
+//		text: num_dvc,
+//	}));
+	send(userid, 'connect', num_dvc);
 }
 
 
