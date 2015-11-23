@@ -254,6 +254,8 @@ function onDeviceChangeRadioButton(){
 //台本1ボタン
 function onScriptButton1(){
 	getCSVFile("daihon1.csv");
+	document.getElementById("number_script").innerHTML = "1";
+	document.getElementById("scripttitle").innerHTML = "無差別";
 }
 
 //台本2ボタン
@@ -263,26 +265,32 @@ function onScriptButton2(){
 
 //台本3ボタン
 function onScriptButton3(){
+	getCSVFile("daihon3.csv");
 }
 
 //台本4ボタン
 function onScriptButton4(){
+	getCSVFile("daihon4.csv");
 }
 
 //台本5ボタン
 function onScriptButton5(){
+	getCSVFile("daihon5.csv");
 }
 
 //台本6ボタン
 function onScriptButton6(){
+	getCSVFile("daihon6.csv");
 }
 
 //台本7ボタン
 function onScriptButton7(){
+	getCSVFile("daihon7.csv");
 }
 
 //台本8ボタン
 function onScriptButton8(){
+	getCSVFile("daihon8.csv");
 }
 
 //台本決定ボタン
@@ -293,18 +301,22 @@ function onScriptDecideButton(){
 
 //Watchデバッグ通知ボタン1
 function onWatchDebugButton1(){
+	send(userid, 'debug', 'watch1');
 }
 
 //Watchデバッグ通知ボタン2
 function onWatchDebugButton2(){
+	send(userid, 'debug', 'watch2');
 }
 
 //Watchデバッグ通知ボタン3
 function onWatchDebugButton3(){
+	send(userid, 'debug', 'watch3');
 }
 
 //音チェックボタン
 function onSoundCheckButton(){
+	//音ファイルを鳴らす
 }
 
 //稽古スタートボタン
@@ -351,9 +363,9 @@ function getCSVFile(daihon) {
     xhr.onload = function() {
 		//CSVファイルが存在すれば、配列に格納
 		createArray(xhr.responseText);
+		createScriptTable(xhr.responseText);
     };
 	 //読み込む台本CSVファイルの定義
-//    xhr.open("get", "daihon1.csv", true);
     xhr.open("get", daihon, true);
     xhr.send(null);
 }
@@ -363,6 +375,37 @@ function createXMLHttpRequest() {
     var XMLhttpObject = null;
     XMLhttpObject = new XMLHttpRequest();
     return XMLhttpObject;
+}
+
+function createScriptTable(csvData){
+	var CR = String.fromCharCode(13);	//改行コード
+    var c_tempArray = csvData.split(CR);	//縦配列、改行コードで分割
+    var c_csvArray = new Array();			//横配列
+	var scriptArray = new Array();
+	
+    for(var i = 0; i < c_tempArray.length;i++){ 
+		c_csvArray = c_tempArray[i].split(",");		//セミコロンで分割
+		scriptArray[i] = new Array();
+		for(var j = 0; j<c_csvArray.length; j++){
+			scriptArray[i][j] = c_csvArray[j];
+		}
+	}
+//	console.log(scriptArray);
+	
+	for(var i = 0; i < c_tempArray.length; i++){
+		if(scriptArray[i][0] == 0){
+			if(scriptArray[i][4] == 1){
+				document.getElementById("actor1_name").innerHTML = scriptArray[i][1];
+				document.getElementById("actor1_first").innerHTML = scriptArray[i][3];
+			} else if(scriptArray[i][4] == 2){
+				document.getElementById("actor2_name").innerHTML = scriptArray[i][1];
+				document.getElementById("actor2_first").innerHTML = scriptArray[i][3];
+			} else if(scriptArray[i][4] == 3){
+				document.getElementById("actor3_name").innerHTML = scriptArray[i][1];
+				document.getElementById("actor3_first").innerHTML = scriptArray[i][3];
+			}
+		}
+	}
 }
 
 

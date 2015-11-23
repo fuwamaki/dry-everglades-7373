@@ -1,4 +1,4 @@
-/*タイトル部分*/
+/* ********************タイトル部分******************** */
 div.title_part{
 	background-color: white;
 	border-color: black;
@@ -9,7 +9,7 @@ div.title_part{
 }
 h1#title{
 }
-/*body全体*/
+/********************* body全体******************** */
 body {
 	width: 1200px;
 	font-family: "Helvetica Neue", helvetica, arial;
@@ -18,12 +18,13 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 }
-/*デバイス部分*/
+/* ********************デバイス部分******************** */
 div.device_part{
 	margin-top: 20px;
 	width: 300px;
 	float: left;
 }
+/* 接続ステータス */
 div.my_connect_status_part{
 	width: 300px;
 	height: 35px;
@@ -37,6 +38,7 @@ div.my_connect_status_part{
 nobr#my_connect_status{
 	color: red;
 }
+/* デバイス登録 */
 div.device_regist_part{
 	width: 300px;
 	height: 130px;
@@ -80,6 +82,7 @@ div.form3{
 	display: block;
 	float: left;
 }
+/* デバイスステータス */
 div.my_device_status_part{
 	width: 300px;
 	height: 35px;
@@ -93,6 +96,7 @@ div.my_device_status_part{
 nobr#my_device_status{
 	color: red;
 }
+/* 接続ステータス */
 div.connect_part{
 	width: 300px;
 	height: 190px;
@@ -124,6 +128,7 @@ div.con2{
 	display: block;
 	float: left;
 }
+/* Kinectステータス */
 div.kinect_part{
 	width: 300px;
 	height: 180px;
@@ -145,13 +150,14 @@ div.kinectbox{
 	border-color: gray;
 	background-color: white;
 }
-/*---稽古部分---*/
+/* ********************稽古部分******************** */
 div.training_part{
 	margin-top: 20px;
 	margin-left: 25px;
 	width: 500px;
 	float: left;
 }
+/* 指示 */
 div.instruction_part{
 	width: 500px;
 	height: 35px;
@@ -164,6 +170,7 @@ div.instruction_part{
 nobr#instruction_title{
 	color: red;
 }
+/* 台本選択 */
 div.choice_script_part{
 	width: 500px;
 	height: 135px;
@@ -206,6 +213,18 @@ table.script_information{
 	font-size: 80%;
 	border-collapse: collapse;
 }
+nobr#number_script{
+	color: red;
+}
+nobr#scripttitle{
+	color: red;
+}
+nobr#actor1_name{font-size: 80%}
+nobr#actor1_first{font-size: 80%}
+nobr#actor2_name{font-size: 80%}
+nobr#actor2_first{font-size: 80%}
+nobr#actor3_name{font-size: 80%}
+nobr#actor3_first{font-size: 80%}
 #script_title{
 	border: 0px;
 }
@@ -215,6 +234,7 @@ table.script_information{
 .info2{
 	width: 40px;
 }
+/* 稽古操作 */
 div.operation_part{
 	width: 500px;
 	height: 225px;
@@ -268,6 +288,7 @@ button#training_restart_back2{
 	margin-left: 30px;
 	font-size: 100%;
 }
+/* 台本進行状況 */
 div.training_log_part{
 	width: 500px;
 	height: 180px;
@@ -290,7 +311,7 @@ div.traininglogbox{
 	background-color: white;
 }
 table.script{
-	background-color: red;
+	background-color: white;
 	width: 495px;
 }
 .one{
@@ -300,15 +321,15 @@ table.script{
 	width: 40px;
 }
 .four{
-	width: 80px;
+	width: 200px;
 }
-/*---ボックス部分---*/
+/* ********************ボックス部分******************** */
 div.box_part{
 	width: 350px;
 	float: right;
 	margin-top: 20px;
 }
-/*チャット部分*/
+/* チャット部分 */
 div.chat_part_title{
 	width: 350px;
 	height: 30px;
@@ -344,7 +365,7 @@ div.chatbox{
 	margin-bottom: 5px;
 	background-color: white;
 }
-/*ログ部分*/
+/* ログ部分 */
 div.log_part_title{
 	width: 350px;
 	height: 30px;
@@ -364,7 +385,7 @@ div.logbox{
 	margin-bottom: 5px;
 	background-color: white;
 }
-/*ping部分*/
+/* ping部分 */
 div.ping_part_title{
 	width: 350px;
 	height: 30px;
