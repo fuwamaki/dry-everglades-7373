@@ -321,15 +321,22 @@ function onSoundCheckButton(){
 	//音ファイルを鳴らす
 }
 
+//現在の順番
+var count;
+
 //稽古スタートボタン
 function onStartButton(){
-//	document.getElementById('2').style.backgroundColor = '#0000ff';
-	document.getElementById('actor1_name').style.backgroundColor = '#0000ff';
+	count = 1;
+	document.getElementById(count).style.backgroundColor = '#fffacd';
 //	console.log(scriptArray);
+	count ++;
 }
 
 //一時停止ボタン
 function onStopButton(){
+	document.getElementById(count-1).style.backgroundColor = '#ffffff';
+	document.getElementById(count).style.backgroundColor = '#fffacd';
+	count ++;
 }
 
 //再スタートボタン
@@ -452,7 +459,7 @@ function makeArray(length, scriptarray){
 		for(var j = 0; j < 4; j++){
 			if(scriptarray[i][0] != 0){
 				if(j == 0){
-					resultTable += "<tr id=\""+ i +"\">";	//trにはクラス(0,1,2,3・・・)をつける
+					resultTable += "<tr id=\""+ scriptarray[i][j] +"\">";	//trにはクラス(0,1,2,3・・・)をつける
 					resultTable +="<td>" + scriptarray[i][j] + "</td>";
 				} else if(j == 3){
 					resultTable +="<td>" + scriptarray[i][j] + "</td></tr>";
