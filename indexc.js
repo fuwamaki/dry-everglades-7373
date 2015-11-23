@@ -326,17 +326,33 @@ var count;
 
 //稽古スタートボタン
 function onStartButton(){
+	//初期化
+	var ClassElement_1 = document.getElementsByClassName(count-1);
+	for(var i = 0; i < ClassElement_1.length; i++){
+		ClassElement_1[i].style.backgroundColor = "#ffffff";
+	}
+	//一番目の色を付加
 	count = 1;
-	document.getElementsByClassName(2).style.backgroundColor = '#fffacd';
-//	console.log(scriptArray);
+	var ClassElement = document.getElementsByClassName(count);
+	for(var i = 0; i < ClassElement.length; i++){
+		ClassElement[i].style.backgroundColor = "#fffacd";
+	}
 	count ++;
 }
 
 //一時停止ボタン
 function onStopButton(){
-	document.getElementById(count-1).style.backgroundColor = '#ffffff';
-	document.getElementById(count).style.backgroundColor = '#fffacd';
-	document.getElementById(count).style.backgroundColor = '#fffacd';
+	//初期化
+	var ClassElement_1 = document.getElementsByClassName(count-1);
+	for(var i = 0; i < ClassElement_1.length; i++){
+		ClassElement_1[i].style.backgroundColor = "#ffffff";
+	}
+	//色を付加
+	var ClassElement = document.getElementsByClassName(count);
+	for(var i = 0; i < ClassElement.length; i++){
+		ClassElement[i].style.backgroundColor = "#fffacd";
+	}
+	//順番を+1
 	count ++;
 }
 
