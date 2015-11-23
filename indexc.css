@@ -313,15 +313,24 @@ div.traininglogbox{
 table.script{
 	background-color: white;
 	width: 495px;
+	table-layout: fixed;
+	border: 0px;
+	border-collapse: collapse;
 }
-.one{
+th.one{
 	width: 40px;
 }
-.two{
+th.two{
 	width: 40px;
 }
-.four{
-	width: 200px;
+th.three{
+	width: 280px;
+}
+th.four{
+	width: 135px;
+}
+tr.ttitle{
+	background-color: #afeeee;
 }
 /* ********************ボックス部分******************** */
 div.box_part{

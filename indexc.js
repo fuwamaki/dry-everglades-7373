@@ -261,6 +261,8 @@ function onScriptButton1(){
 //台本2ボタン
 function onScriptButton2(){
 	getCSVFile("daihon2.csv");
+	document.getElementById("number_script").innerHTML = "2";
+	document.getElementById("scripttitle").innerHTML = "喫茶店";
 }
 
 //台本3ボタン
@@ -321,6 +323,9 @@ function onSoundCheckButton(){
 
 //稽古スタートボタン
 function onStartButton(){
+//	document.getElementById('2').style.backgroundColor = '#0000ff';
+	document.getElementById('actor1_name').style.backgroundColor = '#0000ff';
+//	console.log(scriptArray);
 }
 
 //一時停止ボタン
@@ -362,7 +367,6 @@ function getCSVFile(daihon) {
     var xhr = new createXMLHttpRequest();
     xhr.onload = function() {
 		//CSVファイルが存在すれば、配列に格納
-		createArray(xhr.responseText);
 		createScriptTable(xhr.responseText);
     };
 	 //読み込む台本CSVファイルの定義
@@ -377,11 +381,21 @@ function createXMLHttpRequest() {
     return XMLhttpObject;
 }
 
+var scriptArray;
+
 function createScriptTable(csvData){
 	var CR = String.fromCharCode(13);	//改行コード
     var c_tempArray = csvData.split(CR);	//縦配列、改行コードで分割
     var c_csvArray = new Array();			//横配列
-	var scriptArray = new Array();
+	scriptArray = new Array();
+	
+	//scriptArrayの初期化
+    for(var i = 0; i < c_tempArray.length;i++){ 
+		for(var j = 0; j<c_csvArray.length; j++){
+			scriptArray[i][j] = "";
+		}
+	}
+	
 	
     for(var i = 0; i < c_tempArray.length;i++){ 
 		c_csvArray = c_tempArray[i].split(",");		//セミコロンで分割
@@ -391,63 +405,77 @@ function createScriptTable(csvData){
 		}
 	}
 //	console.log(scriptArray);
-	
-	for(var i = 0; i < c_tempArray.length; i++){
-		if(scriptArray[i][0] == 0){
-			if(scriptArray[i][4] == 1){
-				document.getElementById("actor1_name").innerHTML = scriptArray[i][1];
-				document.getElementById("actor1_first").innerHTML = scriptArray[i][3];
-			} else if(scriptArray[i][4] == 2){
-				document.getElementById("actor2_name").innerHTML = scriptArray[i][1];
-				document.getElementById("actor2_first").innerHTML = scriptArray[i][3];
-			} else if(scriptArray[i][4] == 3){
-				document.getElementById("actor3_name").innerHTML = scriptArray[i][1];
-				document.getElementById("actor3_first").innerHTML = scriptArray[i][3];
+	//台本選択部分に反映
+	makeScripttable(c_tempArray.length, scriptArray);
+	//台本進行状況に反映
+	makeArray(c_tempArray.length, scriptArray);
+}
+
+
+//台本選択-台本概要テーブルの表示
+function makeScripttable(length, scriptarray){
+	//初期化
+	document.getElementById("actor1_name").innerHTML = "none";
+	document.getElementById("actor1_first").innerHTML = "none";
+	document.getElementById("actor2_name").innerHTML = "none";
+	document.getElementById("actor2_first").innerHTML = "none";
+	document.getElementById("actor3_name").innerHTML = "none";
+	document.getElementById("actor3_first").innerHTML = "none";
+	//値の代入
+	for(var i = 0; i < length; i++){
+		if(scriptarray[i][0] == 0){
+			if(scriptarray[i][4] == 1){
+				document.getElementById("actor1_name").innerHTML = scriptarray[i][1];
+				document.getElementById("actor1_first").innerHTML = scriptarray[i][3];
+			} else if(scriptarray[i][4] == 2){
+				document.getElementById("actor2_name").innerHTML = scriptarray[i][1];
+				document.getElementById("actor2_first").innerHTML = scriptarray[i][3];
+			} else if(scriptarray[i][4] == 3){
+				document.getElementById("actor3_name").innerHTML = scriptarray[i][1];
+				document.getElementById("actor3_first").innerHTML = scriptarray[i][3];
 			}
 		}
 	}
 }
 
 
-//台本を配列に格納
-function createArray(csvData) {
-	var CR = String.fromCharCode(13);	//改行コード
-    var tempArray = csvData.split(CR);	//縦配列、改行コードで分割
-    var csvArray = new Array();			//横配列
-	var resultTable = "";				//配列を一旦格納する変数
+//台本進捗状況に台本テーブル表示
+function makeArray(length, scriptarray){
+	//配列を一旦格納する変数
+	var resultTable = "";
 	
 	//格納する前に初期化
 	resultTable = "";
-	resultTable = "<table border=1 class=\"script\"><tr><th class=\"one\">順番</th><th class=\"two\">役者</th><th class=\"three\">セリフ</th><th class=\"four\">動き</th></tr>";
-
-	//配列を作成
-    for(var i = 0; i<tempArray.length;i++){ 
-//		console.log("長さ" + tempArray.length);
-		csvArray = tempArray[i].split(",");		//セミコロンで分割
-/*		for(var j = 0; j<csvArray.length; j++){ */
-		for(var j = 0; j<4; j++){
-			if(j==0){
-				resultTable += "<tr id=\""+ i +"\">";	//trにはクラス(0,1,2,3)をつける
-				resultTable +="<td>" + csvArray[j] + "</td>";
-			}else if(j==3){
-				resultTable +="<td>" + csvArray[j] + "</td></tr>";
-			} else {
-				resultTable +="<td>" + csvArray[j] + "</td>";
+	resultTable = "<table border=1 class=\"script\"><tr class=\"ttitle\"><th class=\"one\">順番</th><th class=\"two\">役者</th><th class=\"three\">セリフ</th><th class=\"four\">動き</th></tr>";
+	
+	for(var i = 0; i < length; i++){
+		for(var j = 0; j < 4; j++){
+			if(scriptarray[i][0] != 0){
+				if(j == 0){
+					resultTable += "<tr id=\""+ i +"\">";	//trにはクラス(0,1,2,3・・・)をつける
+					resultTable +="<td>" + scriptarray[i][j] + "</td>";
+				} else if(j == 3){
+					resultTable +="<td>" + scriptarray[i][j] + "</td></tr>";
+				} else {
+					resultTable +="<td>" + scriptarray[i][j] + "</td>";
+				}
 			}
 		}
-    }
+	}
 	resultTable += "</table>";
-	
+
 	//作成した配列を台本進行状況に格納する
 	displayArray(resultTable);
-}
 
+}
 
 //台本進行状況に台本の配列を表示
 function displayArray(resulttable){
 	var training_log = document.getElementById("training_field");
 	training_log.innerHTML = resulttable;
 }
+
+
 
 //+++++-----台本の読み込み 終了-----+++++
 
