@@ -399,6 +399,7 @@ function createArray(csvData) {
 	displayArray(resultTable);
 }
 
+
 //台本進行状況に台本の配列を表示
 function displayArray(resulttable){
 	var training_log = document.getElementById("training_field");
