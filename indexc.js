@@ -327,7 +327,7 @@ var count;
 //稽古スタートボタン
 function onStartButton(){
 	count = 1;
-	document.getElementById(count).style.backgroundColor = '#fffacd';
+	document.getElementsByClassName(2).style.backgroundColor = '#fffacd';
 //	console.log(scriptArray);
 	count ++;
 }
@@ -335,6 +335,7 @@ function onStartButton(){
 //一時停止ボタン
 function onStopButton(){
 	document.getElementById(count-1).style.backgroundColor = '#ffffff';
+	document.getElementById(count).style.backgroundColor = '#fffacd';
 	document.getElementById(count).style.backgroundColor = '#fffacd';
 	count ++;
 }
@@ -459,7 +460,7 @@ function makeArray(length, scriptarray){
 		for(var j = 0; j < 4; j++){
 			if(scriptarray[i][0] != 0){
 				if(j == 0){
-					resultTable += "<tr id=\""+ scriptarray[i][j] +"\">";	//trにはクラス(0,1,2,3・・・)をつける
+					resultTable += "<tr class=\""+ scriptarray[i][j] +"\">";	//trにはクラス(0,1,2,3・・・)をつける
 					resultTable +="<td>" + scriptarray[i][j] + "</td>";
 				} else if(j == 3){
 					resultTable +="<td>" + scriptarray[i][j] + "</td></tr>";
