@@ -53,7 +53,7 @@ ws.onmessage = function (event) {
 	//-----typeがconnect-----
 	} else if(messages.type == "connect"){
 
-		//===websocket処理部分===
+		//==websocket処理部分==
 		//オープン
 		if(messages.text == "open"){
 			//自分が最初にオープンした時の動作
@@ -69,7 +69,7 @@ ws.onmessage = function (event) {
 		} else if(messages.text == "close"){
 			write_log(messages.user, " device closed<br>");
 			
-		//===open時、デバイス登録状況を更新する===
+		//==open時、デバイス登録状況を更新==
 		} else if(messages.text == "open_device"){
 			
 			if(userid!="PC1"&&userid!="PC2"&&userid!="PC3"&&userid!="Tablet1"&&userid!="Tablet2"&&userid!="Tablet3"){
@@ -126,6 +126,23 @@ ws.onmessage = function (event) {
 	} else if(messages.type == "chat"){
 /*		chat_fld.innerHTML += "ユーザ " + messages.user + ": " + messages.text + "<br>"; */
 		write_chat(messages.user, messages.text);
+
+
+
+	//-----typeがdebug-----
+	} else if(messages.type = "debug"){
+	//今のところPCでは特に処理なし
+	
+	
+	//-----typeがtraining-----
+	} else if(messages.type = "training"){
+	
+	//Watchからの受信処理
+	
+	//-----typeがkinect-----
+	} else if(messages.type = "kinect"){
+	//kinectからの受信処理
+	
 	}
 
 };
@@ -319,10 +336,17 @@ function onWatchDebugButton3(){
 //音チェックボタン
 function onSoundCheckButton(){
 	//音ファイルを鳴らす
+	var audio_correct = new Audio("music/correct_sound.mp3");		//正解音
+	var audio_wrong = new Audio("music/wrong_sound.mp3");			//ドラムロール音
+	var audio_drumroll = new Audio("music/drumroll_sound.mp3");		//間違い音
+	
+	audio_drumroll.play();
+	setTimeout(function musicplay(){ audio_correct.play(); }, 2700);	//遅延して再生
 }
 
-//現在の順番
-var count;
+//training用変数定義
+var count;			//現在の順番
+var scriptArray;	//台本の配列
 
 //稽古スタートボタン
 function onStartButton(){
@@ -337,6 +361,19 @@ function onStartButton(){
 	for(var i = 0; i < ClassElement.length; i++){
 		ClassElement[i].style.backgroundColor = "#fffacd";
 	}
+	
+	console.log(scriptArray.length);
+	for(var i = 0; i < scriptArray.length; i++){
+		if(scriptArray[i][0] == count){
+//			console.log("ユーザ" + scriptArray[i][4] + " テキスト" + scriptArray[i][2] + " モーション" + scriptArray[i][3]);
+			//watchに通知
+			send(scriptArray[i][4],'training',scriptArray[i][2]);	//役者名とセリフを通知
+			//kinectに通知
+			send(scriptArray[i][4],'kinect', scriptArray[i][3]);	//役者名とモーションを通知
+		}
+	}
+	
+	//最後にカウントは1上げる
 	count ++;
 }
 
@@ -352,6 +389,7 @@ function onStopButton(){
 	for(var i = 0; i < ClassElement.length; i++){
 		ClassElement[i].style.backgroundColor = "#fffacd";
 	}
+	
 	//順番を+1
 	count ++;
 }
@@ -377,6 +415,7 @@ function onChatSendButton() {
 }
 
 //********************台本、稽古 機能イベント********************
+
 
 
 //色変えるボタン　デバッグ用
@@ -405,7 +444,6 @@ function createXMLHttpRequest() {
     return XMLhttpObject;
 }
 
-var scriptArray;
 
 function createScriptTable(csvData){
 	var CR = String.fromCharCode(13);	//改行コード
@@ -503,3 +541,19 @@ function displayArray(resulttable){
 
 //+++++-----台本の読み込み 終了-----+++++
 
+//+++++-----台本の判定 終了-----+++++
+
+//台本の判定をする
+function judgeTraining(){
+	//メモ：通知時にwatchフラグとkinectフラグを0に。片方の判定が来ればフラグを立てる。両方立っていれば処理を行う
+	//watchからきた判定の処理
+	
+	//kinectからきた判定の処理
+	
+	//両方の判定結果が正しければ、次へ進む
+	
+	//間違っていれば、ブーと音を鳴らす。そして一時停止。（間違いという判断は秒数が良い。秒は予備実験を元に決める必要がある）
+
+}
+
+//+++++-----台本の判定 終了-----+++++
