@@ -42,7 +42,7 @@ window.onunload = function(event){
 ws.onmessage = function (event) {
 	//-----メッセージの代入-----
 	var messages = JSON.parse(event.data);
-	console.log(messages);
+//	console.log(messages);
 
 	//-----typeがping-----
 	if(messages.type == "ping"){
@@ -142,6 +142,9 @@ ws.onmessage = function (event) {
 	} else if(messages.type = "kinect"){
 	//kinectからの受信処理
 	
+	//一応その他
+	} else {
+		console.log(messages);
 	}
 
 };
