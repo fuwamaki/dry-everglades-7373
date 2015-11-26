@@ -38,6 +38,7 @@ window.onunload = function(event){
 	
 }
 
+
 //********************メッセージ受信イベント********************
 ws.onmessage = function (event) {
 	//-----メッセージの代入-----
