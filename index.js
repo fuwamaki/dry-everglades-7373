@@ -23,6 +23,7 @@ var wss = new WebSocketServer({server: server});
 //console.log("コンソール：websocket server created");
 
 
+
 //クライアントと接続すると動作するイベント
 wss.on("connection", function(ws) {
 	console.log("コンソール：websocket connection open");
