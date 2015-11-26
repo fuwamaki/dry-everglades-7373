@@ -43,7 +43,7 @@ window.onunload = function(event){
 ws.onmessage = function (event) {
 	//-----メッセージの代入-----
 	var messages = JSON.parse(event.data);
-//	console.log(messages);
+	console.log(messages);
 
 	//-----typeがping-----
 	if(messages.type == "ping"){
