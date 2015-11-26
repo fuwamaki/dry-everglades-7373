@@ -44,7 +44,6 @@ ws.onmessage = function (event) {
 	var messages = JSON.parse(event.data);
 	console.log(messages);
 
-
 	//-----typeがping-----
 	if(messages.type == "ping"){
 /*		ping_fld.innerHTML += "ユーザ" + userid + ": " + messages.text + "<br>"; */
