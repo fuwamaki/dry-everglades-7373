@@ -145,6 +145,7 @@ ws.onmessage = function (event) {
 	//-----typeがkinect-----
 	} else if(messages.type = "kinect"){
 	//kinectからの受信処理
+		console.log(messages.text);
 	
 	//一応その他
 	} else {
