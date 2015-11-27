@@ -132,7 +132,6 @@ ws.onmessage = function (event) {
 		write_chat(messages.user, messages.text);
 
 
-
 	//-----typeがdebug-----
 	} else if(messages.type = "debug"){
 	//今のところPCでは特に処理なし
