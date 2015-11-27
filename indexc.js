@@ -133,17 +133,17 @@ ws.onmessage = function (event) {
 
 
 	//-----typeがdebug-----
-	} else if(messages.type = "debug"){
+	} else if(messages.type == "debug"){
 	//今のところPCでは特に処理なし
 	
 	
 	//-----typeがtraining-----
-	} else if(messages.type = "training"){
+	} else if(messages.type == "training"){
 	
 	//Watchからの受信処理
 	
 	//-----typeがkinect-----
-	} else if(messages.type = "kinect"){
+	} else if(messages.type == "kinect"){
 	//kinectからの受信処理
 		console.log(messages.text);
 	
