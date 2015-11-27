@@ -123,7 +123,7 @@ ws.onmessage = function (event) {
 			
 		//kinect接続部分
 		} else if(messages.user == "KINECT"){
-			write_log(messages.user, "接続完了");
+			write_log(messages.user, " 接続完了");
 		}
 		
 	//-----typeがchat-----
