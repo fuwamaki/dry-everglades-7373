@@ -120,6 +120,10 @@ ws.onmessage = function (event) {
 			write_log(messages.user, ":TABLET.3に登録完了<br>");
 			update_tablet3();
 			if(messages.user == userid) userid = "Tablet3";
+			
+		//kinect接続部分
+		} else if(messages.user == "KINECT"){
+			write_log(messages.user, "接続完了");
 		}
 		
 	//-----typeがchat-----
