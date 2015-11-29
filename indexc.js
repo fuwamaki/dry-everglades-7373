@@ -332,6 +332,7 @@ function onScriptButton8(){
 
 //台本決定ボタン
 function onScriptDecideButton(){
+	console.log("台本決定したで");
 	//Tablet1、2、3それぞれに初期状態のデータを送る
 	trainingsend('Tablet1','training',scriptArray[0][1],scriptArray[0][2],scriptArray[0][3]);
 	trainingsend('Tablet2','training',scriptArray[1][1],scriptArray[1][2],scriptArray[1][3]);
