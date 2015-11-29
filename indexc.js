@@ -167,7 +167,7 @@ function send(Userid, Type, Text){
 }
 
 //タブレットに稽古情報を送信メソッド
-function trainingsend(Userid, Type, Actor, Motion, Script){
+function trainingsend(Userid, Type, Actor, Script, Motion){
 	ws.send(JSON.stringify({
 		user: Userid,
 		type: Type,
