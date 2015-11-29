@@ -141,6 +141,19 @@ ws.onmessage = function (event) {
 	} else if(messages.type == "training"){
 	
 	//Watchからの受信処理
+		if(messages.user == "Tablet1"){
+			var wv_rep1 = document.getElementById("watch_voice_reply1");
+			wv_rep1.innerHTML = messages.text + "";
+		}
+		if(messages.user == "Tablet2"){
+			var wv_rep2 = document.getElementById("watch_voice_reply2");
+			wv_rep2.innerHTML = messages.text + "";
+		}
+		if(messages.user == "Tablet3"){
+			var wv_rep3 = document.getElementById("watch_voice_reply3");
+			wv_rep3.innerHTML = messages.text + "";
+		}
+		console.log("受信音声: " + messages.text);
 	
 	//-----typeがkinect-----
 	} else if(messages.type == "kinect"){
