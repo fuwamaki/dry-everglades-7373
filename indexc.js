@@ -162,7 +162,18 @@ function send(Userid, Type, Text){
 	ws.send(JSON.stringify({
 		user: Userid,
 		type: Type,
-		text: Text,
+		text: Text
+	}));
+}
+
+//タブレットに稽古情報を送信メソッド
+function trainingsend(Userid, Type, Actor, Motion, Script){
+	ws.send(JSON.stringify({
+		user: Userid,
+		type: Type,
+		actor: Actor,
+		motion: Motion,
+		script: Script
 	}));
 }
 
@@ -321,6 +332,10 @@ function onScriptButton8(){
 
 //台本決定ボタン
 function onScriptDecideButton(){
+	//Tablet1、2、3それぞれに初期状態のデータを送る
+	trainingsend('Tablet1','training',scriptArray[0][1],scriptArray[0][2],scriptArray[0][3]);
+	trainingsend('Tablet2','training',scriptArray[1][1],scriptArray[1][2],scriptArray[1][3]);
+	trainingsend('Tablet3','training',scriptArray[2][1],scriptArray[2][2],scriptArray[2][3]);
 }
 
 //+++++稽古操作部分+++++
