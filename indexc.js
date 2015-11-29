@@ -385,12 +385,17 @@ function onStartButton(){
 		ClassElement[i].style.backgroundColor = "#fffacd";
 	}
 	
-	console.log(scriptArray.length);
+	console.log("順番:" + count);
 	for(var i = 0; i < scriptArray.length; i++){
 		if(scriptArray[i][0] == count){
-//			console.log("ユーザ" + scriptArray[i][4] + " テキスト" + scriptArray[i][2] + " モーション" + scriptArray[i][3]);
 			//watchに通知
 			send(scriptArray[i][4],'training',scriptArray[i][2]);	//役者名とセリフを通知
+			
+			if(scriptArray[i][4] == 1) trainingsend('Tablet1', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+			if(scriptArray[i][4] == 2) trainingsend('Tablet2', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+			if(scriptArray[i][4] == 3) trainingsend('Tablet3', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+			
+			
 			//kinectに通知
 			send(scriptArray[i][4],'kinect', scriptArray[i][3]);	//役者名とモーションを通知
 		}
@@ -411,6 +416,21 @@ function onStopButton(){
 	var ClassElement = document.getElementsByClassName(count);
 	for(var i = 0; i < ClassElement.length; i++){
 		ClassElement[i].style.backgroundColor = "#fffacd";
+	}
+	
+	console.log("順番:" + count);
+	for(var i = 0; i < scriptArray.length; i++){
+		if(scriptArray[i][0] == count){
+			//watchに通知
+			send(scriptArray[i][4],'training',scriptArray[i][2]);	//役者名とセリフを通知
+			
+			if(scriptArray[i][4] == 1) trainingsend('Tablet1', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+			if(scriptArray[i][4] == 2) trainingsend('Tablet2', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+			if(scriptArray[i][4] == 3) trainingsend('Tablet3', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+			
+			//kinectに通知
+			send(scriptArray[i][4],'kinect', scriptArray[i][3]);	//役者名とモーションを通知
+		}
 	}
 	
 	//順番を+1
