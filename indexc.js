@@ -136,6 +136,7 @@ ws.onmessage = function (event) {
 	} else if(messages.type == "debug"){
 	//今のところPCでは特に処理なし
 	
+	
 	//-----typeがtraining-----
 	} else if(messages.type == "training"){
 	
