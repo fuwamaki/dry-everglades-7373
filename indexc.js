@@ -369,6 +369,7 @@ function onWatchDebugButton3(){
 	send(userid, 'debug', 'watch3');
 }
 
+
 //音チェックボタン
 function onSoundCheckButton(){
 	//音ファイルを鳴らす
