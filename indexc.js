@@ -144,16 +144,23 @@ ws.onmessage = function (event) {
 		if(messages.user == "Tablet1"){
 			var wv_rep1 = document.getElementById("watch_voice_reply1");
 			wv_rep1.innerHTML = messages.text + "";
+			//判定処理
+			judgeTraining(1);
 		}
 		if(messages.user == "Tablet2"){
 			var wv_rep2 = document.getElementById("watch_voice_reply2");
 			wv_rep2.innerHTML = messages.text + "";
+			//判定処理
+			judgeTraining(2);
 		}
 		if(messages.user == "Tablet3"){
 			var wv_rep3 = document.getElementById("watch_voice_reply3");
 			wv_rep3.innerHTML = messages.text + "";
+			//判定処理
+			judgeTraining(3);
 		}
 		console.log("受信音声: " + messages.text);
+		
 	
 	//-----typeがkinect-----
 	} else if(messages.type == "kinect"){
@@ -377,79 +384,36 @@ function onSoundCheckButton(){
 	var audio_wrong = new Audio("music/wrong_sound.mp3");			//ドラムロール音
 	var audio_drumroll = new Audio("music/drumroll_sound.mp3");		//間違い音
 	
-	audio_drumroll.play();
-	setTimeout(function musicplay(){ audio_correct.play(); }, 2700);	//遅延して再生
+//	audio_drumroll.play();
+//	setTimeout(function musicplay(){ audio_correct.play(); }, 2700);	//遅延して再生
+	audio_correct.play();
 }
 
 //training用変数定義
-var count;			//現在の順番
-var scriptArray;	//台本の配列
+var count = 0;			//現在の順番
+var scriptArray;		//台本の配列
 
 //稽古スタートボタン
 function onStartButton(){
-	//初期化
-	var ClassElement_1 = document.getElementsByClassName(count-1);
-	for(var i = 0; i < ClassElement_1.length; i++){
-		ClassElement_1[i].style.backgroundColor = "#ffffff";
-	}
+	//前の順番の色付き背景を白に戻す
+	RepairColor();
+	
 	//一番目の色を付加
 	count = 1;
-	var ClassElement = document.getElementsByClassName(count);
-	for(var i = 0; i < ClassElement.length; i++){
-		ClassElement[i].style.backgroundColor = "#fffacd";
-	}
 	
-	console.log("順番:" + count);
-	for(var i = 0; i < scriptArray.length; i++){
-		if(scriptArray[i][0] == count){
-			//watchに通知
-			send(scriptArray[i][4],'training',scriptArray[i][2]);	//役者名とセリフを通知
-			
-			if(scriptArray[i][4] == 1) trainingsend('Tablet1', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-			if(scriptArray[i][4] == 2) trainingsend('Tablet2', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-			if(scriptArray[i][4] == 3) trainingsend('Tablet3', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-			
-			
-			//kinectに通知
-			send(scriptArray[i][4],'kinect', scriptArray[i][3]);	//役者名とモーションを通知
-		}
-	}
+	//対象の順番の背景に色をつける
+	AddColor();
 	
-	//最後にカウントは1上げる
-	count ++;
+	//WatchとKinectに情報を送る
+	SendInfo();
 }
 
 //一時停止ボタン
 function onStopButton(){
-	//初期化
-	var ClassElement_1 = document.getElementsByClassName(count-1);
-	for(var i = 0; i < ClassElement_1.length; i++){
-		ClassElement_1[i].style.backgroundColor = "#ffffff";
-	}
-	//色を付加
-	var ClassElement = document.getElementsByClassName(count);
-	for(var i = 0; i < ClassElement.length; i++){
-		ClassElement[i].style.backgroundColor = "#fffacd";
-	}
-	
-	console.log("順番:" + count);
-	for(var i = 0; i < scriptArray.length; i++){
-		if(scriptArray[i][0] == count){
-			//watchに通知
-			send(scriptArray[i][4],'training',scriptArray[i][2]);	//役者名とセリフを通知
-			
-			if(scriptArray[i][4] == 1) trainingsend('Tablet1', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-			if(scriptArray[i][4] == 2) trainingsend('Tablet2', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-			if(scriptArray[i][4] == 3) trainingsend('Tablet3', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-			
-			//kinectに通知
-			send(scriptArray[i][4],'kinect', scriptArray[i][3]);	//役者名とモーションを通知
-		}
-	}
-	
-	//順番を+1
-	count ++;
 }
+
+
+
 
 //再スタートボタン
 function onRestartButton(){
@@ -470,6 +434,9 @@ function onChatSendButton() {
 	chat_ipt = document.getElementById("chat_input");
 	send(userid, 'chat', chat_ipt.value);
 }
+
+
+
 
 //********************台本、稽古 機能イベント********************
 
@@ -595,16 +562,32 @@ function displayArray(resulttable){
 }
 
 
-
-//+++++-----台本の読み込み 終了-----+++++
-
-//+++++-----台本の判定 終了-----+++++
+//+++++-----台本の判定-----+++++
 
 //台本の判定をする
-function judgeTraining(){
+function judgeTraining(do_user){
 	//メモ：通知時にwatchフラグとkinectフラグを0に。片方の判定が来ればフラグを立てる。両方立っていれば処理を行う
 	//watchからきた判定の処理
 	
+	for(var i = 0; i < scriptArray.length; i++){
+		if(scriptArray[i][0] == count){
+		
+		//watchからきた判定の処理
+		if(do_user == scriptArray[i][4]){
+			
+			//両方の判定結果が正しければ、次へ進む
+			NextNotification();
+			
+			//正解音鳴らす
+			onSoundCheckButton()
+			
+			console.log("判定オーケー！");
+		}
+		
+		
+		}
+	}
+
 	//kinectからきた判定の処理
 	
 	//両方の判定結果が正しければ、次へ進む
@@ -613,4 +596,55 @@ function judgeTraining(){
 
 }
 
-//+++++-----台本の判定 終了-----+++++
+
+//+++++----- 通知処理 -----+++++
+//次の通知処理を行うメソッド(色付け含む)
+function NextNotification(){
+	//前の順番の色付き背景を白に戻す
+	RepairColor();
+	
+	//順番を+1する
+	count ++;
+	
+	//対象の順番の背景に色をつける
+	AddColor();
+	
+	//WatchとKinectに情報を送る
+	SendInfo();
+}
+
+//前の順番の色付き背景を白に戻すメソッド
+function RepairColor(){
+	var ClassElement_1 = document.getElementsByClassName(count);
+	for(var i = 0; i < ClassElement_1.length; i++){
+		ClassElement_1[i].style.backgroundColor = "#ffffff";
+	}
+}
+
+//対象の順番の背景に色をつけるメソッド
+function AddColor(){
+	var ClassElement = document.getElementsByClassName(count);
+	for(var i = 0; i < ClassElement.length; i++){
+		ClassElement[i].style.backgroundColor = "#fffacd";
+	}
+}
+
+//WatchとKinectに情報を送るメソッド
+function SendInfo(){
+//	console.log("順番:" + count);
+	for(var i = 0; i < scriptArray.length; i++){
+		if(scriptArray[i][0] == count){
+			//watchに通知
+			send(scriptArray[i][4],'training',scriptArray[i][2]);	//役者名とセリフを通知
+			
+			if(scriptArray[i][4] == 1) trainingsend('Tablet1', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+			if(scriptArray[i][4] == 2) trainingsend('Tablet2', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+			if(scriptArray[i][4] == 3) trainingsend('Tablet3', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+			
+			//kinectに通知
+			send(scriptArray[i][4],'kinect', scriptArray[i][3]);	//役者名とモーションを通知
+		}
+	}
+}
+
+
