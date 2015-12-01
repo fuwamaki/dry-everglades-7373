@@ -639,9 +639,9 @@ function SendInfo(){
 			//watchに通知
 			send(scriptArray[i][4],'training',scriptArray[i][2]);	//役者名とセリフを通知
 			
-			if(scriptArray[i][4] == 1) trainingsend('Tablet1', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-			if(scriptArray[i][4] == 2) trainingsend('Tablet2', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-			if(scriptArray[i][4] == 3) trainingsend('Tablet3', 'training', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+			if(scriptArray[i][4] == 1) trainingsend('Tablet1', 'training1', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+			if(scriptArray[i][4] == 2) trainingsend('Tablet2', 'training1', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+			if(scriptArray[i][4] == 3) trainingsend('Tablet3', 'training1', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
 			
 			//kinectに通知
 			send(scriptArray[i][4],'kinect', scriptArray[i][3]);	//役者名とモーションを通知
