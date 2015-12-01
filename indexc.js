@@ -137,6 +137,8 @@ ws.onmessage = function (event) {
 	//今のところPCでは特に処理なし
 	
 	
+	//-----typeがtraining1-----
+	} else if(messages.type == "training1"){
 	//-----typeがtraining-----
 	} else if(messages.type == "training"){
 	
@@ -354,9 +356,9 @@ function onScriptButton8(){
 function onScriptDecideButton(){
 	console.log("台本決定したで");
 	//Tablet1、2、3それぞれに初期状態のデータを送る
-	trainingsend('Tablet1','training',scriptArray[0][1],scriptArray[0][2],scriptArray[0][3]);
-	trainingsend('Tablet2','training',scriptArray[1][1],scriptArray[1][2],scriptArray[1][3]);
-	trainingsend('Tablet3','training',scriptArray[2][1],scriptArray[2][2],scriptArray[2][3]);
+	trainingsend('Tablet1','training1',scriptArray[0][1],scriptArray[0][2],scriptArray[0][3]);
+	trainingsend('Tablet2','training1',scriptArray[1][1],scriptArray[1][2],scriptArray[1][3]);
+	trainingsend('Tablet3','training1',scriptArray[2][1],scriptArray[2][2],scriptArray[2][3]);
 }
 
 //+++++稽古操作部分+++++
@@ -579,7 +581,7 @@ function judgeTraining(do_user){
 			NextNotification();
 			
 			//正解音鳴らす
-			onSoundCheckButton()
+			onSoundCheckButton();
 			
 			console.log("判定オーケー！");
 		}
