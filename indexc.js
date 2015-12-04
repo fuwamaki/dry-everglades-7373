@@ -689,9 +689,9 @@ function MessageChangeBlack(){
 		//順番が正しければ色を赤くする
 		if(scriptArray[i][0] == count){
 			
-			if(scriptArray[i][4] == 1) document.getElementById("watch_voice_reply1").style.backgroundColor="black";
-			if(scriptArray[i][4] == 2) document.getElementById("watch_voice_reply2").style.backgroundColor="black";
-			if(scriptArray[i][4] == 3) document.getElementById("watch_voice_reply3").style.backgroundColor="black";
+			if(scriptArray[i][4] == 1) document.getElementById("watchvoicereply1").style.backgroundColor="white";
+			if(scriptArray[i][4] == 2) document.getElementById("watchvoicereply2").style.backgroundColor="white";
+			if(scriptArray[i][4] == 3) document.getElementById("watchvoicereply3").style.backgroundColor="white";
 			
 		}
 	}
@@ -703,9 +703,9 @@ function MessageChangeRed(){
 		//順番が正しければ色を赤くする
 		if(scriptArray[i][0] == count){
 			
-			if(scriptArray[i][4] == 1) document.getElementById("watch_voice_reply1").style.backgroundColor="red";
-			if(scriptArray[i][4] == 2) document.getElementById("watch_voice_reply2").style.backgroundColor="red";
-			if(scriptArray[i][4] == 3) document.getElementById("watch_voice_reply3").style.backgroundColor="red";
+			if(scriptArray[i][4] == 1) document.getElementById("watchvoicereply1").style.backgroundColor="red";
+			if(scriptArray[i][4] == 2) document.getElementById("watchvoicereply2").style.backgroundColor="red";
+			if(scriptArray[i][4] == 3) document.getElementById("watchvoicereply3").style.backgroundColor="red";
 			
 		}
 	}
