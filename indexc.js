@@ -606,7 +606,7 @@ function displayArray(resulttable){
 	training_log.innerHTML = resulttable;
 }
 
-
+var nankai = 0;
 //+++++-----台本の判定-----+++++
 
 //台本の判定をする
@@ -619,7 +619,7 @@ function judgeTraining(result){
 			//watchからきた判定の処理、発言した役者(ユーザ)が合って入れば
 			if(result == scriptArray[i][4]){	//ユーザ1or2or3
 				watching -= 1;
-				MessageChangeBlack();
+				MessageChangeWhite();
 //				console.log("watching" + watching);
 			}
 			//kinectからきた判定の処理
@@ -635,6 +635,9 @@ function judgeTraining(result){
 				//正解音鳴らす
 				SoundPlay();
 			}
+			
+			nankai += 1;
+			console.log("何回目の判定メソッド：" + nankai);
 		}
 	}
 	//間違っていれば、ブーと音を鳴らす。そして一時停止。（間違いという判断は秒数が良い。秒は予備実験を元に決める必要がある）
@@ -707,7 +710,7 @@ function DisplayMessages(user, text){
 //+++++----- 色付け処理 -----+++++
 
 //通知中ではないデバイスのメッセージの色を黒くする
-function MessageChangeBlack(){
+function MessageChangeWhite(){
 	for(var i = 0; i < scriptArray.length; i++){
 		//順番が正しければ色を赤くする
 		if(scriptArray[i][0] == count){
