@@ -199,7 +199,7 @@ ws.onmessage = function (event) {
 		//稽古中フラグ・Kinectへ通知中フラグ が立っていることを確認
 		if(doing == 1 && kinecting != 0){
 			//true or false を判断するため、judgeTrainingにtextを飛ばす
-		
+			judgeTraining(messages.text);
 		}
 		
 		console.log("kinectからの受信: " + messages.text);
@@ -493,6 +493,9 @@ function onRestartBack2Button(){
 function onChatSendButton() {
 	chat_ipt = document.getElementById("chat_input");
 	send(userid, 'chat', chat_ipt.value);
+	
+	motionsend(1,'kinect_send', 'text');	//役者名とモーションを通知
+
 }
 
 
