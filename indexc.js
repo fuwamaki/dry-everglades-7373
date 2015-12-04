@@ -627,12 +627,14 @@ function judgeTraining(result){
 				kinecting--;
 			}
 			console.log("watching" + watching);
+			console.log("kinecting" + kinecting);
 			//両方の判定結果が正しければ、次へ進む
 			if(watching == 0 && kinecting == 0){
 				//次の通知をする
 				NextNotification();
 				//正解音鳴らす
 				SoundPlay();
+				console.log("チェック");
 			}
 		}
 	}
