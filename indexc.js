@@ -159,14 +159,17 @@ ws.onmessage = function (event) {
 			if(messages.user == "Tablet1"){
 				//判定処理
 				judgeTraining(1);
+				DisplayMessages(messages.text);
 			}
 			if(messages.user == "Tablet2"){
 				//判定処理
 				judgeTraining(2);
+				DisplayMessages(messages.text);
 			}
 			if(messages.user == "Tablet3"){
 				//判定処理
 				judgeTraining(3);
+				DisplayMessages(messages.text);
 			}
 		}
 		console.log("受信音声: " + "端末 " + messages.user + " - メッセージ " + messages.text);
@@ -423,6 +426,9 @@ function onStartButton(){
 	//対象の順番の背景に色をつける
 	AddColor();
 	
+	//対象ユーザ部分の背景に色をつける
+	MessageChangeRed();
+	
 	//WatchとKinectに情報を送る
 	SendInfo();
 }
@@ -595,6 +601,7 @@ function judgeTraining(result){
 			//watchからきた判定の処理、発言した役者(ユーザ)が合って入れば
 			if(result == scriptArray[i][4]){	//ユーザ1or2or3
 				watching--;
+				MessageChangeBlack();
 			}
 			//kinectからきた判定の処理
 			if(result == true){
@@ -625,6 +632,9 @@ function NextNotification(){
 	
 	//対象の順番の背景に色をつける
 	AddColor();
+	
+	//対象ユーザ部分の背景に色をつける
+	MessageChangeRed();
 	
 	//WatchとKinectに情報を送る
 	SendInfo();
@@ -661,6 +671,15 @@ function SendInfo(){
 	}
 }
 
+//+++++----- 音声メッセージ表示処理 -----+++++
+
+//受信したメッセージを表示する
+function DisplayMessages(text){
+	if(result == 1) document.getElementById("watch_voice_reply1").innerHTML = text + "";
+	if(result == 2) document.getElementById("watch_voice_reply2").innerHTML = text + "";
+	if(result == 3) document.getElementById("watch_voice_reply3").innerHTML = text + "";
+}
+
 
 //+++++----- 色付け処理 -----+++++
 
@@ -670,9 +689,9 @@ function MessageChangeBlack(){
 		//順番が正しければ色を赤くする
 		if(scriptArray[i][0] == count){
 			
-			if(scriptArray[i][4] == 1) document.getElementsById("watch_voice_reply1").style.color="black";
-			if(scriptArray[i][4] == 2) document.getElementsById("watch_voice_reply2").style.color="black";
-			if(scriptArray[i][4] == 3) document.getElementsById("watch_voice_reply3").style.color="black";
+			if(scriptArray[i][4] == 1) document.getElementById("watch_voice_reply1").style.backgroundColor="black";
+			if(scriptArray[i][4] == 2) document.getElementById("watch_voice_reply2").style.backgroundColor="black";
+			if(scriptArray[i][4] == 3) document.getElementById("watch_voice_reply3").style.backgroundColor="black";
 			
 		}
 	}
@@ -684,9 +703,9 @@ function MessageChangeRed(){
 		//順番が正しければ色を赤くする
 		if(scriptArray[i][0] == count){
 			
-			if(scriptArray[i][4] == 1) document.getElementsById("watch_voice_reply1").style.color="red";
-			if(scriptArray[i][4] == 2) document.getElementsById("watch_voice_reply2").style.color="red";
-			if(scriptArray[i][4] == 3) document.getElementsById("watch_voice_reply3").style.color="red";
+			if(scriptArray[i][4] == 1) document.getElementById("watch_voice_reply1").style.backgroundColor="red";
+			if(scriptArray[i][4] == 2) document.getElementById("watch_voice_reply2").style.backgroundColor="red";
+			if(scriptArray[i][4] == 3) document.getElementById("watch_voice_reply3").style.backgroundColor="red";
 			
 		}
 	}
