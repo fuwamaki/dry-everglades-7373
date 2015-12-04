@@ -187,7 +187,6 @@ ws.onmessage = function (event) {
 		}
 		
 	
-	
 	//-----typeがkinect_send-----
 	} else if(messages.type == "kinect_send"){
 	//サーバ→Kinect 一方通行 稽古モード
