@@ -626,15 +626,12 @@ function judgeTraining(result){
 			if(result == "motion_ok"){
 				kinecting--;
 			}
-			console.log("watching" + watching);
-			console.log("kinecting" + kinecting);
 			//両方の判定結果が正しければ、次へ進む
 			if(watching == 0 && kinecting == 0){
 				//次の通知をする
 				NextNotification();
 				//正解音鳴らす
 				SoundPlay();
-				console.log("チェック");
 			}
 		}
 	}
@@ -650,7 +647,7 @@ function NextNotification(){
 	RepairColor();
 	
 	//順番を+1する
-	count ++;
+	count += 1;
 	
 	//対象の順番の背景に色をつける
 	AddColor();
