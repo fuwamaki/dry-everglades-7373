@@ -13,6 +13,9 @@ var kinecting = 0;												//kinectから骨格認識通知の有無を示す
 var count = 0;													//現在の順番
 var scriptArray;												//台本の配列
 
+var nankai = 0;
+
+
 //********************オープン処理********************
 ws.onopen = function(){
 	ws.send(JSON.stringify({
@@ -159,16 +162,19 @@ ws.onmessage = function (event) {
 			console.log("受信音声: " + "端末 " + messages.user + " - メッセージ " + messages.text);
 			if(messages.user == "Tablet1"){
 				//判定処理
-//				judgeTraining(1);
+				judgeTraining(1);
 				DisplayMessages(1, messages.text);
 			} else if(messages.user == "Tablet2"){
 				//判定処理
-//				judgeTraining(2);
+				judgeTraining(2);
 				DisplayMessages(2, messages.text);
 			} else if(messages.user == "Tablet3"){
 				//判定処理
 				judgeTraining(3);
 				DisplayMessages(3, messages.text);
+				nankai += 1;
+				console.log("何回目の判定メソッド：" + nankai);
+			
 			}
 			
 			if(messages.text == "please_stop" && doing == 1){
@@ -606,7 +612,6 @@ function displayArray(resulttable){
 	training_log.innerHTML = resulttable;
 }
 
-var nankai = 0;
 //+++++-----台本の判定-----+++++
 
 //台本の判定をする
@@ -636,8 +641,6 @@ function judgeTraining(result){
 				SoundPlay();
 			}
 			
-			nankai += 1;
-			console.log("何回目の判定メソッド：" + nankai);
 		}
 	}
 	//間違っていれば、ブーと音を鳴らす。そして一時停止。（間違いという判断は秒数が良い。秒は予備実験を元に決める必要がある）
