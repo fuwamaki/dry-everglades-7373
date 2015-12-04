@@ -675,9 +675,9 @@ function SendInfo(){
 
 //受信したメッセージを表示する
 function DisplayMessages(user, text){
-	if(user == 1) document.getElementById("watch_voice_reply1").innerHTML = text + "";
-	if(user == 2) document.getElementById("watch_voice_reply2").innerHTML = text + "";
-	if(user == 3) document.getElementById("watch_voice_reply3").innerHTML = text + "";
+	if(user == 1) document.getElementById("watch_voice_reply1").innerHTML = text;
+	if(user == 2) document.getElementById("watch_voice_reply2").innerHTML = text;
+	if(user == 3) document.getElementById("watch_voice_reply3").innerHTML = text;
 }
 
 
