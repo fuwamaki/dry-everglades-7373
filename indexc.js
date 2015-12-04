@@ -639,8 +639,8 @@ function judgeTraining(result){
 				NextNotification();
 				//正解音鳴らす
 				SoundPlay();
+				break;
 			}
-			break;
 			
 		}
 	}
