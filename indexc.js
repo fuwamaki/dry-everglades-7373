@@ -171,6 +171,13 @@ ws.onmessage = function (event) {
 				judgeTraining(3);
 				DisplayMessages(3, messages.text);
 			}
+			if(messages.text == "please_stop" && doing == 1){
+				onStopButton();
+			} else if(messages.text == "please_back_1" && doing == 0){
+				onRestartBack1Button();
+			} else if(messages.text == "please_back_first" && doing == 0){
+				onStartButton();
+			}
 		}
 		console.log("受信音声: " + "端末 " + messages.user + " - メッセージ " + messages.text);
 		
@@ -457,10 +464,22 @@ function onRestartButton(){
 
 //-1から再スタートボタン
 function onRestartBack1Button(){
+	//稽古中フラグを立てる
+	doing = 1;
+	//countは一つ下げる
+	count--;
+	//稽古を再開する
+	NextNotification();
 }
 
 //-2から再スタートボタン
 function onRestartBack2Button(){
+	//稽古中フラグを立てる
+	doing = 1;
+	//countは2つ下げる
+	count -= 2;
+	//稽古を再開する
+	NextNotification();
 }
 
 //-----ボックス部分-----
