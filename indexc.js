@@ -159,17 +159,17 @@ ws.onmessage = function (event) {
 			if(messages.user == "Tablet1"){
 				//判定処理
 				judgeTraining(1);
-				DisplayMessages(messages.text);
+				DisplayMessages(messages.user, messages.text);
 			}
 			if(messages.user == "Tablet2"){
 				//判定処理
 				judgeTraining(2);
-				DisplayMessages(messages.text);
+				DisplayMessages(messages.user, messages.text);
 			}
 			if(messages.user == "Tablet3"){
 				//判定処理
 				judgeTraining(3);
-				DisplayMessages(messages.text);
+				DisplayMessages(messages.user, messages.text);
 			}
 		}
 		console.log("受信音声: " + "端末 " + messages.user + " - メッセージ " + messages.text);
@@ -674,10 +674,10 @@ function SendInfo(){
 //+++++----- 音声メッセージ表示処理 -----+++++
 
 //受信したメッセージを表示する
-function DisplayMessages(text){
-	if(result == 1) document.getElementById("watch_voice_reply1").innerHTML = text + "";
-	if(result == 2) document.getElementById("watch_voice_reply2").innerHTML = text + "";
-	if(result == 3) document.getElementById("watch_voice_reply3").innerHTML = text + "";
+function DisplayMessages(user, text){
+	if(user == 1) document.getElementById("watch_voice_reply1").innerHTML = text + "";
+	if(user == 2) document.getElementById("watch_voice_reply2").innerHTML = text + "";
+	if(user == 3) document.getElementById("watch_voice_reply3").innerHTML = text + "";
 }
 
 
