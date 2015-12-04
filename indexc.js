@@ -621,6 +621,7 @@ function judgeTraining(result){
 			if(result == scriptArray[i][4]){	//ユーザ1or2or3
 				watching -= 1;
 				MessageChangeBlack();
+				console.log("watching" + watching);
 			}
 			//kinectからきた判定の処理
 			if(result == "motion_ok"){
