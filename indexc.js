@@ -639,9 +639,9 @@ function judgeTraining(result){
 				NextNotification();
 				//正解音鳴らす
 				SoundPlay();
+				//ここのbreakはまじで大事
 				break;
 			}
-			
 		}
 	}
 	//間違っていれば、ブーと音を鳴らす。そして一時停止。（間違いという判断は秒数が良い。秒は予備実験を元に決める必要がある）
@@ -695,7 +695,6 @@ function SendInfo(){
 				motionsend(scriptArray[i][4],'kinect_send', scriptArray[i][3]);	//役者名とモーションを通知
 				kinecting++;
 			}
-			
 			console.log("通知した！" + watching);
 		}
 	}
