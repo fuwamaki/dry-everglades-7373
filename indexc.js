@@ -621,12 +621,13 @@ function judgeTraining(result){
 			if(result == scriptArray[i][4]){	//ユーザ1or2or3
 				watching -= 1;
 				MessageChangeBlack();
-				console.log("watching" + watching);
+//				console.log("watching" + watching);
 			}
 			//kinectからきた判定の処理
 			if(result == "motion_ok"){
 				kinecting--;
 			}
+			console.log("判定する前！watching" + watching);
 			//両方の判定結果が正しければ、次へ進む
 			if(watching == 0 && kinecting == 0){
 				console.log("ピンポンなんだ！" + count);
