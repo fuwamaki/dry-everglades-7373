@@ -690,7 +690,7 @@ function MessageChangeRed(){
 			
 		}
 	}
-}}
+}
 
 //前の順番の色付き背景を白に戻すメソッド
 function RepairColor(){
