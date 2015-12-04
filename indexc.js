@@ -626,6 +626,7 @@ function judgeTraining(result){
 			if(result == true){
 				kinecting--;
 			}
+			console.log("watching" + watching);
 			//両方の判定結果が正しければ、次へ進む
 			if(watching == 0 && kinecting == 0){
 				//次の通知をする
