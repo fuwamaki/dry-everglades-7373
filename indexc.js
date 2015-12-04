@@ -671,15 +671,15 @@ function SendInfo(){
 			//Watchにタイミングを通知 count | userid | type | actor | script | motion
 			if(scriptArray[i][4] == 1){
 				trainingsend(count, 'Tablet1', 'training_send', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-				watching++;
+				watching += 1;
 			}
 			if(scriptArray[i][4] == 2){
 				trainingsend(count, 'Tablet2', 'training_send', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-				watching++;
+				watching += 1;
 			}
 			if(scriptArray[i][4] == 3){
 				trainingsend(count, 'Tablet3', 'training_send', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-				watching++;
+				watching += 1;
 			}
 			
 			//kinectに通知
@@ -688,6 +688,8 @@ function SendInfo(){
 				motionsend(scriptArray[i][4],'kinect_send', scriptArray[i][3]);	//役者名とモーションを通知
 				kinecting++;
 			}
+			
+			console.log("通知した！" + watching);
 		}
 	}
 }
