@@ -265,6 +265,16 @@ table.watch_debug{
 .watch_tr{
 	height: 30px;
 }
+th.watch_th1{
+	width: 100px;
+}
+th.watch_th2{
+	width: 395px;
+	max-width: 370px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 div.training_operation{
 	width: 495px;
 	text-align: center;

@@ -181,22 +181,16 @@
 				<div class="watch_table">
 					<table border=1 class="watch_debug">
 						<tr class="watch_tr">
-							<th>Watch通知デバッグ</th>
-							<th><button name="watch_debug1" onclick="onWatchDebugButton1();">Watch1へ通知</button></th>
-							<th><button name="watch_debug2" onclick="onWatchDebugButton2();">Watch2へ通知</button></th>
-							<th><button name="watch_debug3" onclick="onWatchDebugButton3();">Watch3へ通知</button></th>
+							<th class="watch_th1"><button name="watch_debug1" onclick="onWatchRaiseButton1();">Watch1起動</button></th>
+							<th class="watch_th2"><nobr id="watch_voice_reply1">No Message</nobr></th>
 						</tr>
 						<tr class="watch_tr">
-							<th>button-reply</th>
-							<th><nobr id="watch_reply1">no reply</nobr></th>
-							<th><nobr id="watch_reply2">no reply</nobr></th>
-							<th><nobr id="watch_reply3">no reply</nobr></th>
+							<th class="watch_th1"><button name="watch_debug2" onclick="onWatchRaiseButton2();">Watch2起動</button></th>
+							<th class="watch_th2"><nobr id="watch_voice_reply2">No Message</nobr></th>
 						</tr>
 						<tr class="watch_tr">
-							<th>音声確認<button name="soundcheck" onclick="onSoundCheckButton();">音チェック</button></th>
-							<th><nobr id="watch_voice_reply1">音声no reply</nobr></th>
-							<th><nobr id="watch_voice_reply2">音声no reply</nobr></th>
-							<th><nobr id="watch_voice_reply3">音声no reply</nobr></th>
+							<th class="watch_th1"><button name="watch_debug3" onclick="onWatchRaiseButton3();">Watch3起動</button></th>
+							<th class="watch_th2"><nobr id="watch_voice_reply3">No Message</nobr></th>
 						</tr>
 					</table>
 				</div>

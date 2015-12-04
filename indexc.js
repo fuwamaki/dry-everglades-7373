@@ -3,10 +3,15 @@ var host = location.origin.replace(/^http/, 'ws');				//host
 var ws = new WebSocket(host);									//websocket
 //付け加え変数定義
 var userid = Math.floor(Math.random() * 500);					//自デバイスのユーザIDをランダムで生成
-var pc1_id, pc2_id, pc3_id, tablet1_id, tablet2_id, tablet3_id;	//
 var open_switch = 0;											//オープンしてるかどうかのフラグ
 var num_dvc;													//自デバイスの値
-
+//フラグ
+var doing = 0;													//稽古中かを示すフラグ
+var watching = 0;												//watchからの音声通知の有無を示すフラグ
+var kinecting = 0;												//kinectから骨格認識通知の有無を示すフラグ
+//training用変数定義
+var count = 0;													//現在の順番
+var scriptArray;												//台本の配列
 
 //********************オープン処理********************
 ws.onopen = function(){
@@ -47,7 +52,6 @@ ws.onmessage = function (event) {
 
 	//-----typeがping-----
 	if(messages.type == "ping"){
-/*		ping_fld.innerHTML += "ユーザ" + userid + ": " + messages.text + "<br>"; */
 		write_ping(userid, messages.text);
 	
 	//-----typeがconnect-----
@@ -65,6 +69,7 @@ ws.onmessage = function (event) {
 			}
 			//共通
 			write_log(messages.user, " device opened<br>");
+			
 		//クローズ
 		} else if(messages.text == "close"){
 			write_log(messages.user, " device closed<br>");
@@ -128,50 +133,66 @@ ws.onmessage = function (event) {
 		
 	//-----typeがchat-----
 	} else if(messages.type == "chat"){
-/*		chat_fld.innerHTML += "ユーザ " + messages.user + ": " + messages.text + "<br>"; */
 		write_chat(messages.user, messages.text);
 
 
-	//-----typeがdebug-----
-	} else if(messages.type == "debug"){
-	//今のところPCでは特に処理なし
+	//-----typeがraise-----
+	} else if(messages.type == "raise"){
+	//サーバ→Watch 一方通行 Watchのアプリ起動させる
 	
 	
-	//-----typeがtraining1-----
-	} else if(messages.type == "training1"){
+	//-----typeがtraining_prepare-----
+	} else if(messages.type == "training_prepare"){
+	//サーバ→Watch 一方通行 稽古前準備 台本情報を送る
+	
+	//-----typeがtraining_send-----
+	} else if(messages.type == "training_send"){
+	//サーバ→Watch 一方通行 稽古モード
+	
+	
 	//-----typeがtraining-----
 	} else if(messages.type == "training"){
+	//稽古モード Watchからの受信処理
 	
-	//Watchからの受信処理
-		if(messages.user == "Tablet1"){
-			var wv_rep1 = document.getElementById("watch_voice_reply1");
-			wv_rep1.innerHTML = messages.text + "";
-			//判定処理
-			judgeTraining(1);
+		//稽古中フラグ・Watchへ通知中フラグ が立っていることを確認
+		if(doing == 1 && watching != 0){
+			if(messages.user == "Tablet1"){
+				//判定処理
+				judgeTraining(1);
+			}
+			if(messages.user == "Tablet2"){
+				//判定処理
+				judgeTraining(2);
+			}
+			if(messages.user == "Tablet3"){
+				//判定処理
+				judgeTraining(3);
+			}
 		}
-		if(messages.user == "Tablet2"){
-			var wv_rep2 = document.getElementById("watch_voice_reply2");
-			wv_rep2.innerHTML = messages.text + "";
-			//判定処理
-			judgeTraining(2);
-		}
-		if(messages.user == "Tablet3"){
-			var wv_rep3 = document.getElementById("watch_voice_reply3");
-			wv_rep3.innerHTML = messages.text + "";
-			//判定処理
-			judgeTraining(3);
-		}
-		console.log("受信音声: " + messages.text);
+		console.log("受信音声: " + "端末 " + messages.user + " - メッセージ " + messages.text);
 		
+	
+	//-----typeがkinect_send-----
+	} else if(messages.type == "kinect_send"){
+	//サーバ→Kinect 一方通行 稽古モード
+	
 	
 	//-----typeがkinect-----
 	} else if(messages.type == "kinect"){
 	//kinectからの受信処理
-		console.log(messages.text);
+		
+		//稽古中フラグ・Kinectへ通知中フラグ が立っていることを確認
+		if(doing == 1 && kinecting != 0){
+			//true or false を判断するため、judgeTrainingにtextを飛ばす
+		
+		}
+		
+		console.log("kinectからの受信: " + messages.text);
 	
-	//一応その他
+	
+	//-----一応その他のtypeだった場合-----
 	} else {
-//		console.log(messages);
+		console.log("その他のtypeを受信: " + messages);
 	}
 
 };
@@ -188,17 +209,26 @@ function send(Userid, Type, Text){
 	}));
 }
 
-//タブレットに稽古情報を送信メソッド
-function trainingsend(Userid, Type, Actor, Script, Motion){
+//Androidに稽古情報を送信メソッド
+function trainingsend(Count, Userid, Type, Actor, Script, Motion){
 	ws.send(JSON.stringify({
+		count: Count,
 		user: Userid,
 		type: Type,
 		actor: Actor,
-		motion: Motion,
-		script: Script
+		script: Script,
+		motion: Motion
 	}));
 }
 
+//Kinectに動き情報を送信メソッド
+function motionsend(Userid, Type, Motion){
+	ws.send(JSON.stringify({
+		user: Userid,
+		type: Type,
+		motion: Motion
+	}));
+}
 
 //********************接続ボックス内のイベント********************
 
@@ -354,49 +384,36 @@ function onScriptButton8(){
 
 //台本決定ボタン
 function onScriptDecideButton(){
-	console.log("台本決定したで");
+//	console.log("台本決定したで");
 	//Tablet1、2、3それぞれに初期状態のデータを送る
-	trainingsend('Tablet1','training1',scriptArray[0][1],scriptArray[0][2],scriptArray[0][3]);
-	trainingsend('Tablet2','training1',scriptArray[1][1],scriptArray[1][2],scriptArray[1][3]);
-	trainingsend('Tablet3','training1',scriptArray[2][1],scriptArray[2][2],scriptArray[2][3]);
+	trainingsend('0', 'Tablet1','training_prepare',scriptArray[0][1],scriptArray[0][2],scriptArray[0][3]);
+	trainingsend('0', 'Tablet2','training_prepare',scriptArray[1][1],scriptArray[1][2],scriptArray[1][3]);
+	trainingsend('0', 'Tablet3','training_prepare',scriptArray[2][1],scriptArray[2][2],scriptArray[2][3]);
 }
 
 //+++++稽古操作部分+++++
 
-//Watchデバッグ通知ボタン1
-function onWatchDebugButton1(){
-	send(userid, 'debug', 'watch1');
+//Watch1起動ボタン1
+function onWatchRaiseButton1(){
+	send('Tablet1', 'raise', 'watch1_raise');
 }
 
-//Watchデバッグ通知ボタン2
-function onWatchDebugButton2(){
-	send(userid, 'debug', 'watch2');
+//Watch1起動ボタン2
+function onWatchRaiseButton2(){
+	send('Tablet2', 'raise', 'watch2_raise');
 }
 
-//Watchデバッグ通知ボタン3
-function onWatchDebugButton3(){
-	send(userid, 'debug', 'watch3');
+//Watch1起動ボタン1
+function onWatchRaiseButton3(){
+	send('Tablet3', 'raise', 'watch3_raise');
 }
 
-
-//音チェックボタン
-function onSoundCheckButton(){
-	//音ファイルを鳴らす
-	var audio_correct = new Audio("music/correct_sound.mp3");		//正解音
-	var audio_wrong = new Audio("music/wrong_sound.mp3");			//ドラムロール音
-	var audio_drumroll = new Audio("music/drumroll_sound.mp3");		//間違い音
-	
-//	audio_drumroll.play();
-//	setTimeout(function musicplay(){ audio_correct.play(); }, 2700);	//遅延して再生
-	audio_correct.play();
-}
-
-//training用変数定義
-var count = 0;			//現在の順番
-var scriptArray;		//台本の配列
 
 //稽古スタートボタン
 function onStartButton(){
+	//稽古中フラグを立てる
+	doing = 1;
+	
 	//前の順番の色付き背景を白に戻す
 	RepairColor();
 	
@@ -412,13 +429,24 @@ function onStartButton(){
 
 //一時停止ボタン
 function onStopButton(){
+//	NextNotification();
+	
+	//稽古中フラグを閉じる
+	doing = 0;
+	
+	//通知フラグも閉じる
+	watching = 0;
+	kinecting = 0;
+	
 }
-
-
-
 
 //再スタートボタン
 function onRestartButton(){
+	//稽古中フラグを立てる
+	doing = 1;
+	
+	//稽古を再開する
+	NextNotification();
 }
 
 //-1から再スタートボタン
@@ -442,13 +470,6 @@ function onChatSendButton() {
 
 //********************台本、稽古 機能イベント********************
 
-
-
-//色変えるボタン　デバッグ用
-function onChangeColorButton(){
-	document.getElementById('2').style.backgroundColor = '#0000ff';
-}
-
 //+++++-----台本の読み込み-----+++++
 
 //CSVファイルの読み込み
@@ -470,7 +491,7 @@ function createXMLHttpRequest() {
     return XMLhttpObject;
 }
 
-
+//scriptArrayに台本を読み込ませる
 function createScriptTable(csvData){
 	var CR = String.fromCharCode(13);	//改行コード
     var c_tempArray = csvData.split(CR);	//縦配列、改行コードで分割
@@ -483,8 +504,7 @@ function createScriptTable(csvData){
 			scriptArray[i][j] = "";
 		}
 	}
-	
-	
+	//scriptArrayに台本csvファイルを格納
     for(var i = 0; i < c_tempArray.length;i++){ 
 		c_csvArray = c_tempArray[i].split(",");		//セミコロンで分割
 		scriptArray[i] = new Array();
@@ -493,6 +513,7 @@ function createScriptTable(csvData){
 		}
 	}
 //	console.log(scriptArray);
+
 	//台本選択部分に反映
 	makeScripttable(c_tempArray.length, scriptArray);
 	//台本進行状況に反映
@@ -526,7 +547,6 @@ function makeScripttable(length, scriptarray){
 	}
 }
 
-
 //台本進捗状況に台本テーブル表示
 function makeArray(length, scriptarray){
 	//配列を一旦格納する変数
@@ -552,9 +572,8 @@ function makeArray(length, scriptarray){
 	}
 	resultTable += "</table>";
 
-	//作成した配列を台本進行状況に格納する
+	//作成した配列を台本進行状況に表示する
 	displayArray(resultTable);
-
 }
 
 //台本進行状況に台本の配列を表示
@@ -567,33 +586,29 @@ function displayArray(resulttable){
 //+++++-----台本の判定-----+++++
 
 //台本の判定をする
-function judgeTraining(do_user){
+function judgeTraining(result){
 	//メモ：通知時にwatchフラグとkinectフラグを0に。片方の判定が来ればフラグを立てる。両方立っていれば処理を行う
-	//watchからきた判定の処理
 	
 	for(var i = 0; i < scriptArray.length; i++){
 		if(scriptArray[i][0] == count){
 		
-		//watchからきた判定の処理
-		if(do_user == scriptArray[i][4]){
-			
+			//watchからきた判定の処理、発言した役者(ユーザ)が合って入れば
+			if(result == scriptArray[i][4]){	//ユーザ1or2or3
+				watching--;
+			}
+			//kinectからきた判定の処理
+			if(result == true){
+				kinecting--;
+			}
 			//両方の判定結果が正しければ、次へ進む
-			NextNotification();
-			
-			//正解音鳴らす
-			onSoundCheckButton();
-			
-			console.log("判定オーケー！");
-		}
-		
-		
+			if(watching == 0 && kinecting == 0){
+				//次の通知をする
+				NextNotification();
+				//正解音鳴らす
+				SoundPlay();
+			}
 		}
 	}
-
-	//kinectからきた判定の処理
-	
-	//両方の判定結果が正しければ、次へ進む
-	
 	//間違っていれば、ブーと音を鳴らす。そして一時停止。（間違いという判断は秒数が良い。秒は予備実験を元に決める必要がある）
 
 }
@@ -615,6 +630,68 @@ function NextNotification(){
 	SendInfo();
 }
 
+
+//WatchとKinectに情報を送るメソッド
+function SendInfo(){
+//	console.log("順番:" + count);
+	for(var i = 0; i < scriptArray.length; i++){
+		if(scriptArray[i][0] == count){
+		
+			//Watchにタイミングを通知 count | userid | type | actor | script | motion
+			if(scriptArray[i][4] == 1){
+				trainingsend(count, 'Tablet1', 'training_send', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+				watching++;
+			}
+			if(scriptArray[i][4] == 2){
+				trainingsend(count, 'Tablet2', 'training_send', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+				watching++;
+			}
+			if(scriptArray[i][4] == 3){
+				trainingsend(count, 'Tablet3', 'training_send', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+				watching++;
+			}
+			
+			//kinectに通知
+			//Motionがなし(=0)でなければ通知
+			if(scriptArray[i][3] != 0){
+				motionsend(scriptArray[i][4],'kinect_send', scriptArray[i][3]);	//役者名とモーションを通知
+				kinecting++;
+			}
+		}
+	}
+}
+
+
+//+++++----- 色付け処理 -----+++++
+
+//通知中ではないデバイスのメッセージの色を黒くする
+function MessageChangeBlack(){
+	for(var i = 0; i < scriptArray.length; i++){
+		//順番が正しければ色を赤くする
+		if(scriptArray[i][0] == count){
+			
+			if(scriptArray[i][4] == 1) document.getElementsById("watch_voice_reply1").style.color="black";
+			if(scriptArray[i][4] == 2) document.getElementsById("watch_voice_reply2").style.color="black";
+			if(scriptArray[i][4] == 3) document.getElementsById("watch_voice_reply3").style.color="black";
+			
+		}
+	}
+}
+
+//通知中のデバイスのメッセージの色を黒くする
+function MessageChangeRed(){
+	for(var i = 0; i < scriptArray.length; i++){
+		//順番が正しければ色を赤くする
+		if(scriptArray[i][0] == count){
+			
+			if(scriptArray[i][4] == 1) document.getElementsById("watch_voice_reply1").style.color="red";
+			if(scriptArray[i][4] == 2) document.getElementsById("watch_voice_reply2").style.color="red";
+			if(scriptArray[i][4] == 3) document.getElementsById("watch_voice_reply3").style.color="red";
+			
+		}
+	}
+}}
+
 //前の順番の色付き背景を白に戻すメソッド
 function RepairColor(){
 	var ClassElement_1 = document.getElementsByClassName(count);
@@ -631,22 +708,19 @@ function AddColor(){
 	}
 }
 
-//WatchとKinectに情報を送るメソッド
-function SendInfo(){
-//	console.log("順番:" + count);
-	for(var i = 0; i < scriptArray.length; i++){
-		if(scriptArray[i][0] == count){
-			//watchに通知
-			send(scriptArray[i][4],'training',scriptArray[i][2]);	//役者名とセリフを通知
-			
-			if(scriptArray[i][4] == 1) trainingsend('Tablet1', 'training1', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-			if(scriptArray[i][4] == 2) trainingsend('Tablet2', 'training1', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-			if(scriptArray[i][4] == 3) trainingsend('Tablet3', 'training1', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-			
-			//kinectに通知
-			send(scriptArray[i][4],'kinect', scriptArray[i][3]);	//役者名とモーションを通知
-		}
-	}
+//+++++----- 音鳴らす処理 -----+++++
+
+//音を鳴らすメソッド
+function SoundPlay(){
+	//音ファイルを鳴らす
+	var audio_correct = new Audio("music/correct_sound.mp3");		//正解音
+	var audio_wrong = new Audio("music/wrong_sound.mp3");			//ドラムロール音
+	var audio_drumroll = new Audio("music/drumroll_sound.mp3");		//間違い音
+	
+//	audio_drumroll.play();
+//	setTimeout(function musicplay(){ audio_correct.play(); }, 2700);	//遅延して再生
+	audio_correct.play();
 }
+
 
 
