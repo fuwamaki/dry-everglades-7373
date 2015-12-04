@@ -623,7 +623,7 @@ function judgeTraining(result){
 				MessageChangeBlack();
 			}
 			//kinectからきた判定の処理
-			if(result == true){
+			if(result == "motion_ok"){
 				kinecting--;
 			}
 			console.log("watching" + watching);
