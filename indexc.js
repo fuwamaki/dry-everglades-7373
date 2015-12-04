@@ -156,21 +156,21 @@ ws.onmessage = function (event) {
 	
 		//稽古中フラグ・Watchへ通知中フラグ が立っていることを確認
 		if(doing == 1 && watching != 0){
+			console.log("受信音声: " + "端末 " + messages.user + " - メッセージ " + messages.text);
 			if(messages.user == "Tablet1"){
 				//判定処理
 				judgeTraining(1);
 				DisplayMessages(1, messages.text);
-			}
-			if(messages.user == "Tablet2"){
+			} else if(messages.user == "Tablet2"){
 				//判定処理
 				judgeTraining(2);
 				DisplayMessages(2, messages.text);
-			}
-			if(messages.user == "Tablet3"){
+			} else if(messages.user == "Tablet3"){
 				//判定処理
 				judgeTraining(3);
 				DisplayMessages(3, messages.text);
 			}
+			
 			if(messages.text == "please_stop" && doing == 1){
 				onStopButton();
 			} else if(messages.text == "please_back_1" && doing == 0){
@@ -179,7 +179,6 @@ ws.onmessage = function (event) {
 				onStartButton();
 			}
 		}
-		console.log("受信音声: " + "端末 " + messages.user + " - メッセージ " + messages.text);
 		
 	
 	//-----typeがkinect_send-----
