@@ -619,7 +619,7 @@ function judgeTraining(result){
 		
 			//watchからきた判定の処理、発言した役者(ユーザ)が合って入れば
 			if(result == scriptArray[i][4]){	//ユーザ1or2or3
-				watching--;
+				watching -= 1;
 				MessageChangeBlack();
 			}
 			//kinectからきた判定の処理
