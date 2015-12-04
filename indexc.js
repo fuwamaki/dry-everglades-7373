@@ -640,6 +640,7 @@ function judgeTraining(result){
 				//正解音鳴らす
 				SoundPlay();
 			}
+			break;
 			
 		}
 	}
