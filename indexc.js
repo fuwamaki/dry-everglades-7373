@@ -159,17 +159,17 @@ ws.onmessage = function (event) {
 			if(messages.user == "Tablet1"){
 				//判定処理
 				judgeTraining(1);
-				DisplayMessages(messages.user, messages.text);
+				DisplayMessages(1, messages.text);
 			}
 			if(messages.user == "Tablet2"){
 				//判定処理
 				judgeTraining(2);
-				DisplayMessages(messages.user, messages.text);
+				DisplayMessages(2, messages.text);
 			}
 			if(messages.user == "Tablet3"){
 				//判定処理
 				judgeTraining(3);
-				DisplayMessages(messages.user, messages.text);
+				DisplayMessages(3, messages.text);
 			}
 		}
 		console.log("受信音声: " + "端末 " + messages.user + " - メッセージ " + messages.text);
