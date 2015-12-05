@@ -204,6 +204,7 @@ ws.onmessage = function (event) {
 		console.log("kinectからの受信: " + messages.text);
 	
 	
+	
 	//-----一応その他のtypeだった場合-----
 	} else {
 		console.log("その他のtypeを受信: " + messages);
