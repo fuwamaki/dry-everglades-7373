@@ -13,7 +13,8 @@ var kinecting = 0;												//kinectから骨格認識通知の有無を示す
 var count = 0;													//現在の順番
 var scriptArray;												//台本の配列
 
-var nankai = 0;
+//var nankai = 0;
+var motion_user = 0;
 
 
 //********************オープン処理********************
@@ -172,8 +173,8 @@ ws.onmessage = function (event) {
 				//判定処理
 				judgeTraining(3);
 				DisplayMessages(3, messages.text);
-				nankai += 1;
-				console.log("何回目の判定メソッド：" + nankai);
+//				nankai += 1;
+//				console.log("何回目の判定メソッド：" + nankai);
 			
 			}
 			
@@ -671,7 +672,6 @@ function NextNotification(){
 	SendInfo();
 }
 
-
 //WatchとKinectに情報を送るメソッド
 function SendInfo(){
 //	console.log("順番:" + count);
@@ -695,7 +695,9 @@ function SendInfo(){
 			//kinectに通知
 			//Motionがなし(=0)でなければ通知
 			if(scriptArray[i][3] != 0){
-				motionsend(scriptArray[i][4],'kinect_send', scriptArray[i][3]);	//役者名とモーションを通知
+				//やっぱりkinectに通知はしない
+//				motionsend(scriptArray[i][4],'kinect_send', scriptArray[i][3]);	//役者名とモーションを通知
+				motion_user = scriptArray[i][4];
 				kinecting++;
 			}
 			console.log("通知した！" + watching);
