@@ -185,7 +185,6 @@ ws.onmessage = function (event) {
 				onStartButton();
 			}
 		}
-		
 	
 	//-----typeがkinect_send-----
 	} else if(messages.type == "kinect_send"){
