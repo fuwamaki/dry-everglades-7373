@@ -198,8 +198,10 @@ ws.onmessage = function (event) {
 		
 		//稽古中フラグ・Kinectへ通知中フラグ が立っていることを確認
 		if(doing == 1 && kinecting != 0){
-			//true or false を判断するため、judgeTrainingにtextを飛ばす
-			judgeTraining(messages.text);
+			if(motion_user == messages.text){
+				//true or false を判断するため、judgeTrainingにtextを飛ばす
+				judgeTraining(messages.text);
+			}
 		}
 		
 		console.log("kinectからの受信: " + messages.text);
