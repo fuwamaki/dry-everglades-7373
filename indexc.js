@@ -734,7 +734,6 @@ function SendInfo(){
 //	console.log("順番:" + count);
 	for(var i = 0; i < scriptArray.length; i++){
 		if(scriptArray[i][0] == count){
-		
 			
 			//Watchにタイミングを通知 count | userid | type | actor | script | motion
 			if(scriptArray[i][4] == 1){
