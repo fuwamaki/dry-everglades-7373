@@ -407,11 +407,15 @@ function onScriptButton2(){
 //台本3ボタン
 function onScriptButton3(){
 	getCSVFile("daihon3.csv");
+	document.getElementById("number_script").innerHTML = "3";
+	document.getElementById("scripttitle").innerHTML = "家族会議";
 }
 
 //台本4ボタン
 function onScriptButton4(){
 	getCSVFile("daihon4.csv");
+	document.getElementById("number_script").innerHTML = "4";
+	document.getElementById("scripttitle").innerHTML = "ある目線";
 }
 
 //台本5ボタン
@@ -722,18 +726,39 @@ function SendInfo(){
 	for(var i = 0; i < scriptArray.length; i++){
 		if(scriptArray[i][0] == count){
 		
+			
+			
 			//Watchにタイミングを通知 count | userid | type | actor | script | motion
 			if(scriptArray[i][4] == 1){
-				trainingsend(count, 'Tablet1', 'training_send', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-				watching += 1;
+				//台詞があった場合
+				if(scriptArray[i][2] != 0){
+					trainingsend(count, 'Tablet1', 'training_send', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+					watching += 1;
+				//台詞がなかった場合
+				} else if(scriptArray[i][2] != 0){
+					trainingsend(count, 'Tablet1', 'training_send', scriptArray[i][1], '動きのみ', scriptArray[i][3]);
+					//watchingフラグは立てない
+				}
 			}
 			if(scriptArray[i][4] == 2){
-				trainingsend(count, 'Tablet2', 'training_send', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-				watching += 1;
+				if(scriptArray[i][2] != 0){
+					trainingsend(count, 'Tablet2', 'training_send', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+					watching += 1;
+				//台詞がなかった場合
+				} else if(scriptArray[i][2] != 0){
+					trainingsend(count, 'Tablet2', 'training_send', scriptArray[i][1], '動きのみ', scriptArray[i][3]);
+					//watchingフラグは立てない
+				}
 			}
 			if(scriptArray[i][4] == 3){
-				trainingsend(count, 'Tablet3', 'training_send', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
-				watching += 1;
+				if(scriptArray[i][2] != 0){
+					trainingsend(count, 'Tablet3', 'training_send', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
+					watching += 1;
+				//台詞がなかった場合
+				} else if(scriptArray[i][2] != 0){
+					trainingsend(count, 'Tablet3', 'training_send', scriptArray[i][1], '動きのみ', scriptArray[i][3]);
+					//watchingフラグは立てない
+				}
 			}
 			
 			//kinectに通知
