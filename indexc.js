@@ -201,9 +201,16 @@ ws.onmessage = function (event) {
 			if(motion_user == messages.user){
 				//true or false を判断するため、judgeTrainingにtextを飛ばす
 				judgeTraining(messages.text);
-		console.log("いいタイミングでkinect認識！");
+//				console.log("いいタイミングでkinect認識！");
+			}
+			
+		//システムなしモード
+		} else if(doing == 0 && kinecting != 0){
+			if(motion_user == messages.user){
+				judgeMotionTraining(messages.text);
 			}
 		}
+
 		
 		console.log("kinectからの受信: " + messages.text);
 	
@@ -294,6 +301,7 @@ function update_tablet3(){
 	document.getElementById("con_tablet3").innerHTML = "TABLET.3";
 }
 
+
 //********************チャット、ログ、pingイベント********************
 
 //チャットボックスに書き込み
@@ -352,6 +360,30 @@ function onDeviceRadioButton(){
 //デバイス変更ボタン
 function onDeviceChangeRadioButton(){
 	//未実装
+}
+
+//-----kinect部分-----
+function onKinectCheckButton(){
+
+	//前の順番の色付き背景を白に戻す
+	RepairColor();
+	MessageChangeWhite();
+	
+	//入力された値のcountを入力
+	kinect_count_ipt = document.getElementById("kinect_count_input");
+	count = kinect_count_ipt.value;
+	
+	//対象の順番の背景に色をつける
+	AddColor();
+	
+	//対象ユーザ部分の背景に色をつける
+	MessageChangeRed();
+
+	//kinectingフラグを立てる
+	SendToKinectInfo();
+
+	//3秒後にまだフラグが立っていたらブーと音を鳴らす
+	setTimeout("SoundPlay()", 3000);
 }
 
 //-----台本、稽古部分-----
@@ -646,16 +678,21 @@ function judgeTraining(result){
 				//次の通知をする
 				NextNotification();
 				//正解音鳴らす
-				SoundPlay();
+//				SoundPlay();
 				//ここのbreakはまじで大事
 				break;
 			}
 		}
 	}
 	//間違っていれば、ブーと音を鳴らす。そして一時停止。（間違いという判断は秒数が良い。秒は予備実験を元に決める必要がある）
-
 }
 
+//システムなしモード kinectだけの判定をする
+function judgeMotionTraining(result){
+	if(result == "motion_ok"){
+		kinecting--;
+	}
+}
 
 //+++++----- 通知処理 -----+++++
 //次の通知処理を行うメソッド(色付け含む)
@@ -676,7 +713,7 @@ function NextNotification(){
 	SendInfo();
 	
 	//3秒後に動きが出来てるかどうかチェックし、だめなら音を出す
-	setTimeout(SoundPlay(), 3000);
+	setTimeout("SoundPlay()", 3000);
 }
 
 //WatchとKinectに情報を送るメソッド
@@ -710,6 +747,21 @@ function SendInfo(){
 			console.log("通知した！" + watching);
 		}
 	}
+}
+
+//システムなしモード kinectの通知だけする
+function SendToKinectInfo(){
+	for(var i = 0; i < scriptArray.length; i++){
+		if(scriptArray[i][0] == count){
+			//kinectに通知
+			//Motionがなし(=0)でなければ通知
+			if(scriptArray[i][3] != 0){
+				motion_user = scriptArray[i][4];
+				kinecting++;
+			}
+		}
+	}
+
 }
 
 //+++++----- 音声メッセージ表示処理 -----+++++
