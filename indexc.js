@@ -202,6 +202,8 @@ ws.onmessage = function (event) {
 				//true or false を判断するため、judgeTrainingにtextを飛ばす
 				judgeTraining(messages.text);
 //				console.log("いいタイミングでkinect認識！");
+			} else if(messages.user == "debug"){
+				judgeTraining(messages.text);
 			}
 			
 		//システムなしモード
