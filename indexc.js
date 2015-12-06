@@ -674,6 +674,9 @@ function NextNotification(){
 	
 	//WatchとKinectに情報を送る
 	SendInfo();
+	
+	//3秒後に動きが出来てるかどうかチェックし、だめなら音を出す
+	setTimeout(SoundPlay(), 3000);
 }
 
 //WatchとKinectに情報を送るメソッド
@@ -776,7 +779,11 @@ function SoundPlay(){
 	
 //	audio_drumroll.play();
 //	setTimeout(function musicplay(){ audio_correct.play(); }, 2700);	//遅延して再生
-	audio_correct.play();
+//	audio_correct.play();
+
+	if(kinecting != 0){
+		audio_wrong.play();
+	}
 }
 
 
