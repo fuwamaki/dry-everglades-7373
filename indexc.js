@@ -13,8 +13,10 @@ var kinecting = 0;												//kinectから骨格認識通知の有無を示す
 var count = 0;													//現在の順番
 var scriptArray;												//台本の配列
 
-//var nankai = 0;
+//認識中のユーザ
 var motion_user = 0;
+//タイマーの名前
+var timer = 0;
 
 
 //********************オープン処理********************
@@ -385,7 +387,7 @@ function onKinectCheckButton(){
 	SendToKinectInfo();
 
 	//7秒後にまだフラグが立っていたらブーと音を鳴らす
-	setTimeout("SoundPlay()", 7000);
+	timer = setTimeout("SoundPlay()", 7000);
 }
 
 //-----台本、稽古部分-----
@@ -483,7 +485,7 @@ function onStartButton(){
 	//WatchとKinectに情報を送る
 	SendInfo();
 	//7秒後に動きが出来てるかどうかチェックし、だめなら音を出す
-	setTimeout("SoundPlay()", 7000);
+	timer = setTimeout("SoundPlay()", 7000);
 	//順番表示
 	DisplayCount();
 }
@@ -710,6 +712,9 @@ function judgeMotionTraining(result){
 //+++++----- 通知処理 -----+++++
 //次の通知処理を行うメソッド(色付け含む)
 function NextNotification(){
+	//timerを一度停止する
+	clearTimeout(timer);
+	
 	//前の順番の色付き背景を白に戻す
 	RepairColor();
 	
@@ -726,7 +731,7 @@ function NextNotification(){
 	SendInfo();
 	
 	//7秒後に動きが出来てるかどうかチェックし、だめなら音を出す
-	setTimeout("SoundPlay()", 7000);
+	timer = setTimeout("SoundPlay()", 7000);
 	
 	//順番表示
 	DisplayCount();
