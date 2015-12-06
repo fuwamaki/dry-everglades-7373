@@ -383,7 +383,7 @@ function onKinectCheckButton(){
 	SendToKinectInfo();
 
 	//3秒後にまだフラグが立っていたらブーと音を鳴らす
-	setTimeout("SoundPlay()", 3000);
+	setTimeout("SoundPlay()", 10000);
 }
 
 //-----台本、稽古部分-----
@@ -469,19 +469,14 @@ function onWatchRaiseButton3(){
 function onStartButton(){
 	//稽古中フラグを立てる
 	doing = 1;
-	
 	//前の順番の色付き背景を白に戻す
 	RepairColor();
-	
 	//一番目の色を付加
 	count = 1;
-	
 	//対象の順番の背景に色をつける
 	AddColor();
-	
 	//対象ユーザ部分の背景に色をつける
 	MessageChangeRed();
-	
 	//WatchとKinectに情報を送る
 	SendInfo();
 }
@@ -489,10 +484,8 @@ function onStartButton(){
 //一時停止ボタン
 function onStopButton(){
 //	NextNotification();
-	
 	//稽古中フラグを閉じる
 	doing = 0;
-	
 	//通知フラグも閉じる
 	watching = 0;
 	kinecting = 0;
@@ -503,7 +496,11 @@ function onStopButton(){
 function onRestartButton(){
 	//稽古中フラグを立てる
 	doing = 1;
-	
+	//countは一つ下げる(NextNotification()でcount+1するので)
+	count -= 1;
+	//通知フラグも閉じる
+	watching = 0;
+	kinecting = 0;
 	//稽古を再開する
 	NextNotification();
 }
@@ -512,8 +509,11 @@ function onRestartButton(){
 function onRestartBack1Button(){
 	//稽古中フラグを立てる
 	doing = 1;
-	//countは一つ下げる
-	count--;
+	//countは二つ下げる(NextNotification()でcount+1するので)
+	count -= 2;
+	//通知フラグも閉じる
+	watching = 0;
+	kinecting = 0;
 	//稽古を再開する
 	NextNotification();
 }
@@ -522,8 +522,8 @@ function onRestartBack1Button(){
 function onRestartBack2Button(){
 	//稽古中フラグを立てる
 	doing = 1;
-	//countは2つ下げる
-	count -= 2;
+	//countは3つ下げる(NextNotification()でcount+1するので)
+	count -= 3;
 	//稽古を再開する
 	NextNotification();
 }
@@ -534,7 +534,6 @@ function onRestartBack2Button(){
 function onChatSendButton() {
 	chat_ipt = document.getElementById("chat_input");
 	send(userid, 'chat', chat_ipt.value);
-	
 	motionsend(1,'kinect_send', 'text');	//役者名とモーションを通知
 
 }
@@ -689,6 +688,9 @@ function judgeTraining(result){
 		}
 	}
 	//間違っていれば、ブーと音を鳴らす。そして一時停止。（間違いという判断は秒数が良い。秒は予備実験を元に決める必要がある）
+	
+	//順番表示
+	DisplayCount();
 }
 
 //システムなしモード kinectだけの判定をする
@@ -717,7 +719,10 @@ function NextNotification(){
 	SendInfo();
 	
 	//3秒後に動きが出来てるかどうかチェックし、だめなら音を出す
-	setTimeout("SoundPlay()", 3000);
+	setTimeout("SoundPlay()", 10000);
+	
+	//順番表示
+	DisplayCount();
 }
 
 //WatchとKinectに情報を送るメソッド
@@ -735,7 +740,7 @@ function SendInfo(){
 					trainingsend(count, 'Tablet1', 'training_send', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
 					watching += 1;
 				//台詞がなかった場合
-				} else if(scriptArray[i][2] != 0){
+				} else if(scriptArray[i][2] == 0){
 					trainingsend(count, 'Tablet1', 'training_send', scriptArray[i][1], '動きのみ', scriptArray[i][3]);
 					//watchingフラグは立てない
 				}
@@ -745,7 +750,7 @@ function SendInfo(){
 					trainingsend(count, 'Tablet2', 'training_send', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
 					watching += 1;
 				//台詞がなかった場合
-				} else if(scriptArray[i][2] != 0){
+				} else if(scriptArray[i][2] == 0){
 					trainingsend(count, 'Tablet2', 'training_send', scriptArray[i][1], '動きのみ', scriptArray[i][3]);
 					//watchingフラグは立てない
 				}
@@ -755,7 +760,7 @@ function SendInfo(){
 					trainingsend(count, 'Tablet3', 'training_send', scriptArray[i][1], scriptArray[i][2], scriptArray[i][3]);
 					watching += 1;
 				//台詞がなかった場合
-				} else if(scriptArray[i][2] != 0){
+				} else if(scriptArray[i][2] == 0){
 					trainingsend(count, 'Tablet3', 'training_send', scriptArray[i][1], '動きのみ', scriptArray[i][3]);
 					//watchingフラグは立てない
 				}
@@ -769,7 +774,7 @@ function SendInfo(){
 				motion_user = scriptArray[i][4];
 				kinecting++;
 			}
-			console.log("通知した！" + watching);
+			console.log("通知した！watching:" + watching + "  kinecting:" + kinecting);
 		}
 	}
 }
@@ -861,7 +866,12 @@ function SoundPlay(){
 	if(kinecting != 0){
 		audio_wrong.play();
 	}
+	//順番表示
+	DisplayCount();
 }
 
-
-
+//+++++----- 順番を表示する処理 -----+++++
+function DisplayCount(){
+	var countnow = document.getElementById("training_now");
+	countnow.innerHTML = count;
+}
