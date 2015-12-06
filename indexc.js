@@ -736,7 +736,6 @@ function SendInfo(){
 		if(scriptArray[i][0] == count){
 		
 			
-			
 			//Watchにタイミングを通知 count | userid | type | actor | script | motion
 			if(scriptArray[i][4] == 1){
 				//台詞があった場合
