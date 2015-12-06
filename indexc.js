@@ -368,6 +368,8 @@ function onDeviceChangeRadioButton(){
 
 //-----kinect部分-----
 function onKinectCheckButton(){
+	//timerを一度停止する
+	clearTimeout(timer);
 
 	//前の順番の色付き背景を白に戻す
 	RepairColor();
