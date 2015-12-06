@@ -479,6 +479,8 @@ function onStartButton(){
 	MessageChangeRed();
 	//WatchとKinectに情報を送る
 	SendInfo();
+	//順番表示
+	DisplayCount();
 }
 
 //一時停止ボタン
@@ -872,6 +874,5 @@ function SoundPlay(){
 
 //+++++----- 順番を表示する処理 -----+++++
 function DisplayCount(){
-	var countnow = document.getElementById("training_now");
-	countnow.innerHTML = count;
+	document.getElementById("training_now").innerHTML = count;
 }
