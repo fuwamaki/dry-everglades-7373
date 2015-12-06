@@ -384,8 +384,8 @@ function onKinectCheckButton(){
 	//kinectingフラグを立てる
 	SendToKinectInfo();
 
-	//3秒後にまだフラグが立っていたらブーと音を鳴らす
-	setTimeout("SoundPlay()", 10000);
+	//7秒後にまだフラグが立っていたらブーと音を鳴らす
+	setTimeout("SoundPlay()", 7000);
 }
 
 //-----台本、稽古部分-----
@@ -481,6 +481,8 @@ function onStartButton(){
 	MessageChangeRed();
 	//WatchとKinectに情報を送る
 	SendInfo();
+	//7秒後に動きが出来てるかどうかチェックし、だめなら音を出す
+	setTimeout("SoundPlay()", 7000);
 	//順番表示
 	DisplayCount();
 }
@@ -722,8 +724,8 @@ function NextNotification(){
 	//WatchとKinectに情報を送る
 	SendInfo();
 	
-	//3秒後に動きが出来てるかどうかチェックし、だめなら音を出す
-	setTimeout("SoundPlay()", 10000);
+	//7秒後に動きが出来てるかどうかチェックし、だめなら音を出す
+	setTimeout("SoundPlay()", 7000);
 	
 	//順番表示
 	DisplayCount();
