@@ -449,7 +449,7 @@ function onScriptDecideButton(){
 	trainingsend('0', 'Tablet3','training_prepare',scriptArray[2][1],scriptArray[2][2],scriptArray[2][3]);
 	
 	//常にcountを送り続けてみる
-	var id = setInterval(trainingsend("ping1",'training_send', count), 1000);
+	var id = setInterval(send("ping1",'training_send', count), 1000);
 }
 
 //+++++稽古操作部分+++++
