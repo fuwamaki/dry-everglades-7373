@@ -206,7 +206,7 @@ ws.onmessage = function (event) {
 //				console.log("いいタイミングでkinect認識！");
 //			} else if(messages.user == "debug"){
 //				judgeTraining(messages.text);
-			}
+//			}
 			
 		//システムなしモード
 		} else if(doing == 0 && kinecting != 0){
