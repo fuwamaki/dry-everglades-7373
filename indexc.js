@@ -200,12 +200,12 @@ ws.onmessage = function (event) {
 		
 		//稽古中フラグ・Kinectへ通知中フラグ が立っていることを確認
 		if(doing == 1 && kinecting != 0){
-			if(motion_user == messages.user){
+//			if(motion_user == messages.user){
 				//true or false を判断するため、judgeTrainingにtextを飛ばす
 				judgeTraining(messages.text);
 //				console.log("いいタイミングでkinect認識！");
-			} else if(messages.user == "debug"){
-				judgeTraining(messages.text);
+//			} else if(messages.user == "debug"){
+//				judgeTraining(messages.text);
 			}
 			
 		//システムなしモード
@@ -683,7 +683,7 @@ function judgeTraining(result){
 			}
 			//kinectからきた判定の処理
 			if(result == "motion_ok"){
-				kinecting--;
+				kinecting -= 1;
 			}
 			console.log("判定する前！watching" + watching);
 			//両方の判定結果が正しければ、次へ進む
