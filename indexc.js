@@ -210,9 +210,9 @@ ws.onmessage = function (event) {
 			
 		//システムなしモード
 		} else if(doing == 0 && kinecting != 0){
-			if(motion_user == messages.user){
+//			if(motion_user == messages.user){
 				judgeMotionTraining(messages.text);
-			}
+//			}
 		}
 
 		
