@@ -518,6 +518,12 @@ function onRestartButton(){
 
 //-1から再スタートボタン
 function onRestartBack1Button(){
+	//timerを一度停止する
+	clearTimeout(timer);
+	
+	//前の順番の色付き背景を白に戻す
+	RepairColor();
+
 	//稽古中フラグを立てる
 	doing = 1;
 	//countは二つ下げる(NextNotification()でcount+1するので)
@@ -531,6 +537,12 @@ function onRestartBack1Button(){
 
 //-2から再スタートボタン
 function onRestartBack2Button(){
+	//timerを一度停止する
+	clearTimeout(timer);
+	
+	//前の順番の色付き背景を白に戻す
+	RepairColor();
+
 	//稽古中フラグを立てる
 	doing = 1;
 	//countは3つ下げる(NextNotification()でcount+1するので)
