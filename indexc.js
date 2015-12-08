@@ -826,7 +826,6 @@ function DisplayMessages(user, text){
 	if(user == 3) document.getElementById("watch_voice_reply3").innerHTML = text;
 }
 
-
 //+++++----- 色付け処理 -----+++++
 
 //通知中ではないデバイスのメッセージの色を黒くする
