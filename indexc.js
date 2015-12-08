@@ -718,6 +718,7 @@ function judgeTraining(result){
 function judgeMotionTraining(result){
 	if(result == "motion_ok"){
 		kinecting--;
+		clearTimeout(timer);
 	}
 }
 
@@ -885,8 +886,8 @@ function SoundPlay(){
 //	audio_drumroll.play();
 //	setTimeout(function musicplay(){ audio_correct.play(); }, 2700);	//遅延して再生
 //	audio_correct.play();
-
-	if(kinecting != 0){
+	
+	}else if(kinecting != 0){
 		audio_wrong.play();
 	}
 	//順番表示
