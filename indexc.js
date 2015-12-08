@@ -887,7 +887,7 @@ function SoundPlay(){
 //	setTimeout(function musicplay(){ audio_correct.play(); }, 2700);	//遅延して再生
 //	audio_correct.play();
 	
-	}else if(kinecting != 0){
+	if(kinecting != 0){
 		audio_wrong.play();
 	}
 	//順番表示
