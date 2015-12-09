@@ -549,7 +549,8 @@ function onStartButton(){
 
 //一時停止ボタン
 function onStopButton(){
-//	NextNotification();
+	//timerを一度停止する
+	clearTimeout(timer);
 	//稽古中フラグを閉じる
 	doing = 0;
 	document.getElementById("training_now").innerHTML = "停止中";
@@ -960,7 +961,12 @@ function SoundPlay(){
 //	audio_correct.play();
 	
 	if(kinecting != 0){
+		//間違いの音を出す
 		audio_wrong.play();
+		
+		//kinectチェック前という文字を表示する、文字黒くする
+		document.getElementById("check_kinect_text").innerHTML = "Kinectチェック前";
+		document.getElementById("check_kinect_text").style.backgroundColor="white";
 	}
 	//順番表示
 	DisplayCount();
