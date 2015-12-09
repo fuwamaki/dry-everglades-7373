@@ -131,7 +131,7 @@ div.con2{
 /* Kinectステータス */
 div.kinect_part{
 	width: 300px;
-	height: 180px;
+	height: 580px;
 	margin-top: 10px;
 }
 div.kinect_part_title{
@@ -145,10 +145,17 @@ div.kinect_part_title{
 }
 div.kinectbox{
 	width: 295px;
-	height: 150px;
+	height: 550px;
 	border-style: solid;
 	border-color: gray;
 	background-color: white;
+}
+nobr#check_kinect_text{
+	width: 300px;
+	height: 30px;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
 }
 /* ********************稽古部分******************** */
 div.training_part{
@@ -301,7 +308,7 @@ button#training_restart_back2{
 /* 台本進行状況 */
 div.training_log_part{
 	width: 500px;
-	height: 180px;
+	height: 580px;
 	margin-top: 10px;
 }
 div.training_log_part_title{
@@ -315,7 +322,7 @@ div.training_log_part_title{
 }
 div.traininglogbox{
 	width: 495px;
-	height: 150px;
+	height: 550px;
 	border-style: solid;
 	border-color: gray;
 	background-color: white;
@@ -416,7 +423,7 @@ div.ping_part_title{
 }
 div.pingbox{
 	width: 345px;
-	height: 150px;
+	height: 550px;
 	border-style: solid;
 	border-color: gray;
 	margin-left: auto;

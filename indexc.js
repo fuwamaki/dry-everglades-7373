@@ -368,16 +368,67 @@ function onDeviceChangeRadioButton(){
 
 //-----kinect部分-----
 function onKinectCheckButton(){
-	//timerを一度停止する
-	clearTimeout(timer);
-
 	//前の順番の色付き背景を白に戻す
 	RepairColor();
 	MessageChangeWhite();
-	
 	//入力された値のcountを入力
 	kinect_count_ipt = document.getElementById("kinect_count_input");
-	count = kinect_count_ipt.value;
+	//kinectチェックメソッドへ
+	KinectCheck(kinect_count_ipt.value);
+}
+
+//daihonデバッグボタン部分
+function Scenario1Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("1"); }
+function Scenario3Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("3"); }
+function Scenario4Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("4"); }
+function Scenario5Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("5"); }
+function Scenario6Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("6"); }
+function Scenario7Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("7"); }
+function Scenario8Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("8"); }
+function Scenario9Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("9"); }
+function Scenario13Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("13"); }
+function Scenario15Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("15"); }
+function Scenario18Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("18"); }
+function Scenario19Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("19"); }
+function Scenario22Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("22"); }
+function Scenario23Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("23"); }
+function Scenario24Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("24"); }
+function Scenario25Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("25"); }
+function Scenario26Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("26"); }
+function Scenario27Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("27"); }
+function Scenario28Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("28"); }
+function Scenario29Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("29"); }
+function Scenario30Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("30"); }
+function Scenario31Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("31"); }
+function Scenario32Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("32"); }
+function Scenario33Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("33"); }
+function Scenario35Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("35"); }
+function Scenario37Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("37"); }
+function Scenario38Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("38"); }
+function Scenario39Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("39"); }
+
+//watchデバッグボタン部分
+function onDebugWatch1Button(){
+	send("Tablet1", "training", "PCからデバッグ通知");
+}
+function onDebugWatch2Button(){
+	send("Tablet2", "training", "PCからデバッグ通知");
+}
+function onDebugWatch3Button(){
+	send("Tablet3", "training", "PCからデバッグ通知");
+}
+
+//システムなしモード、Kinectによる動作チェック
+function KinectCheck(Count){
+	//timerを一度停止する
+	clearTimeout(timer);
+	
+	//countに値を入れる
+	count = Count;
+	
+	//kinectチェック中という文字を表示する、文字赤くする
+	document.getElementById("check_kinect_text").innerHTML = "Kinectチェック中";
+	document.getElementById("check_kinect_text").style.backgroundColor="red";
 	
 	//対象の順番の背景に色をつける
 	AddColor();
@@ -476,6 +527,7 @@ function onWatchRaiseButton3(){
 function onStartButton(){
 	//稽古中フラグを立てる
 	doing = 1;
+	document.getElementById("training_now").innerHTML = "稽古中";
 	//前の順番の色付き背景を白に戻す
 	RepairColor();
 	//一番目の色を付加
@@ -497,6 +549,7 @@ function onStopButton(){
 //	NextNotification();
 	//稽古中フラグを閉じる
 	doing = 0;
+	document.getElementById("training_now").innerHTML = "停止中";
 	//通知フラグも閉じる
 	watching = 0;
 	kinecting = 0;
@@ -507,6 +560,7 @@ function onStopButton(){
 function onRestartButton(){
 	//稽古中フラグを立てる
 	doing = 1;
+	document.getElementById("training_now").innerHTML = "稽古中";
 	//countは一つ下げる(NextNotification()でcount+1するので)
 	count -= 1;
 	//通知フラグも閉じる
@@ -526,6 +580,7 @@ function onRestartBack1Button(){
 
 	//稽古中フラグを立てる
 	doing = 1;
+	document.getElementById("training_now").innerHTML = "稽古中";
 	//countは二つ下げる(NextNotification()でcount+1するので)
 	count -= 2;
 	//通知フラグも閉じる
@@ -545,6 +600,7 @@ function onRestartBack2Button(){
 
 	//稽古中フラグを立てる
 	doing = 1;
+	document.getElementById("training_now").innerHTML = "稽古中";
 	//countは3つ下げる(NextNotification()でcount+1するので)
 	count -= 3;
 	//稽古を再開する
@@ -719,6 +775,10 @@ function judgeMotionTraining(result){
 	if(result == "motion_ok"){
 		kinecting--;
 		clearTimeout(timer);
+		
+		//kinectチェック前という文字を表示する、文字黒くする
+		document.getElementById("check_kinect_text").innerHTML = "Kinectチェック前";
+		document.getElementById("check_kinect_text").style.backgroundColor="black";
 	}
 }
 
@@ -896,5 +956,5 @@ function SoundPlay(){
 
 //+++++----- 順番を表示する処理 -----+++++
 function DisplayCount(){
-	document.getElementById("training_now").innerHTML = count;
+	document.getElementById("training_count").innerHTML = count;
 }
