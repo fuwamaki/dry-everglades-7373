@@ -418,31 +418,6 @@ function onDebugWatch3Button(){
 	send("Tablet3", "training", "PCからデバッグ通知");
 }
 
-//システムなしモード、Kinectによる動作チェック
-function KinectCheck(Count){
-	console.log("きねくとチェック中");
-	//timerを一度停止する
-	clearTimeout(timer);
-	
-	//countに値を入れる
-	count = Count;
-	
-	//kinectチェック中という文字を表示する、文字赤くする
-	document.getElementById("check_kinect_text").innerHTML = "Kinectチェック中";
-	document.getElementById("check_kinect_text").style.backgroundColor="red";
-	
-	//対象の順番の背景に色をつける
-	AddColor();
-	
-	//対象ユーザ部分の背景に色をつける
-	MessageChangeRed();
-
-	//kinectingフラグを立てる
-	SendToKinectInfo();
-
-	//7秒後にまだフラグが立っていたらブーと音を鳴らす
-	timer = setTimeout("SoundPlay()", 7000);
-}
 
 //-----台本、稽古部分-----
 
@@ -873,6 +848,31 @@ function SendInfo(){
 			console.log("通知した！watching:" + watching + "  kinecting:" + kinecting);
 		}
 	}
+}
+
+//システムなしモード、Kinectによる動作チェック
+function KinectCheck(Count){
+	//timerを一度停止する
+	clearTimeout(timer);
+	
+	//countに値を入れる
+	count = Count;
+	
+	//kinectチェック中という文字を表示する、文字赤くする
+	document.getElementById("check_kinect_text").innerHTML = "Kinectチェック中";
+	document.getElementById("check_kinect_text").style.backgroundColor="red";
+	
+	//対象の順番の背景に色をつける
+	AddColor();
+	
+	//対象ユーザ部分の背景に色をつける
+	MessageChangeRed();
+
+	//kinectingフラグを立てる
+	SendToKinectInfo();
+
+	//7秒後にまだフラグが立っていたらブーと音を鳴らす
+	timer = setTimeout("SoundPlay()", 7000);
 }
 
 //システムなしモード kinectの通知だけする
