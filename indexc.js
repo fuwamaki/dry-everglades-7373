@@ -402,7 +402,7 @@ function Scenario30Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("3
 function Scenario31Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("31"); }
 function Scenario32Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("32"); }
 function Scenario33Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("33"); }
-function Scenario35Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("35"); }
+function Scenario34Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("34"); }
 function Scenario37Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("37"); }
 function Scenario38Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("38"); }
 function Scenario39Button(){ RepairColor(); MessageChangeWhite(); KinectCheck("39"); }
@@ -420,6 +420,7 @@ function onDebugWatch3Button(){
 
 //システムなしモード、Kinectによる動作チェック
 function KinectCheck(Count){
+	console.log("きねくとチェック中");
 	//timerを一度停止する
 	clearTimeout(timer);
 	
@@ -542,6 +543,8 @@ function onStartButton(){
 	timer = setTimeout("SoundPlay()", 7000);
 	//順番表示
 	DisplayCount();
+	document.getElementById("display_watching").innerHTML = watching;
+	document.getElementById("display_kinecting").innerHTML = kinecting;
 }
 
 //一時停止ボタン
@@ -553,7 +556,9 @@ function onStopButton(){
 	//通知フラグも閉じる
 	watching = 0;
 	kinecting = 0;
-	
+
+	document.getElementById("display_watching").innerHTML = watching;
+	document.getElementById("display_kinecting").innerHTML = kinecting;
 }
 
 //再スタートボタン
@@ -768,6 +773,8 @@ function judgeTraining(result){
 	
 	//順番表示
 	DisplayCount();
+	document.getElementById("display_watching").innerHTML = watching;
+	document.getElementById("display_kinecting").innerHTML = kinecting;
 }
 
 //システムなしモード kinectだけの判定をする
@@ -778,8 +785,11 @@ function judgeMotionTraining(result){
 		
 		//kinectチェック前という文字を表示する、文字黒くする
 		document.getElementById("check_kinect_text").innerHTML = "Kinectチェック前";
-		document.getElementById("check_kinect_text").style.backgroundColor="black";
+		document.getElementById("check_kinect_text").style.backgroundColor="white";
 	}
+	
+	document.getElementById("display_watching").innerHTML = watching;
+	document.getElementById("display_kinecting").innerHTML = kinecting;
 }
 
 //+++++----- 通知処理 -----+++++
@@ -802,6 +812,8 @@ function NextNotification(){
 	
 	//WatchとKinectに情報を送る
 	SendInfo();
+	document.getElementById("display_watching").innerHTML = watching;
+	document.getElementById("display_kinecting").innerHTML = kinecting;
 	
 	//7秒後に動きが出来てるかどうかチェックし、だめなら音を出す
 	timer = setTimeout("SoundPlay()", 7000);
