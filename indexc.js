@@ -875,7 +875,6 @@ function KinectCheck(Count){
 	timer = setTimeout("SoundPlay()", 7000);
 }
 
-
 //システムなしモード kinectの通知だけする
 function SendToKinectInfo(){
 	for(var i = 0; i < scriptArray.length; i++){
