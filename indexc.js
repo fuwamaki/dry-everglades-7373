@@ -893,6 +893,7 @@ function SendToKinectInfo(){
 		}
 	}
 
+
 }
 
 
