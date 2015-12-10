@@ -542,6 +542,7 @@ function onStopButton(){
 	document.getElementById("display_kinecting").innerHTML = kinecting;
 }
 
+
 //再スタートボタン
 function onRestartButton(){
 	//稽古中フラグを立てる
