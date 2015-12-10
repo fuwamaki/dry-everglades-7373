@@ -533,6 +533,7 @@ function onStopButton(){
 	watching = 0;
 	kinecting = 0;
 
+
 	//kinectチェック前という文字を表示する、文字黒くする
 	document.getElementById("check_kinect_text").innerHTML = "Kinectチェック前";
 	document.getElementById("check_kinect_text").style.backgroundColor="white";
