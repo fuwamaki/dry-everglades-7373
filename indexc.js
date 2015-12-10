@@ -886,10 +886,10 @@ function SendToKinectInfo(){
 		if(scriptArray[i][0] == count){
 			//kinectに通知
 			//Motionがなし(=0)でなければ通知
-			if(scriptArray[i][3] != 0){
+//			if(scriptArray[i][3] != 0){
 				motion_user = scriptArray[i][4];
 				kinecting++;
-			}
+//			}
 		}
 	}
 
